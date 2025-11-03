@@ -22,8 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Media files
-# public/Revwheel_Presentation.mp4
-public/Revwheel-Presentation.mp4
-# *.mp4
