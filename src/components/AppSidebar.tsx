@@ -65,7 +65,7 @@ export function AppSidebar() {
     isActive
   }: {
     isActive: boolean;
-  }) => isActive ? "flex items-center w-full px-4 py-2 rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all duration-200 font-medium" : "flex items-center w-full px-4 py-2 rounded-xl border border-transparent text-gray-800 hover:border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all duration-200 font-medium";
+  }) => isActive ? "flex items-center gap-3 w-full px-4 py-2 rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all duration-200 font-medium" : "flex items-center gap-3 w-full px-4 py-2 rounded-xl border border-transparent text-gray-800 hover:border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all duration-200 font-medium";
   return <Sidebar className="border-r border-sidebar-border">
       <SidebarHeader className="p-6 border-b border-border relative">
         <Button
@@ -93,8 +93,8 @@ export function AppSidebar() {
                     <NavLink to={item.url} end className={getNavClass}>
                       {({ isActive }) => (
                         <>
-                          <item.icon className={`h-5 w-5 ${isActive ? 'text-primary' : 'text-gray-800'}`} />
-                          <span className={isActive ? 'text-primary' : 'text-gray-800'}>{item.title}</span>
+                          <item.icon className={`h-5 w-5 flex-shrink-0 ${isActive ? 'text-primary' : 'text-gray-800'}`} />
+                          <span className={`${isActive ? 'text-primary' : 'text-gray-800'}`}>{item.title}</span>
                         </>
                       )}
                     </NavLink>
@@ -158,11 +158,11 @@ export function AppSidebar() {
         <Button 
           variant="outline" 
           size="sm" 
-          className="w-full justify-start gap-2"
+          className="w-full justify-start gap-3 items-center"
           onClick={logout}
         >
-          <LogOut className="h-4 w-4" />
-          {t('sidebar.disconnect')}
+          <LogOut className="h-4 w-4 flex-shrink-0" />
+          <span>{t('sidebar.disconnect')}</span>
         </Button>
       </SidebarFooter>
     </Sidebar>;

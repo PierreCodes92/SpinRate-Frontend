@@ -601,9 +601,9 @@ export default function Settings() {
       <div className="max-w-5xl mx-auto md:px-6 py-4 md:py-6 px-px">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 md:mb-8 gap-4">
           <h1 className="text-2xl md:text-3xl font-bold text-center">{t('settings.title')}</h1>
-          <Button onClick={() => setShowPreview(true)} className="flex items-center gap-2 text-center mx-auto md:mx-0 px-4 py-2">
-            <Eye className="w-4 h-4" />
-            {t('settings.previewGame')}
+          <Button onClick={() => setShowPreview(true)} className="flex items-center gap-3 text-center mx-auto md:mx-0 px-4 py-2">
+            <Eye className="w-4 h-4 flex-shrink-0" />
+            <span>{t('settings.previewGame')}</span>
           </Button>
         </div>
 
@@ -817,13 +817,13 @@ export default function Settings() {
                       <div>
                         <h3 className="font-semibold text-base mb-3">{t('settings.displayOptions')}</h3>
                         <div className="grid grid-cols-2 gap-2">
-                          <Button onClick={downloadEnglishPoster} disabled={isLoading} className="bg-green-600 hover:bg-green-700">
-                            <Download className="w-4 h-4 mr-2" />
-                            {t('settings.englishPoster')}
+                          <Button onClick={downloadEnglishPoster} disabled={isLoading} className="bg-green-600 hover:bg-green-700 flex items-center gap-2 justify-center">
+                            <Download className="w-4 h-4 flex-shrink-0" />
+                            <span>{t('settings.englishPoster')}</span>
                           </Button>
-                          <Button onClick={downloadFrenchPoster} disabled={isLoading} className="bg-green-600 hover:bg-green-700">
-                            <Download className="w-4 h-4 mr-2" />
-                            {t('settings.frenchPoster')}
+                          <Button onClick={downloadFrenchPoster} disabled={isLoading} className="bg-green-600 hover:bg-green-700 flex items-center gap-2 justify-center">
+                            <Download className="w-4 h-4 flex-shrink-0" />
+                            <span>{t('settings.frenchPoster')}</span>
                           </Button>
                         </div>
                       </div>
@@ -832,21 +832,21 @@ export default function Settings() {
                       <div>
                         <h3 className="font-semibold text-base mb-3">{t('settings.downloadOptions')}</h3>
                         <div className="grid grid-cols-2 gap-2">
-                          <Button variant="default" size="sm" onClick={downloadQRCodeAsSVG} className="bg-blue-600 hover:bg-blue-700">
-                            <Download className="w-4 h-4 mr-2" />
-                            {t('settings.downloadSVG')}
+                          <Button variant="default" size="sm" onClick={downloadQRCodeAsSVG} className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2 justify-center">
+                            <Download className="w-4 h-4 flex-shrink-0" />
+                            <span>{t('settings.downloadSVG')}</span>
                           </Button>
-                          <Button variant="default" size="sm" onClick={downloadQRCodeAsPNG} className="bg-blue-600 hover:bg-blue-700">
-                            <Download className="w-4 h-4 mr-2" />
-                            {t('settings.downloadPNG')}
+                          <Button variant="default" size="sm" onClick={downloadQRCodeAsPNG} className="bg-blue-600 hover:bg-blue-700 flex items-center gap-2 justify-center">
+                            <Download className="w-4 h-4 flex-shrink-0" />
+                            <span>{t('settings.downloadPNG')}</span>
                           </Button>
                         </div>
                       </div>
 
                       {/* Copy Link Button */}
-                      <Button variant="outline" className="w-full" onClick={copyLinkToClipboard}>
-                        <Copy className="w-4 h-4 mr-2" />
-                        {t('settings.copyLink')}
+                      <Button variant="outline" className="w-full flex items-center gap-2 justify-center" onClick={copyLinkToClipboard}>
+                        <Copy className="w-4 h-4 flex-shrink-0" />
+                        <span>{t('settings.copyLink')}</span>
                       </Button>
                     </div>
                   </div>
