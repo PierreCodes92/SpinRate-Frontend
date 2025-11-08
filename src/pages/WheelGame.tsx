@@ -9,7 +9,7 @@ import googleReviewIcon from '@/assets/google-review.webp';
 import tiktokIcon from '@/assets/tiktok.webp';
 import axios from 'axios';
 
-const API_URL = "http://localhost:4000/api";
+const API_URL = "https://api.revwheel.fr/api";
 
 interface Lot {
   name: string;
