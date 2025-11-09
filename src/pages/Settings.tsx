@@ -725,7 +725,7 @@ export default function Settings() {
                   <span className="text-muted-foreground font-medium">{t('settings.logoUpload')}</span>
                 </label>
                 <div className="w-32 h-24 bg-muted rounded-lg border flex items-center justify-center overflow-hidden">
-                  {logoPreview ? <img src={logoPreview} alt="Logo preview" className="max-w-full max-h-full object-contain" /> : <span className="text-muted-foreground text-sm">{t('settings.noLogo')}</span>}
+                  {logoPreview ? <img src={logoPreview} alt="Logo preview" className="w-full h-full object-cover" /> : <span className="text-muted-foreground text-sm">{t('settings.noLogo')}</span>}
                 </div>
               </div>
             </div>

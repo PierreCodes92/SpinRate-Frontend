@@ -877,7 +877,7 @@ export default function WheelGame() {
 
             {/* Center hole for logo */}
             <div 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] rounded-full flex items-center justify-center overflow-hidden"
               style={{
                 background: 'rgba(255,255,255,0.5)',
                 backdropFilter: 'blur(8px)',

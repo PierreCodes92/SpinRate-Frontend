@@ -110,6 +110,7 @@ export default function Customers() {
   const [itemsPerPage, setItemsPerPage] = useState(50);
   const [selectedMonth, setSelectedMonth] = useState(new Date().getMonth());
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
+  const [openDropdownId, setOpenDropdownId] = useState<string | null>(null);
   const months = useMemo(() =>
     Array.from({ length: 12 }, (_, i) => new Date(2000, i).toLocaleDateString('fr-FR', { month: 'long' })),
   []);
@@ -171,6 +172,13 @@ export default function Customers() {
 
     fetchCustomers();
   }, [isInitialized, user?.user?._id, fetchCustomers]);
+
+  // Close dropdown when any dialog opens
+  useEffect(() => {
+    if (detailsOpen || enrichOpen || addOpen) {
+      setOpenDropdownId(null);
+    }
+  }, [detailsOpen, enrichOpen, addOpen]);
 
   const handleMarkAsRecovered = async (customerId: string) => {
     try {
@@ -492,12 +500,15 @@ export default function Customers() {
                       {customer.codePromo || "-"}
                     </TableCell>
                     <TableCell>
-                      <Badge 
-                        variant={customer.statut === "Réclamé" ? "default" : "secondary"}
-                        className={customer.statut === "Réclamé" ? "bg-success hover:bg-success/90 text-white" : ""}
-                      >
-                        {customer.statut === "Réclamé" ? t('customers.claimed') : t('customers.notClaimed')}
-                      </Badge>
+                      {customer.statut === "Réclamé" ? (
+                        <Badge className="bg-green-600 hover:bg-green-700 text-white">
+                          {t('customers.claimed')}
+                        </Badge>
+                      ) : (
+                        <Badge variant="secondary" className="bg-slate-200 text-slate-700">
+                          {t('customers.notClaimed')}
+                        </Badge>
+                      )}
                     </TableCell>
                     <TableCell>
                       <Badge 
@@ -508,7 +519,12 @@ export default function Customers() {
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <DropdownMenu>
+                      <DropdownMenu
+                        open={openDropdownId === customer.id}
+                        onOpenChange={(isOpen) => {
+                          setOpenDropdownId(isOpen ? customer.id : null);
+                        }}
+                      >
                         <DropdownMenuTrigger 
                           asChild
                           onTouchStart={(e) => e.stopPropagation()}
@@ -535,15 +551,19 @@ export default function Customers() {
                           <DropdownMenuItem
                             onSelect={(e) => {
                               e.preventDefault();
+                              setOpenDropdownId(null);
                               handleMarkAsRecovered(customer.id);
                             }}
                           >
                             <Gift className="h-4 w-4 mr-2" />
-                            {t('customers.markAsRecovered')}
+                            {customer.statut === "Réclamé" 
+                              ? t('customers.markAsNotClaimed') || "Mark as Not Claimed"
+                              : t('customers.markAsClaimed') || "Mark as Claimed"}
                           </DropdownMenuItem>
                           <DropdownMenuItem
                             onSelect={(e) => {
                               e.preventDefault();
+                              setOpenDropdownId(null);
                               setSelectedCustomer(customer);
                               setDetailsOpen(true);
                             }}
@@ -554,6 +574,7 @@ export default function Customers() {
                           <DropdownMenuItem
                             onSelect={(e) => {
                               e.preventDefault();
+                              setOpenDropdownId(null);
                               setSelectedCustomer(customer);
                               setEnrichFormData({
                                 prenom: customer.prenom,
@@ -571,6 +592,7 @@ export default function Customers() {
                             className="text-red-600"
                             onSelect={(e) => {
                               e.preventDefault();
+                              setOpenDropdownId(null);
                               handleDeleteCustomer(customer.id);
                             }}
                           >
