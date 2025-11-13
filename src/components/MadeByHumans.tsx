@@ -7,7 +7,7 @@ const MadeByHumans = () => {
         
         <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden relative mt-6 sm:mt-8">
           <div className="bg-no-repeat bg-cover bg-center p-4 sm:p-5 min-h-[250px] sm:min-h-[350px] flex flex-col justify-between" style={{
-          backgroundImage: "url('/background-section3.png')"
+          backgroundImage: "url('/background-section3.webp')"
         }}>
             <div className="flex items-center text-white">
               <img src="/logo.svg" alt="Pulse Robot Logo" className="h-5 sm:h-6 w-auto mr-3 invert" />

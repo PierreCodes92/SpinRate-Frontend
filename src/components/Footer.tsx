@@ -11,7 +11,7 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/revwheel-logo.png" alt="RevWheel logo" className="h-10 md:h-12 w-auto" />
+              <img src="/lovable-uploads/revwheel-logo.webp" alt="RevWheel logo" className="h-10 md:h-12 w-auto" />
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               {t('footerDescription')}

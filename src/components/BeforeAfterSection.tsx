@@ -48,13 +48,13 @@ const BeforeAfterSection = () => {
             <div className="relative z-10 shadow-card rounded-2xl overflow-hidden hover-lift">
               {/* Image pour desktop */}
               <img 
-                src={language === 'en' ? '/lovable-uploads/avant-apres-en.png' : '/lovable-uploads/avant-apres-fr.png'} 
+                src={language === 'en' ? '/lovable-uploads/avant-apres-en.webp' : '/lovable-uploads/avant-apres-fr.webp'} 
                 alt="Avant/Après - Résultats RevWheel" 
                 className="w-full h-auto hidden lg:block scale-105" 
               />
               {/* Image pour mobile et tablet */}
               <img 
-                src={(language?.toLowerCase?.().startsWith('en')) ? '/lovable-uploads/mobile-avant-apres-en-new.png' : '/lovable-uploads/mobile-avant-apres-fr.png'} 
+                src={(language?.toLowerCase?.().startsWith('en')) ? '/lovable-uploads/mobile-avant-apres-en-new.webp' : '/lovable-uploads/mobile-avant-apres-fr.webp'} 
                 alt="Avant/Après - Résultats RevWheel" 
                 className="w-full h-auto lg:hidden" 
               />

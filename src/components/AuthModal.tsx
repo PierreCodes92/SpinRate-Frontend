@@ -118,7 +118,7 @@ export const AuthModal = ({
           
           <div className="flex justify-center mb-3 md:mb-4">
             <div className="w-14 h-14 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center">
-              <img src="/lovable-uploads/revwheel-logo.png" alt="RevWheel logo" className="w-32 md:w-48 h-auto" />
+              <img src="/lovable-uploads/revwheel-logo.webp" alt="RevWheel logo" className="w-32 md:w-48 h-auto" />
             </div>
           </div>
           

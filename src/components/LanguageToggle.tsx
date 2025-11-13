@@ -1,6 +1,6 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import frFlag from '@/assets/france.png';
-import ukFlag from '@/assets/uk.png';
+import frFlag from '@/assets/france.webp';
+import ukFlag from '@/assets/uk.webp';
 
 interface LanguageToggleProps {
   isScrolled?: boolean;

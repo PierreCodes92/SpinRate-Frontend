@@ -150,7 +150,7 @@ export const blogPosts: BlogPost[] = [
     date: 'June 12, 2025',
     author: 'WRLDS Technologies',
     category: 'Business',
-    imageUrl: '/lovable-uploads/078a129e-0f98-4d91-af61-873687db1a04.png',
+    imageUrl: '/lovable-uploads/078a129e-0f98-4d91-af61-873687db1a04.webp',
     keywords: [
       'wearable safety technology',
       'workplace injury prevention',
@@ -274,7 +274,7 @@ export const blogPosts: BlogPost[] = [
     date: 'June 28, 2025',
     author: 'WRLDS Technologies',
     category: 'Technology',
-    imageUrl: '/lovable-uploads/6b0637e9-4a7b-40d0-b219-c8b7f879f93e.png',
+    imageUrl: '/lovable-uploads/6b0637e9-4a7b-40d0-b219-c8b7f879f93e.webp',
     keywords: [
       'modular technology',
       'rapid prototyping',

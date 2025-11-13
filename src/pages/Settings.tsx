@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { Check, Upload, Copy, Download, Eye } from 'lucide-react';
-import googleReviewHelp from '@/assets/google-review-help.png';
+import googleReviewHelp from '@/assets/google-review-help.webp';
 import { motion } from 'framer-motion';
 import { QRCodeSVG } from 'qrcode.react';
 import { jsPDF } from 'jspdf';
@@ -353,7 +353,7 @@ export default function Settings() {
         const pngUrl = canvas.toDataURL('image/png');
         const downloadLink = document.createElement('a');
         downloadLink.href = pngUrl;
-        downloadLink.download = 'wheel-qr-code.png';
+        downloadLink.download = 'wheel-qr-code.webp';
         document.body.appendChild(downloadLink);
         downloadLink.click();
         document.body.removeChild(downloadLink);
@@ -396,7 +396,7 @@ export default function Settings() {
       const pngUrl = canvas.toDataURL('image/png');
       const downloadLink = document.createElement('a');
       downloadLink.href = pngUrl;
-      downloadLink.download = `wheel-poster-${language.toLowerCase()}.png`;
+      downloadLink.download = `wheel-poster-${language.toLowerCase()}.webp`;
       document.body.appendChild(downloadLink);
       downloadLink.click();
       document.body.removeChild(downloadLink);
@@ -488,7 +488,7 @@ export default function Settings() {
       toast.error(t('settings.posterTemplateErrorEnglish'));
       setIsLoading(false);
     };
-    templateImg.src = '/lovable-uploads/english-poster.png';
+    templateImg.src = '/lovable-uploads/english-poster.webp';
   };
   const downloadFrenchPoster = () => {
     if (!wheelId) {
@@ -574,7 +574,7 @@ export default function Settings() {
       toast.error(t('settings.posterTemplateError'));
       setIsLoading(false);
     };
-    templateImg.src = '/lovable-uploads/french-poster-new.png';
+    templateImg.src = '/lovable-uploads/french-poster-new.webp';
   };
   const copyLinkToClipboard = () => {
     if (!wheelId) {

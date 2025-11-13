@@ -43,7 +43,7 @@ const DetailsSection = () => {
           <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-elegant">
             {/* Card Header with background image instead of gradient */}
             <div className="relative h-48 sm:h-64 p-6 sm:p-8 flex items-end" style={{
-            backgroundImage: "url('/background-section3.png')",
+            backgroundImage: "url('/background-section3.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}>
@@ -134,7 +134,7 @@ const DetailsSection = () => {
           <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-elegant">
             {/* Card Header with background image instead of gradient */}
             <div className="relative h-48 sm:h-64 p-6 sm:p-8 flex flex-col items-start" style={{
-            backgroundImage: "url('/background-section1.png')",
+            backgroundImage: "url('/background-section1.webp')",
             backgroundSize: "cover",
             backgroundPosition: "center"
           }}>

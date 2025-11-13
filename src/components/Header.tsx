@@ -9,7 +9,7 @@ import { AuthModal } from "@/components/AuthModal";
 import { useAuthModal } from "@/hooks/useAuthModal";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
-import pricingIcon from "@/assets/pricing-icon.png";
+import pricingIcon from "@/assets/pricing-icon.webp";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -71,7 +71,7 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3 lg:ml-6">
             <a href="/" className="flex items-center space-x-3">
-              <img src="/lovable-uploads/revwheel-logo.png" alt="RevWheel logo" className="h-12 w-auto" />
+              <img src="/lovable-uploads/revwheel-logo.webp" alt="RevWheel logo" className="h-12 w-auto" />
             </a>
           </div>
 
@@ -179,7 +179,7 @@ const Header = () => {
                   className="text-foreground/80 hover:text-foreground transition-smooth font-medium text-lg py-2 text-left flex items-center space-x-3"
                 >
                   <div className="w-5 h-5 flex items-center justify-center">
-                    <img src="/lovable-uploads/database-icon.png" alt="Pro Space" className="w-5 h-5" />
+                    <img src="/lovable-uploads/database-icon.webp" alt="Pro Space" className="w-5 h-5" />
                   </div>
                   <span>{t('proSpace')}</span>
                 </button>

@@ -1,6 +1,6 @@
 import { BarChart3, Users, Settings, CreditCard, LogOut, X, Sparkles } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import revwheelLogo from "@/assets/revwheel-logo.png";
+import revwheelLogo from "@/assets/revwheel-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useOnboarding } from "@/contexts/OnboardingContext";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, SidebarFooter, useSidebar } from "@/components/ui/sidebar";

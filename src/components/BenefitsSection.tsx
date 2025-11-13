@@ -49,7 +49,7 @@ const BenefitsSection = () => {
           }`}>
              <div className="relative z-10 shadow-card rounded-2xl overflow-hidden">
                 <img 
-                  src={language === 'en' ? '/lovable-uploads/etsi-en.png' : '/lovable-uploads/etsi-fr.png'} 
+                  src={language === 'en' ? '/lovable-uploads/etsi-en.webp' : '/lovable-uploads/etsi-fr.webp'} 
                   alt="Résultats clients RevWheel" 
                   className="w-full h-auto object-contain rounded-2xl" 
                   loading="lazy" 

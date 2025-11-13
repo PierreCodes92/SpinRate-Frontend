@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useScrollReveal, useAnimatedCounter } from "@/hooks/useScrollAnimation";
 import { useTranslation } from "@/components/TranslationProvider";
-import clientLogo1 from "@/assets/client-logo-1.png";
-import clientLogo2 from "@/assets/client-logo-2.png";
-import clientLogo3 from "@/assets/client-logo-3.png";
-import clientLogo4 from "@/assets/client-logo-4.png";
-import clientLogo5 from "@/assets/client-logo-5.png";
-import clientLogo6 from "@/assets/client-logo-6.png";
-import clientLogo7 from "@/assets/client-logo-7.png";
-import clientLogo8 from "@/assets/client-logo-8.png";
+import clientLogo1 from "@/assets/client-logo-1.webp";
+import clientLogo2 from "@/assets/client-logo-2.webp";
+import clientLogo3 from "@/assets/client-logo-3.webp";
+import clientLogo4 from "@/assets/client-logo-4.webp";
+import clientLogo5 from "@/assets/client-logo-5.webp";
+import clientLogo6 from "@/assets/client-logo-6.webp";
+import clientLogo7 from "@/assets/client-logo-7.webp";
+import clientLogo8 from "@/assets/client-logo-8.webp";
 
 const StatsSection = () => {
   const { ref: counterRef, isVisible: counterVisible } = useScrollReveal(0.3);

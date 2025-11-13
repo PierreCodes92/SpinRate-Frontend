@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useTranslation } from "@/components/TranslationProvider";
-import marieImg from "@/assets/testimonial-marie.jpg";
-import sophieImg from "@/assets/testimonial-sophie.jpg";
-import jeromeImg from "@/assets/testimonial-jerome.jpg";
+import marieImg from "@/assets/testimonial-marie.webp";
+import sophieImg from "@/assets/testimonial-sophie.webp";
+import jeromeImg from "@/assets/testimonial-jerome.webp";
 const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
