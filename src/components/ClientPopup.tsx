@@ -14,7 +14,7 @@ export function ClientPopup({ count }: ClientPopupProps) {
     .replace('{plural}', plural);
   
   return (
-    <Card aria-live="polite" className="w-fit border-border shadow-lg">
+    <Card aria-live="polite" className="w-fit border-border shadow-lg" data-onboarding="monthly-reviews">
       <CardContent className="p-4 flex items-start gap-3">
         <img src={starIcon} alt="Star" className="w-8 h-8 mt-2" />
         <div>

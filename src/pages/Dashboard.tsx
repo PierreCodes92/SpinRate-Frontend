@@ -4,6 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Search, Gift, TrendingUp, Users, UserCheck, BarChart2, Scan, User, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuthContext } from "@/hooks/useAuthContext";
+import { useOnboarding } from "@/contexts/OnboardingContext";
 import { API_BASE_URL } from "@/config/api";
 import { Badge } from "@/components/ui/badge";
 
@@ -22,6 +23,7 @@ interface DashboardData {
 export default function Dashboard() {
   const { t } = useLanguage();
   const { user, isInitialized } = useAuthContext();
+  const { checkAndStartTutorial } = useOnboarding();
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -73,6 +75,14 @@ export default function Dashboard() {
 
     fetchDashboardData();
   }, [isInitialized, user?.user?._id]);
+
+  // Check and auto-start tutorial for first-time users
+  useEffect(() => {
+    if (!isInitialized || !user?.user?._id) return;
+    
+    // Check tutorial status and start if needed
+    checkAndStartTutorial(user.user._id);
+  }, [isInitialized, user?.user?._id, checkAndStartTutorial]);
 
   // Calculate claim rate (redemption rate)
   const calculateClaimRate = () => {
@@ -245,7 +255,7 @@ export default function Dashboard() {
         )}
 
         {/* Regular User Stats OR Admin Second Row */}
-        <div className={`grid gap-6 md:grid-cols-2 ${isAdmin ? 'lg:grid-cols-3' : 'lg:grid-cols-5'}`}>
+        <div className={`grid gap-6 md:grid-cols-2 ${isAdmin ? 'lg:grid-cols-3' : 'lg:grid-cols-5'}`} data-onboarding="analytics-metrics">
           {!isAdmin && (
             <Card className="p-6 hover:shadow-lg transition-all duration-300 border-border hover:border-primary/20">
               <div className="flex items-center justify-between mb-3">

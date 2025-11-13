@@ -7,6 +7,8 @@ import { NotificationProvider } from "@/components/NotificationProvider";
 import { TranslationProvider } from "@/components/TranslationProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthContextProvider } from "@/contexts/AuthContext";
+import { OnboardingProvider } from "@/contexts/OnboardingContext";
+import { OnboardingOverlay } from "@/components/onboarding/OnboardingOverlay";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
 import Contact from "./pages/Contact";
@@ -27,30 +29,33 @@ const App = () => (
     <TooltipProvider>
       <AuthContextProvider>
         <LanguageProvider>
-          <TranslationProvider>
-            <NotificationProvider>
-              <Toaster />
-              <Sonner />
-              <BrowserRouter>
-                <Routes>
-                  {/* Landing pages */}
-                  <Route path="/" element={<Index />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/terms" element={<Terms />} />
-                  <Route path="/privacy" element={<Privacy />} />
-                  {/* Dashboard routes */}
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/dashboard/customers" element={<Customers />} />
-                  <Route path="/dashboard/settings" element={<Settings />} />
-                  <Route path="/dashboard/subscription" element={<Subscription />} />
-                  <Route path="/wheelGame/:wheelId" element={<WheelGame />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </BrowserRouter>
-            </NotificationProvider>
-          </TranslationProvider>
+          <OnboardingProvider>
+            <TranslationProvider>
+              <NotificationProvider>
+                <Toaster />
+                <Sonner />
+                <BrowserRouter>
+                  <OnboardingOverlay />
+                  <Routes>
+                    {/* Landing pages */}
+                    <Route path="/" element={<Index />} />
+                    <Route path="/blog" element={<Blog />} />
+                    <Route path="/contact" element={<Contact />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    {/* Dashboard routes */}
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard/customers" element={<Customers />} />
+                    <Route path="/dashboard/settings" element={<Settings />} />
+                    <Route path="/dashboard/subscription" element={<Subscription />} />
+                    <Route path="/wheelGame/:wheelId" element={<WheelGame />} />
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                </BrowserRouter>
+              </NotificationProvider>
+            </TranslationProvider>
+          </OnboardingProvider>
         </LanguageProvider>
       </AuthContextProvider>
     </TooltipProvider>

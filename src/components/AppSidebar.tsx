@@ -1,7 +1,8 @@
-import { BarChart3, Users, Settings, CreditCard, LogOut, X } from "lucide-react";
+import { BarChart3, Users, Settings, CreditCard, LogOut, X, Sparkles } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import revwheelLogo from "@/assets/revwheel-logo.png";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useOnboarding } from "@/contexts/OnboardingContext";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, SidebarFooter, useSidebar } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -18,6 +19,7 @@ export function AppSidebar() {
   const { logout } = useLogout();
   const [isTrialVisible, setIsTrialVisible] = useState(true);
   const { setOpenMobile } = useSidebar();
+  const { startOnboarding } = useOnboarding();
 
   // Calculate remaining days for the current user
   const trialDaysRemaining = useMemo(() => {
@@ -43,22 +45,26 @@ export function AppSidebar() {
     {
       title: t('sidebar.analytics'),
       url: "/dashboard",
-      icon: BarChart3
+      icon: BarChart3,
+      onboardingId: "analytics"
     },
     {
       title: t('sidebar.clients'),
       url: "/dashboard/customers",
-      icon: Users
+      icon: Users,
+      onboardingId: "clients"
     },
     {
       title: t('sidebar.settings'),
       url: "/dashboard/settings",
-      icon: Settings
+      icon: Settings,
+      onboardingId: "settings"
     },
     {
       title: t('sidebar.subscription'),
       url: "/dashboard/subscription",
-      icon: CreditCard
+      icon: CreditCard,
+      onboardingId: "subscription"
     }
   ];
   const getNavClass = ({
@@ -90,7 +96,12 @@ export function AppSidebar() {
             <SidebarMenu>
               {menuItems.map(item => <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.url} end className={getNavClass}>
+                    <NavLink 
+                      to={item.url} 
+                      end 
+                      className={getNavClass}
+                      data-onboarding={item.onboardingId}
+                    >
                       {({ isActive }) => (
                         <>
                           <item.icon className={`h-5 w-5 flex-shrink-0 ${isActive ? 'text-primary' : 'text-gray-800'}`} />
@@ -163,6 +174,18 @@ export function AppSidebar() {
         >
           <LogOut className="h-4 w-4 flex-shrink-0" />
           <span>{t('sidebar.disconnect')}</span>
+        </Button>
+        <Button 
+          variant="outline" 
+          size="sm" 
+          className="w-full justify-start gap-2"
+          onClick={() => {
+            setOpenMobile(false);
+            startOnboarding();
+          }}
+        >
+          <Sparkles className="h-4 w-4" />
+          {t('sidebar.rewatchGuide')}
         </Button>
       </SidebarFooter>
     </Sidebar>;

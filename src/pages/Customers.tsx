@@ -479,7 +479,7 @@ export default function Customers() {
                     </TableCell>
                   </TableRow>
                 ) : (
-                  paginatedCustomers.map((customer) => (
+                  paginatedCustomers.map((customer, index) => (
                   <TableRow key={customer.id}>
                     <TableCell className="text-muted-foreground">
                       {customer.date}
@@ -518,7 +518,7 @@ export default function Customers() {
                         {customer.enrichi === "Oui" ? t('customers.yes') : t('customers.no')}
                       </Badge>
                     </TableCell>
-                    <TableCell>
+                    <TableCell data-onboarding={index === 0 ? "client-actions-cell" : undefined}>
                       <DropdownMenu
                         open={openDropdownId === customer.id}
                         onOpenChange={(isOpen) => {
@@ -536,11 +536,13 @@ export default function Customers() {
                             className="focus:outline-none"
                             type="button"
                             aria-label="Actions"
+                            data-onboarding={index === 0 ? "client-menu-marie" : undefined}
                           >
                             <MoreVertical className="h-5 w-5" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent 
+                          data-onboarding={index === 0 ? "client-actions" : undefined}
                           align="end" 
                           className="w-48 z-[9999]" 
                           sideOffset={8}

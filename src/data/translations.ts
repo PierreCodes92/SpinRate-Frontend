@@ -272,6 +272,67 @@ export const translations = {
     'sidebar.upgrade': 'Mettre à niveau',
     'sidebar.upgradeNow': 'Mettre à niveau maintenant',
     'sidebar.disconnect': 'Déconnexion',
+    'sidebar.rewatchGuide': 'Revoir le guide interactif',
+
+    // Onboarding
+    'onboarding.welcome.title': 'Bienvenue sur Revwheel !',
+    'onboarding.welcome.subtitle': 'Suivez ce guide pour découvrir toutes les fonctionnalités et booster vos avis Google.',
+    'onboarding.welcome.skip': 'Passer',
+    'onboarding.welcome.start': 'Découvrir Revwheel',
+    'onboarding.welcome.footer': 'Retrouvez ce tutoriel si besoin dans le menu « Revoir le guide interactif »',
+    'onboarding.welcome.footerMobile': 'Retrouvez ce tutoriel si besoin dans le menu\n« Revoir le guide interactif »',
+
+    'onboarding.analytics.title': '📊 Analytics',
+    'onboarding.analytics.message': "Voici Analytics, l'endroit pour suivre vos performances et statistiques.",
+    'onboarding.analytics.action': 'Continuer',
+
+    'onboarding.analyticsDashboard.title': '📊 Tableau de bord Analytics',
+    'onboarding.analyticsDashboard.message': 'Voici les 5 métriques principales pour suivre vos performances en temps réel.',
+    'onboarding.analyticsDashboard.action': 'Continuer',
+
+    'onboarding.clients.title': '👥 Clients',
+    'onboarding.clients.message': 'Découvrez la section Clients pour gérer tous vos clients qui tournent la roue.',
+    'onboarding.clients.action': 'Voir les détails',
+
+    'onboarding.clientsPopup.title': '🎉 Avis mensuels',
+    'onboarding.clientsPopup.message': 'Cette pop-up vous montre les avis collectés sur le mois.',
+    'onboarding.clientsPopup.action': 'Suivant',
+
+    'onboarding.clientsMenu.title': '⚡ Menu Actions',
+    'onboarding.clientsMenu.message': `Ici, vous pouvez cliquer sur les **trois petits points** pour afficher les actions disponibles :
+
+• 🎁 Voir le lot
+• 👁️ Voir les détails
+• ➕ Enrichir (ajouter des infos supplémentaires)
+• 🗑️ Supprimer`,
+    'onboarding.clientsMenu.messageMobile': `Ici, vous pouvez scroller tout à droite sur les **trois petits points** dans actions pour afficher les actions disponibles :
+
+• 🎁 Voir le lot
+• 👁️ Voir les détails`,
+    'onboarding.clientsMenu.action': 'Continuer',
+
+    'onboarding.settings.title': '⚙️ Paramètres',
+    'onboarding.settings.message': "C'est ici que vous personnalisez votre roue :\n• Nom de l'entreprise, lien Avis Google, logo et couleurs 🎨\n• Lots 🎁 et probabilités 🎲 entièrement personnalisables\n• 📱 Votre QR code apparaîtra en bas et pourra être téléchargé, avec des affiches personnalisées, une fois la roue enregistrée",
+    'onboarding.settings.action': 'Continuer',
+
+    'onboarding.subscription.title': '💳 Abonnement',
+    'onboarding.subscription.message': "Gérez facilement votre abonnement :\n• 📅 Mensuel ou annuel, selon vos besoins\n• 🔄 Changez de formule à tout moment\n• 🎁 Profitez de votre essai gratuit de 7 jours pour explorer toutes les fonctionnalités",
+    'onboarding.subscription.action': 'Terminer',
+
+    'onboarding.complete.title': 'Félicitations !',
+    'onboarding.complete.subtitleMobile1': 'Votre roue est presque prête 🎯',
+    'onboarding.complete.subtitleMobile2': 'Bientôt, vos clients pourront s\'amuser et booster vos avis Google 🚀',
+    'onboarding.complete.subtitleMobile3': 'Personnalisez infos, lots et couleurs, puis enregistrez pour activer votre roue ✅',
+    'onboarding.complete.subtitleDesktop': 'Vos clients peuvent maintenant tourner la roue et booster vos avis Google dès que vos paramètres sont configurés.',
+    'onboarding.complete.explore': 'Continuez à explorer :',
+    'onboarding.complete.exploreAnalytics': '📊 Analytics pour suivre vos performances',
+    'onboarding.complete.exploreClients': '👥 Clients pour gérer vos contacts',
+    'onboarding.complete.exploreSettings': '⚙️ Paramètres pour personnaliser votre roue',
+    'onboarding.complete.exploreSubscription': '💳 Abonnement pour gérer votre plan',
+    'onboarding.complete.cta': '🎯 À vous de jouer !',
+    'onboarding.complete.start': 'Commencer à utiliser RevWheel',
+    'onboarding.complete.rewatch': 'Revoir le tutoriel',
+    'onboarding.complete.mobileNote': '💡 Ce tutoriel est une version mobile allégée. L\'ensemble des fonctionnalités est disponible ici, mais expliqué plus en détail sur ordinateur.',
     
     // Dashboard
     'dashboard.title': 'Analytics',
@@ -753,6 +814,67 @@ export const translations = {
     'sidebar.upgrade': 'Upgrade',
     'sidebar.upgradeNow': 'Upgrade Now',
     'sidebar.disconnect': 'Log out',
+    'sidebar.rewatchGuide': 'Replay tutorial',
+
+    // Onboarding
+    'onboarding.welcome.title': 'Welcome to Revwheel!',
+    'onboarding.welcome.subtitle': 'Follow this guide to discover all the features and boost your Google reviews.',
+    'onboarding.welcome.skip': 'Skip',
+    'onboarding.welcome.start': 'Discover Revwheel',
+    'onboarding.welcome.footer': 'Find again this tutorial if needed in the menu « Replay tutorial»',
+    'onboarding.welcome.footerMobile': 'Find again this tutorial if needed in the menu\n« Replay tutorial »',
+
+    'onboarding.analytics.title': '📊 Analytics',
+    'onboarding.analytics.message': 'Here\'s Analytics, the place to track your performance and statistics.',
+    'onboarding.analytics.action': 'Continue',
+
+    'onboarding.analyticsDashboard.title': '📊 Analytics Dashboard',
+    'onboarding.analyticsDashboard.message': 'Here are the 5 key metrics to track your performance in real time.',
+    'onboarding.analyticsDashboard.action': 'Continue',
+
+    'onboarding.clients.title': '👥 Customers',
+    'onboarding.clients.message': 'Discover the Customers section to manage all your customers who spin the wheel.',
+    'onboarding.clients.action': 'View details',
+
+    'onboarding.clientsPopup.title': '🎉 Monthly Reviews',
+    'onboarding.clientsPopup.message': 'This popup shows you the reviews collected for the month.',
+    'onboarding.clientsPopup.action': 'Next',
+
+    'onboarding.clientsMenu.title': '⚡ Actions Menu',
+    'onboarding.clientsMenu.message': `Here, you can click on the **three dots** to display available actions:
+
+• 🎁 View prize
+• 👁️ View details
+• ➕ Enrich (add additional information)
+• 🗑️ Delete`,
+    'onboarding.clientsMenu.messageMobile': `Here, you can scroll all the way right on the **three dots** in actions to display available actions:
+
+• 🎁 View prize
+• 👁️ View details`,
+    'onboarding.clientsMenu.action': 'Continue',
+
+    'onboarding.settings.title': '⚙️ Settings',
+    'onboarding.settings.message': 'This is where you customize your wheel:\n• Business name, Google Review link, logo and colors 🎨\n• Prizes 🎁 and odds 🎲 fully customizable\n• 📱 Your QR code will appear at the bottom and can be downloaded, with custom posters, once the wheel is saved',
+    'onboarding.settings.action': 'Continue',
+
+    'onboarding.subscription.title': '💳 Subscription',
+    'onboarding.subscription.message': 'Easily manage your subscription:\n• 📅 Monthly or annual, according to your needs\n• 🔄 Change your plan at any time\n• 🎁 Enjoy your 7-day free trial to explore all the features',
+    'onboarding.subscription.action': 'Finish',
+
+    'onboarding.complete.title': 'Congratulations!',
+    'onboarding.complete.subtitleMobile1': 'Your wheel is almost ready 🎯',
+    'onboarding.complete.subtitleMobile2': 'Soon, your customers will be able to have fun and boost your Google reviews 🚀',
+    'onboarding.complete.subtitleMobile3': 'Customize info, prizes and colors, then save to activate your wheel ✅',
+    'onboarding.complete.subtitleDesktop': 'Your customers can now spin the wheel and boost your Google reviews as soon as your settings are configured.',
+    'onboarding.complete.explore': 'Continue exploring:',
+    'onboarding.complete.exploreAnalytics': '📊 Analytics to track your performance',
+    'onboarding.complete.exploreClients': '👥 Customers to manage your contacts',
+    'onboarding.complete.exploreSettings': '⚙️ Settings to customize your wheel',
+    'onboarding.complete.exploreSubscription': '💳 Subscription to manage your plan',
+    'onboarding.complete.cta': '🎯 Your turn!',
+    'onboarding.complete.start': 'Start Using RevWheel',
+    'onboarding.complete.rewatch': 'Rewatch the Tutorial',
+    'onboarding.complete.mobileNote': '💡 This tutorial is a lightweight mobile version. All features are available here, but explained in more detail on desktop.',
     
     // Dashboard
     'dashboard.title': 'Analytics',

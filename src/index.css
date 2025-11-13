@@ -207,6 +207,11 @@
   .scale-in.animate {
     @apply opacity-100 scale-100;
   }
+
+  /* Onboarding animation */
+  .animate-pulse-subtle {
+    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
   
   /* Halo animation for CTA button */
   .button-container {
@@ -241,6 +246,15 @@
     }
     100% {
       box-shadow: 0 0 20px 20px rgba(26,115,232,0);
+    }
+  }
+
+  @keyframes pulse-subtle {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.95;
     }
   }
 }
