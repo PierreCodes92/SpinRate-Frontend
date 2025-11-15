@@ -2,15 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Riwil Design System - Bluish Theme */
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
 
 @layer base {
   :root {
-    /* Primary bluish gradient colors */
-    --primary-blue: 217 91% 60%;
-    --primary-blue-dark: 217 91% 50%;
-    --primary-blue-light: 217 91% 70%;
-    
     --background: 245 25% 97%;
     --foreground: 220 25% 15%;
 
@@ -32,8 +29,12 @@
     --accent: 217 91% 95%;
     --accent-foreground: 220 25% 15%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
+
+    --success: 142 71% 45%;
+    --warning: 48 96% 53%;
+    --danger: 0 84% 60%;
 
     --border: 217 25% 90%;
     --input: 217 25% 90%;
@@ -41,35 +42,43 @@
 
     --radius: 0.75rem;
 
-    /* Custom gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary-blue)) 0%, hsl(var(--primary-blue-dark)) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary-blue-light)) 0%, hsl(var(--primary-blue)) 50%, hsl(var(--primary-blue-dark)) 100%);
+    /* Wheel colors */
+    --wheel-red: 0 99% 53%;
+    --wheel-green: 141 91% 49%;
+    --wheel-yellow: 53 96% 50%;
+
+    /* Neon wheel colors */
+    --neon: 203 100% 59%;
+    --neon2: 203 100% 64%;
+    --neon-shadow: 203 100% 59%;
+    --neon-bg: 220 75% 99%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 50%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 70%) 0%, hsl(217 91% 60%) 50%, hsl(217 91% 50%) 100%);
     --gradient-background: linear-gradient(180deg, hsl(245 50% 98%) 0%, hsl(217 25% 95%) 100%);
     --gradient-subtle: linear-gradient(135deg, hsl(217 91% 96%) 0%, hsl(217 91% 92%) 100%);
 
-    /* Animations */
+    /* Shadows */
+    --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    --shadow-soft: 0 4px 20px -2px hsl(217 91% 60% / 0.15);
+    --shadow-button: 0 8px 25px -5px hsl(217 91% 60% / 0.3);
+    --shadow-card: 0 10px 40px -10px hsl(217 91% 60% / 0.1);
+
+    /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Shadows */
-    --shadow-soft: 0 4px 20px -2px hsl(var(--primary-blue) / 0.15);
-    --shadow-button: 0 8px 25px -5px hsl(var(--primary-blue) / 0.3);
-    --shadow-card: 0 10px 40px -10px hsl(var(--primary-blue) / 0.1);
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 25% 15%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 217 25% 95%;
+    --sidebar-accent-foreground: 220 25% 15%;
+    --sidebar-border: 217 25% 90%;
+    --sidebar-ring: 217 91% 60%;
   }
 
   .dark {
@@ -89,24 +98,19 @@
     --secondary-foreground: 217 25% 95%;
 
     --muted: 220 25% 15%;
-    --muted-foreground: 217 15% 65%;
+    --muted-foreground: 220 15% 55%;
 
-    --accent: 220 25% 15%;
-    --accent-foreground: 217 25% 95%;
+    --accent: 217 91% 70%;
+    --accent-foreground: 220 25% 8%;
 
-    --destructive: 0 62.8% 50%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 217 25% 95%;
 
     --border: 220 25% 20%;
     --input: 220 25% 20%;
     --ring: 217 91% 70%;
 
-    /* Dark mode gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(var(--primary-blue-light)) 0%, hsl(var(--primary-blue)) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(var(--primary-blue)) 0%, hsl(var(--primary-blue-dark)) 100%);
-    --gradient-background: linear-gradient(180deg, hsl(220 25% 8%) 0%, hsl(220 25% 12%) 100%);
-    
-    --sidebar-background: 220 25% 8%;
+    --sidebar-background: 220 25% 10%;
     --sidebar-foreground: 217 25% 95%;
     --sidebar-primary: 217 91% 70%;
     --sidebar-primary-foreground: 220 25% 8%;
@@ -114,6 +118,11 @@
     --sidebar-accent-foreground: 217 25% 95%;
     --sidebar-border: 220 25% 20%;
     --sidebar-ring: 217 91% 70%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 70%) 0%, hsl(217 91% 60%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%) 0%, hsl(217 91% 50%) 100%);
+    --gradient-background: linear-gradient(180deg, hsl(220 25% 8%) 0%, hsl(220 25% 12%) 100%);
   }
 }
 
@@ -122,15 +131,37 @@
     @apply border-border;
   }
 
+  * {
+    font-family: "Poppins", "Nunito", sans-serif;
+  }
+
   body {
     @apply bg-background text-foreground font-sans antialiased;
+    font-family: "Poppins", "Nunito", sans-serif;
     background: var(--gradient-background);
     min-height: 100vh;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Ensure headings also use the font */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Poppins", "Nunito", sans-serif;
+  }
+
+  /* Apply to form elements which sometimes don't inherit font */
+  input, button, textarea, select {
+    font-family: "Poppins", "Nunito", sans-serif;
   }
 
   html {
     scroll-behavior: smooth;
+  }
+  
+  /* Ensure fixed elements stay on top */
+  .fixed {
+    position: fixed !important;
   }
 
   /* Custom classes for Riwil design */
@@ -208,53 +239,22 @@
     @apply opacity-100 scale-100;
   }
 
-  /* Onboarding animation */
-  .animate-pulse-subtle {
-    animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
-  
-  /* Halo animation for CTA button */
-  .button-container {
-    position: relative;
-    display: inline-block;
-  }
+}
 
-  .btn {
-    position: relative;
-    border-radius: 9999px; /* arrondi complet */
-    background-color: #1A73E8; /* bleu Google */
-    color: white;
-    padding: 12px 24px;
-    font-weight: 600;
-    text-align: center;
-    cursor: pointer;
-    border: none;
+@keyframes pulseHalo {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.5); 
   }
+  100% { 
+    box-shadow: 0 0 20px 20px rgba(26, 115, 232, 0); 
+  }
+}
 
-  .halo {
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px; /* arrondi complet */
-    box-shadow: 0 0 0 0 rgba(26,115,232,0.5);
-    pointer-events: none;
-    animation: pulseHalo 2.3s forwards infinite;
-  }
-
-  @keyframes pulseHalo {
-    0% {
-      box-shadow: 0 0 0 0 rgba(26,115,232,0.5);
-    }
-    100% {
-      box-shadow: 0 0 20px 20px rgba(26,115,232,0);
-    }
-  }
-
-  @keyframes pulse-subtle {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.95;
-    }
-  }
+.halo {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 0 rgba(26, 115, 232, 0.5);
+  pointer-events: none;
+  animation: pulseHalo 2.3s forwards infinite;
 }

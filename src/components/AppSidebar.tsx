@@ -71,7 +71,7 @@ export function AppSidebar() {
     isActive
   }: {
     isActive: boolean;
-  }) => isActive ? "flex items-center gap-3 w-full px-4 py-2 rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all duration-200 font-medium" : "flex items-center gap-3 w-full px-4 py-2 rounded-xl border border-transparent text-gray-800 hover:border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all duration-200 font-medium";
+  }) => isActive ? "flex items-center w-full px-4 py-2 rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all duration-200 font-medium" : "flex items-center w-full px-4 py-2 rounded-xl border border-transparent text-gray-800 hover:border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all duration-200 font-medium";
   return <Sidebar className="border-r border-sidebar-border">
       <SidebarHeader className="p-6 border-b border-border relative">
         <Button
@@ -104,8 +104,8 @@ export function AppSidebar() {
                     >
                       {({ isActive }) => (
                         <>
-                          <item.icon className={`h-5 w-5 flex-shrink-0 ${isActive ? 'text-primary' : 'text-gray-800'}`} />
-                          <span className={`${isActive ? 'text-primary' : 'text-gray-800'}`}>{item.title}</span>
+                          <item.icon className={`h-5 w-5 ${isActive ? 'text-primary' : 'text-gray-800'}`} />
+                          <span className={isActive ? 'text-primary' : 'text-gray-800'}>{item.title}</span>
                         </>
                       )}
                     </NavLink>
@@ -118,31 +118,13 @@ export function AppSidebar() {
 
       <SidebarFooter className="p-4 border-t border-sidebar-border space-y-4">
         {isOnTrial && isTrialVisible && (
-          <Card className={`shadow-sm p-3 ${
-            trialDaysRemaining <= 2 
-              ? 'border-red-300 bg-red-50 animate-pulse' 
-              : trialDaysRemaining <= 4 
-              ? 'border-orange-300 bg-orange-50' 
-              : 'border-yellow-200 bg-yellow-50'
-          }`}>
+          <Card className="border-orange-200 bg-orange-50 shadow-sm p-3">
             <div className="flex flex-col gap-2">
-              <p className={`text-xs font-semibold whitespace-nowrap text-center ${
-                trialDaysRemaining <= 2 
-                  ? 'text-red-800' 
-                  : trialDaysRemaining <= 4 
-                  ? 'text-orange-800' 
-                  : 'text-yellow-800'
-              }`}>
-                {trialDaysRemaining} {trialDaysRemaining === 1 ? t('sidebar.day') : t('sidebar.days')} {t('sidebar.trialRemaining')}
+              <p className="text-xs font-semibold text-orange-800 whitespace-nowrap text-center">
+                {t('sidebar.trialExpires')}
               </p>
               <Button 
-                className={`text-xs h-8 px-4 font-semibold rounded-md w-full whitespace-nowrap ${
-                  trialDaysRemaining <= 2
-                    ? 'bg-red-500 text-white hover:bg-red-600'
-                    : trialDaysRemaining <= 4
-                    ? 'bg-orange-500 text-white hover:bg-orange-600'
-                    : 'bg-yellow-500 text-black hover:bg-yellow-600'
-                }`}
+                className="text-xs h-8 px-4 font-semibold bg-red-400 text-white hover:bg-red-500 rounded-md w-full whitespace-nowrap"
                 onClick={() => navigate("/dashboard/subscription")}
               >
                 {t('sidebar.upgradeNow')}
@@ -169,11 +151,11 @@ export function AppSidebar() {
         <Button 
           variant="outline" 
           size="sm" 
-          className="w-full justify-start gap-3 items-center"
+          className="w-full justify-start gap-2"
           onClick={logout}
         >
-          <LogOut className="h-4 w-4 flex-shrink-0" />
-          <span>{t('sidebar.disconnect')}</span>
+          <LogOut className="h-4 w-4" />
+          {t('sidebar.disconnect')}
         </Button>
         <Button 
           variant="outline" 

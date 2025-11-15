@@ -19,8 +19,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'poppins': ['Poppins', 'sans-serif'],
-				'nunito': ['Nunito', 'sans-serif'],
+				poppins: ['Poppins', 'sans-serif'],
+				nunito: ['Nunito', 'sans-serif'],
+				sans: ['Poppins', 'Nunito', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -65,7 +66,33 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				success: 'hsl(var(--success))',
+				warning: 'hsl(var(--warning))',
+				danger: 'hsl(var(--danger))',
+				wheel: {
+					red: 'hsl(var(--wheel-red))',
+					green: 'hsl(var(--wheel-green))',
+					yellow: 'hsl(var(--wheel-yellow))'
 				}
+			},
+			boxShadow: {
+				sm: 'var(--shadow-sm)',
+				md: 'var(--shadow-md)',
+				lg: 'var(--shadow-lg)',
+				xl: 'var(--shadow-xl)',
+				soft: 'var(--shadow-soft)',
+				button: 'var(--shadow-button)',
+				card: 'var(--shadow-card)'
+			},
+			backgroundImage: {
+				'gradient-primary': 'var(--gradient-primary)',
+				'gradient-hero': 'var(--gradient-hero)',
+				'gradient-background': 'var(--gradient-background)',
+				'gradient-subtle': 'var(--gradient-subtle)'
+			},
+			transitionDuration: {
+				'1000': '1000ms'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

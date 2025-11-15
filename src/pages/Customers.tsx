@@ -377,9 +377,9 @@ export default function Customers() {
               {t('customers.subtitle')}
             </p>
           </div>
-          <Button className="flex items-center gap-3 shadow-md hover:shadow-lg transition-all" onClick={() => setAddOpen(true)}>
-            <UserPlus className="h-4 w-4 flex-shrink-0" />
-            <span>{t('customers.addClient')}</span>
+          <Button className="gap-2 shadow-md hover:shadow-lg transition-all" onClick={() => setAddOpen(true)}>
+            <UserPlus className="h-4 w-4" />
+            {t('customers.addClient')}
           </Button>
         </div>
 
