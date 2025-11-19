@@ -13,7 +13,7 @@ import { useAuthContext } from "@/hooks/useAuthContext";
 import { useLogout } from "@/hooks/useLogout";
 
 export function AppSidebar() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
   const { user } = useAuthContext();
   const { logout } = useLogout();
@@ -168,7 +168,11 @@ export function AppSidebar() {
             startOnboarding();
           }}
         >
-          <span className="inline-flex items-center gap-2 whitespace-nowrap">
+          <span
+            className={`inline-flex items-center gap-2 whitespace-nowrap ${
+              language === 'fr' ? 'text-sm' : ''
+            }`}
+          >
             <Sparkles className="h-4 w-4" />
             {t('sidebar.rewatchGuide')}
           </span>
