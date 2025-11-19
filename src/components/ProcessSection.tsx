@@ -38,8 +38,8 @@ const ProcessSection = () => {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-2 mb-12 md:gap-10 md:mb-16">
-          {steps.map((step, index) => <div key={index} className="text-center space-y-2 group md:space-y-4">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 md:gap-10 md:mb-16">
+          {steps.map((step, index) => <div key={index} className="text-center space-y-3 group md:space-y-8">
               {/* Espace réservé sans icône */}
               
               

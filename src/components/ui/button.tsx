@@ -45,7 +45,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
     size,
     className
   }))} ref={ref} {...props}>
-        {children}
+        <span className="relative z-10 text-base rounded-full text-center px-0 mx-0 py-[8px]">
+          {children}
+        </span>
       </Comp>;
 });
 Button.displayName = "Button";

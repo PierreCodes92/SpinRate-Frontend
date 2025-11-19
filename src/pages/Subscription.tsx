@@ -87,8 +87,18 @@ export default function Subscription() {
     }
   };
 
-  const subscriptionLost = hasLostSubscription(user);
-  const onFreeTrial = isOnFreeTrial(user);
+  const subscriptionRemaining = user?.user?.subscriptionRemaining ?? 0;
+  const lastPaymentDate = user?.user?.lastPaymentDate ? new Date(user.user.lastPaymentDate) : null;
+  const now = new Date();
+  const diffInDays = lastPaymentDate ? Math.floor((now.getTime() - lastPaymentDate.getTime()) / (1000 * 60 * 60 * 24)) : null;
+
+  const isFreeTrialUser = subscriptionRemaining === 7;
+  const freeTrialActive = isFreeTrialUser && diffInDays !== null && diffInDays <= 7;
+  const freeTrialExpired = isFreeTrialUser && diffInDays !== null && diffInDays > 7;
+  const subscriptionExpired = !isFreeTrialUser && diffInDays !== null && diffInDays > subscriptionRemaining;
+
+  const subscriptionLost = subscriptionExpired;
+  const onFreeTrial = freeTrialActive;
   const currentPlanInfo = getCurrentPlanInfo(user);
 
   // Format date for display
@@ -152,7 +162,18 @@ export default function Subscription() {
           )}
 
           {/* Subscription Status Messages */}
-          {subscriptionLost && (
+          {freeTrialExpired && (
+            <div className="mb-8 bg-destructive/10 border border-destructive/20 rounded-lg p-6">
+              <h2 className="text-xl font-semibold text-destructive mb-2">
+                {t('subscription.freeTrialExpiredTitle') || 'Free Trial Expired'}
+              </h2>
+              <p className="text-muted-foreground">
+                {t('subscription.freeTrialExpiredSubtitle') || 'Your free trial has expired. Choose a plan to continue.'}
+              </p>
+            </div>
+          )}
+
+          {subscriptionExpired && (
             <div className="mb-8 bg-destructive/10 border border-destructive/20 rounded-lg p-6">
               <h2 className="text-xl font-semibold text-destructive mb-2">
                 {t('subscription.expiredTitle') || 'Subscription Expired'}
@@ -163,7 +184,7 @@ export default function Subscription() {
             </div>
           )}
 
-          {onFreeTrial && !subscriptionLost && (
+          {freeTrialActive && (
             <div className="mb-8 bg-warning/10 border border-warning/20 rounded-lg p-6">
               <h2 className="text-xl font-semibold text-warning mb-2">
                 {t('subscription.freeTrialTitle') || 'Free Trial Active'}

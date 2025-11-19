@@ -151,23 +151,27 @@ export function AppSidebar() {
         <Button 
           variant="outline" 
           size="sm" 
-          className="w-full justify-start gap-2"
+          className="w-full justify-start"
           onClick={logout}
         >
-          <LogOut className="h-4 w-4" />
-          {t('sidebar.disconnect')}
+          <span className="inline-flex items-center gap-2 whitespace-nowrap">
+            <LogOut className="h-4 w-4" />
+            {t('sidebar.disconnect')}
+          </span>
         </Button>
         <Button 
           variant="outline" 
           size="sm" 
-          className="w-full justify-start gap-2"
+          className="w-full justify-start"
           onClick={() => {
             setOpenMobile(false);
             startOnboarding();
           }}
         >
-          <Sparkles className="h-4 w-4" />
-          {t('sidebar.rewatchGuide')}
+          <span className="inline-flex items-center gap-2 whitespace-nowrap">
+            <Sparkles className="h-4 w-4" />
+            {t('sidebar.rewatchGuide')}
+          </span>
         </Button>
       </SidebarFooter>
     </Sidebar>;

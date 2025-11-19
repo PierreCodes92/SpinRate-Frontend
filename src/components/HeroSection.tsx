@@ -49,7 +49,7 @@ const HeroSection = () => {
         <div className="absolute bottom-1/2 right-1/6 w-3 h-3 bg-primary/25 animate-bounce delay-2800"></div>
       </div>
       
-      <div className="container mx-auto max-w-5xl relative px-0">
+      <div className="container mx-auto max-w-7xl relative px-0">
         {/* Desktop Layout */}
         <div className="hidden lg:grid lg:grid-cols-2 gap-12 items-center md:hidden" ref={heroRef}>
           {/* Left Content */}

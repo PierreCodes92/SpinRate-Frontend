@@ -101,12 +101,18 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-3 lg:mr-10">
             <LanguageToggle />
             
-            <Button 
-              variant="nav-cta" 
-              onClick={handleCTAClick}
-            >
-              {t('startFreeTrial')}
-            </Button>
+            <div className="button-container">
+              <span className="halo" style={{ animationDelay: '0s' }}></span>
+              <span className="halo" style={{ animationDelay: '0.35s' }}></span>
+              <span className="halo" style={{ animationDelay: '0.7s' }}></span>
+              <Button 
+                variant="nav-cta" 
+                className="btn"
+                onClick={handleCTAClick}
+              >
+                {t('startFreeTrial')}
+              </Button>
+            </div>
           </div>
 
           {/* Mobile & Tablet: Language Toggle & Menu Button */}
@@ -204,16 +210,21 @@ const Header = () => {
                 
                 {/* Mobile CTA Button */}
                 <div className="pt-4">
-                  <Button 
-                    variant="nav-cta" 
-                    className="w-full"
-                    onClick={() => {
-                      toggleMobileMenu();
-                      handleCTAClick();
-                    }}
-                  >
-                    {t('startFreeTrial')}
-                  </Button>
+                  <div className="button-container w-full">
+                    <span className="halo" style={{ animationDelay: '0s' }}></span>
+                    <span className="halo" style={{ animationDelay: '0.35s' }}></span>
+                    <span className="halo" style={{ animationDelay: '0.7s' }}></span>
+                    <Button 
+                      variant="nav-cta" 
+                      className="w-full btn"
+                      onClick={() => {
+                        toggleMobileMenu();
+                        handleCTAClick();
+                      }}
+                    >
+                      {t('startFreeTrial')}
+                    </Button>
+                  </div>
                 </div>
               </div>
             </nav>

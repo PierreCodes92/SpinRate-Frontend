@@ -145,10 +145,12 @@ export const OnboardingTooltip = ({
                     <div className="halo" style={{ animationDelay: '0.7s' }}></div>
                     <Button
                       onClick={onNext}
-                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full relative z-10"
+                      className="w-full bg-primary hover:bg-primary/90 text-primary-foreground rounded-full relative z-10 px-4 py-2"
                     >
-                      {actionText}
-                      <ArrowRight className="w-4 h-4 ml-2" />
+                      <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-sm sm:text-base">
+                        {actionText}
+                        <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+                      </span>
                     </Button>
                   </div>
                 )}

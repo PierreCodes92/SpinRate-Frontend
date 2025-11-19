@@ -239,6 +239,24 @@ All colors MUST be HSL.
     @apply opacity-100 scale-100;
   }
 
+  /* Halo animation for CTA button */
+  .button-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .btn {
+    position: relative;
+    border-radius: 9999px;
+    background-color: #1A73E8;
+    color: white;
+    padding: 12px 24px;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+  }
+
 }
 
 @keyframes pulseHalo {

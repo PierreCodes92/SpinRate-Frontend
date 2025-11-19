@@ -246,6 +246,13 @@ export default function WheelGame() {
     }
   };
 
+  const handlePhoneChange = (value: string) => {
+    const allowedPattern = /^[0-9+\-]*$/;
+    if (allowedPattern.test(value)) {
+      setPhone(value);
+    }
+  };
+
   const isFormValid = firstName && email && phone && acceptTerms;
 
   const handleSpinFromForm = async () => {
@@ -745,22 +752,38 @@ export default function WheelGame() {
             width: '90px',
             height: '90px',
             backgroundColor: 'white',
-            borderRadius: '8px',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+            borderRadius: '50%',
+            boxShadow: '0 8px 25px rgba(15,23,42,0.12)',
+            padding: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             overflow: 'hidden',
             zIndex: 10
           }}
         >
-          <img 
-            src={logoPreview} 
-            alt="Logo" 
+          <div
             style={{
               width: '100%',
               height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'center'
+              borderRadius: '50%',
+              backgroundColor: '#ffffff',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
-          />
+          >
+            <img 
+              src={logoPreview} 
+              alt="Logo" 
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'contain',
+                borderRadius: '50%'
+              }}
+            />
+          </div>
         </div>
       )}
 
@@ -877,7 +900,7 @@ export default function WheelGame() {
 
             {/* Center hole for logo */}
             <div 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[50px] h-[50px] rounded-full flex items-center justify-center overflow-hidden"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden"
               style={{
                 background: 'rgba(255,255,255,0.5)',
                 backdropFilter: 'blur(8px)',
@@ -890,8 +913,7 @@ export default function WheelGame() {
                 <img 
                   src={logoPreview} 
                   alt="Logo" 
-                  className="w-full h-full object-cover"
-                  style={{ objectPosition: 'center' }}
+                  className="w-[80%] h-[80%] object-contain"
                 />
               )}
             </div>
@@ -935,7 +957,7 @@ export default function WheelGame() {
               type="tel"
               placeholder={t.phoneLabel}
               value={phone}
-              onChange={(e) => setPhone(e.target.value)}
+              onChange={(e) => handlePhoneChange(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary font-nunito"
             />
 

@@ -131,6 +131,22 @@ export default function Customers() {
     prix: "",
     codePromo: "",
   });
+  const [dummyCustomer, setDummyCustomer] = useState<Customer>({
+    id: "demo-row",
+    _id: "demo-row",
+    date: "19 nov. 2025",
+    email: "Mia@revwheel.fr",
+    prenom: "Mia de Revwheel",
+    phone: "+33 6 60 60 61 61",
+    prix: "10% de réduction",
+    codePromo: "fiche test",
+    statut: "Non réclamé",
+    enrichi: "Non",
+    nom: "",
+    dateNaissance: "",
+    adresse: "",
+    createdAt: new Date().toISOString(),
+  });
 
   // Fetch customers from API
   const fetchCustomers = useCallback(async () => {
@@ -181,6 +197,22 @@ export default function Customers() {
   }, [detailsOpen, enrichOpen, addOpen]);
 
   const handleMarkAsRecovered = async (customerId: string) => {
+    if (customerId === dummyCustomer.id) {
+      setDummyCustomer((prev) => {
+        const newStatus = prev.statut === "Réclamé" ? "Non réclamé" : "Réclamé";
+        toast.success(
+          newStatus === "Réclamé"
+            ? t("customers.statusUpdated") || "Status updated successfully"
+            : t("customers.statusUpdated") || "Status updated successfully"
+        );
+        return {
+          ...prev,
+          statut: newStatus,
+        };
+      });
+      return;
+    }
+
     try {
       const response = await fetch(`${API_BASE_URL}/customer/updateStatus/${customerId}`, {
         method: "PUT",
@@ -203,6 +235,11 @@ export default function Customers() {
   };
 
   const handleDeleteCustomer = async (customerId: string) => {
+    if (customerId === dummyCustomer.id) {
+      toast.info(t('customers.demoRowStatic') || "This demo entry cannot be removed.");
+      return;
+    }
+
     if (!window.confirm(t('customers.deleteConfirm') || "Are you sure you want to delete this customer?")) {
       return;
     }
@@ -230,6 +267,20 @@ export default function Customers() {
 
   const handleEnrichSave = async () => {
     if (!selectedCustomer) return;
+
+    if (selectedCustomer.id === dummyCustomer.id) {
+      setDummyCustomer(prev => ({
+        ...prev,
+        prenom: enrichFormData.prenom,
+        nom: enrichFormData.nom,
+        dateNaissance: enrichFormData.dateNaissance,
+        adresse: enrichFormData.adresse,
+        enrichi: "Oui"
+      }));
+      setEnrichOpen(false);
+      toast.success(t('customers.enrichedSuccess') || "Customer information enriched successfully");
+      return;
+    }
 
     try {
       const response = await fetch(`${API_BASE_URL}/customer/enrichCustomer/${selectedCustomer._id}`, {
@@ -265,6 +316,134 @@ export default function Customers() {
     setAddOpen(false);
     // TODO: Implement customer creation with wheelId selection
   };
+
+  const renderCustomerRow = (customer: Customer, index: number, isDemo = false) => (
+    <TableRow key={isDemo ? "demo-row" : customer.id} className={isDemo ? "bg-muted/20" : undefined}>
+      <TableCell className="text-muted-foreground">
+        {customer.date}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {customer.email}
+      </TableCell>
+      <TableCell className="font-medium">
+        {customer.prenom}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {customer.phone}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {customer.prix}
+      </TableCell>
+      <TableCell className="text-muted-foreground">
+        {customer.codePromo || "-"}
+      </TableCell>
+      <TableCell>
+        {customer.statut === "Réclamé" ? (
+          <Badge className="bg-green-600 hover:bg-green-700 text-white whitespace-nowrap px-3">
+            {t('customers.claimed')}
+          </Badge>
+        ) : (
+          <Badge variant="secondary" className="bg-slate-200 text-slate-700 whitespace-nowrap px-3">
+            {t('customers.notClaimed')}
+          </Badge>
+        )}
+      </TableCell>
+      <TableCell>
+        <Badge 
+          variant={customer.enrichi === "Oui" ? "default" : "secondary"}
+          className={customer.enrichi === "Oui" ? "bg-primary" : ""}
+        >
+          {customer.enrichi === "Oui" ? t('customers.yes') : t('customers.no')}
+        </Badge>
+      </TableCell>
+      <TableCell data-onboarding={!isDemo && index === 0 ? "client-actions-cell" : undefined}>
+        <DropdownMenu
+          open={openDropdownId === customer.id}
+          onOpenChange={(isOpen) => {
+            setOpenDropdownId(isOpen ? customer.id : null);
+          }}
+        >
+          <DropdownMenuTrigger 
+            asChild
+            onTouchStart={(e) => e.stopPropagation()}
+            onPointerDown={(e) => e.stopPropagation()}
+          >
+            <Button
+              variant="ghost"
+              size="icon"
+              className="focus:outline-none"
+              type="button"
+              aria-label="Actions"
+              data-onboarding={!isDemo && index === 0 ? "client-menu-marie" : undefined}
+            >
+              <MoreVertical className="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent 
+            data-onboarding={!isDemo && index === 0 ? "client-actions" : undefined}
+            align="end" 
+            className="w-48 z-[9999]" 
+            sideOffset={8}
+            side="bottom"
+            onTouchStart={(e) => e.stopPropagation()}
+            onPointerDown={(e) => e.stopPropagation()}
+          >
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+                setOpenDropdownId(null);
+                handleMarkAsRecovered(customer.id);
+              }}
+            >
+              <Gift className="h-4 w-4 mr-2" />
+              {customer.statut === "Réclamé" 
+                ? t('customers.markAsNotClaimed') || "Mark as Not Claimed"
+                : t('customers.markAsClaimed') || "Mark as Claimed"}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+                setOpenDropdownId(null);
+                setSelectedCustomer(customer);
+                setDetailsOpen(true);
+              }}
+            >
+              <Eye className="h-4 w-4 mr-2" />
+              {t('customers.viewDetails')}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              onSelect={(e) => {
+                e.preventDefault();
+                setOpenDropdownId(null);
+                setSelectedCustomer(customer);
+                setEnrichFormData({
+                  prenom: customer.prenom,
+                  nom: customer.nom,
+                  dateNaissance: customer.dateNaissance,
+                  adresse: customer.adresse,
+                });
+                setEnrichOpen(true);
+              }}
+            >
+              <UserPlus2 className="h-4 w-4 mr-2" />
+              {t('customers.enrichClient')}
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-red-600"
+              onSelect={(e) => {
+                e.preventDefault();
+                setOpenDropdownId(null);
+                handleDeleteCustomer(customer.id);
+              }}
+            >
+              <Trash2 className="h-4 w-4 mr-2" />
+              {t('customers.delete')}
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </TableCell>
+    </TableRow>
+  );
 
   // Filtrer et paginer les clients
   const filteredCustomers = useMemo(() => {
@@ -377,9 +556,11 @@ export default function Customers() {
               {t('customers.subtitle')}
             </p>
           </div>
-          <Button className="gap-2 shadow-md hover:shadow-lg transition-all" onClick={() => setAddOpen(true)}>
-            <UserPlus className="h-4 w-4" />
-            {t('customers.addClient')}
+          <Button className="shadow-md hover:shadow-lg transition-all whitespace-nowrap" onClick={() => setAddOpen(true)}>
+            <span className="inline-flex items-center gap-2">
+              <UserPlus className="h-4 w-4" />
+              <span className="whitespace-nowrap">{t('customers.addClient')}</span>
+            </span>
           </Button>
         </div>
 
@@ -472,6 +653,8 @@ export default function Customers() {
                   </TableRow>
                 </TableHeader>
               <TableBody>
+                {renderCustomerRow(dummyCustomer, -1, true)}
+
                 {paginatedCustomers.length === 0 ? (
                   <TableRow>
                     <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
@@ -480,131 +663,7 @@ export default function Customers() {
                   </TableRow>
                 ) : (
                   paginatedCustomers.map((customer, index) => (
-                  <TableRow key={customer.id}>
-                    <TableCell className="text-muted-foreground">
-                      {customer.date}
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {customer.email}
-                    </TableCell>
-                    <TableCell className="font-medium">
-                      {customer.prenom}
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {customer.phone}
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {customer.prix}
-                    </TableCell>
-                    <TableCell className="text-muted-foreground">
-                      {customer.codePromo || "-"}
-                    </TableCell>
-                    <TableCell>
-                      {customer.statut === "Réclamé" ? (
-                        <Badge className="bg-green-600 hover:bg-green-700 text-white">
-                          {t('customers.claimed')}
-                        </Badge>
-                      ) : (
-                        <Badge variant="secondary" className="bg-slate-200 text-slate-700">
-                          {t('customers.notClaimed')}
-                        </Badge>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <Badge 
-                        variant={customer.enrichi === "Oui" ? "default" : "secondary"}
-                        className={customer.enrichi === "Oui" ? "bg-primary" : ""}
-                      >
-                        {customer.enrichi === "Oui" ? t('customers.yes') : t('customers.no')}
-                      </Badge>
-                    </TableCell>
-                    <TableCell data-onboarding={index === 0 ? "client-actions-cell" : undefined}>
-                      <DropdownMenu
-                        open={openDropdownId === customer.id}
-                        onOpenChange={(isOpen) => {
-                          setOpenDropdownId(isOpen ? customer.id : null);
-                        }}
-                      >
-                        <DropdownMenuTrigger 
-                          asChild
-                          onTouchStart={(e) => e.stopPropagation()}
-                          onPointerDown={(e) => e.stopPropagation()}
-                        >
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            className="focus:outline-none"
-                            type="button"
-                            aria-label="Actions"
-                            data-onboarding={index === 0 ? "client-menu-marie" : undefined}
-                          >
-                            <MoreVertical className="h-5 w-5" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent 
-                          data-onboarding={index === 0 ? "client-actions" : undefined}
-                          align="end" 
-                          className="w-48 z-[9999]" 
-                          sideOffset={8}
-                          side="bottom"
-                          onTouchStart={(e) => e.stopPropagation()}
-                          onPointerDown={(e) => e.stopPropagation()}
-                        >
-                          <DropdownMenuItem
-                            onSelect={(e) => {
-                              e.preventDefault();
-                              setOpenDropdownId(null);
-                              handleMarkAsRecovered(customer.id);
-                            }}
-                          >
-                            <Gift className="h-4 w-4 mr-2" />
-                            {customer.statut === "Réclamé" 
-                              ? t('customers.markAsNotClaimed') || "Mark as Not Claimed"
-                              : t('customers.markAsClaimed') || "Mark as Claimed"}
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onSelect={(e) => {
-                              e.preventDefault();
-                              setOpenDropdownId(null);
-                              setSelectedCustomer(customer);
-                              setDetailsOpen(true);
-                            }}
-                          >
-                            <Eye className="h-4 w-4 mr-2" />
-                            {t('customers.viewDetails')}
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            onSelect={(e) => {
-                              e.preventDefault();
-                              setOpenDropdownId(null);
-                              setSelectedCustomer(customer);
-                              setEnrichFormData({
-                                prenom: customer.prenom,
-                                nom: customer.nom,
-                                dateNaissance: customer.dateNaissance,
-                                adresse: customer.adresse,
-                              });
-                              setEnrichOpen(true);
-                            }}
-                          >
-                            <UserPlus2 className="h-4 w-4 mr-2" />
-                            {t('customers.enrichClient')}
-                          </DropdownMenuItem>
-                          <DropdownMenuItem
-                            className="text-red-600"
-                            onSelect={(e) => {
-                              e.preventDefault();
-                              setOpenDropdownId(null);
-                              handleDeleteCustomer(customer.id);
-                            }}
-                          >
-                            <Trash2 className="h-4 w-4 mr-2" />
-                            {t('customers.delete')}
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
-                    </TableCell>
-                  </TableRow>
+                    renderCustomerRow(customer, index)
                   ))
                 )}
               </TableBody>
