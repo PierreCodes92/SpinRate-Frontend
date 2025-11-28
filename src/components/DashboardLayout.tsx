@@ -9,7 +9,7 @@ export function DashboardLayout({
   children
 }: DashboardLayoutProps) {
   return <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-background relative">
+      <div className="min-h-screen flex w-full bg-background relative dashboard-fonts">
         <AppSidebar />
         <div className="flex-1 flex flex-col">
           <header className="h-16 border-b border-border bg-card flex items-center justify-between px-6">

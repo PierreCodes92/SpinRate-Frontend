@@ -261,3 +261,39 @@ All colors MUST be HSL.
   pointer-events: none;
   animation: pulseHalo 2.3s forwards infinite;
 }
+
+/* Dashboard-specific font styling */
+.dashboard-fonts,
+.dashboard-fonts * {
+  font-family: "Poppins", "Nunito", sans-serif;
+}
+
+.dashboard-fonts h1,
+.dashboard-fonts h2,
+.dashboard-fonts h3,
+.dashboard-fonts h4,
+.dashboard-fonts h5,
+.dashboard-fonts h6 {
+  font-family: "Poppins", "Nunito", sans-serif;
+}
+
+.dashboard-fonts input,
+.dashboard-fonts button,
+.dashboard-fonts textarea,
+.dashboard-fonts select {
+  font-family: "Poppins", "Nunito", sans-serif;
+}
+
+/* Onboarding animation */
+.animate-pulse-subtle {
+  animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.95;
+  }
+}

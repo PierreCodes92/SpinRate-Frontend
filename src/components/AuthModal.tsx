@@ -17,11 +17,13 @@ import { useSignup } from '@/hooks/useSignup';
 import { toast } from 'sonner';
 import { X, User, Mail, Phone, Lock } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
+
 interface AuthModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialMode?: 'login' | 'register';
 }
+
 export const AuthModal = ({
   isOpen,
   onClose,
@@ -40,9 +42,7 @@ export const AuthModal = ({
   const [isResendingEmail, setIsResendingEmail] = useState(false);
   const { login } = useLogin();
   const { signup } = useSignup();
-  const {
-    t
-  } = useTranslation();
+  const { t } = useTranslation();
 
   // Function to send verification email
   const sendVerificationEmail = async (userFullName: string, userEmail: string) => {
@@ -83,11 +83,7 @@ export const AuthModal = ({
       setIsResendingEmail(false);
     }
   };
-  const activeToggleClass = "px-8 py-2 rounded-full text-sm font-semibold text-white shadow-[0_15px_30px_rgba(61,139,255,0.3)] bg-[#3D8BFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 transition-all";
-  const inactiveToggleClass = "text-sm font-semibold text-[#3D8BFF] hover:text-[#1E4FD8] transition-colors px-3 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/40 rounded-full";
-  const inputClasses = "h-12 md:h-12 pl-11 rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]";
-  const iconClasses = "absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#90A1C0]";
-  const ctaButtonClass = "w-full h-12 rounded-full bg-gradient-to-r from-[#3D8BFF] to-[#1E62FF] text-base font-semibold text-white shadow-[0_18px_35px_rgba(61,139,255,0.35)] transform transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 disabled:opacity-70 disabled:cursor-not-allowed";
+
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -116,6 +112,7 @@ export const AuthModal = ({
       setHasOpened(false);
     }
   }, [isOpen]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isLoading) return;
@@ -163,32 +160,37 @@ export const AuthModal = ({
       setIsLoading(false);
     }
   };
+
   if (!isOpen) return null;
-  return <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+
+  return <>
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+      {/* Backdrop */}
       <div className={`fixed inset-0 bg-black/50 backdrop-blur-sm transition-all duration-500 ${isClosing ? 'opacity-0' : 'opacity-100'}`} onClick={handleClose} />
       
+      {/* Modal */}
       <div className={`relative w-full max-w-md bg-white rounded-[28px] shadow-[0_35px_90px_rgba(15,23,42,0.12)] border border-[#E8EEFA] overflow-hidden transition-all duration-500 ease-out ${isClosing ? 'opacity-0 scale-95' : hasOpened ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-        <button onClick={handleClose} className="absolute top-5 right-5 text-[#98A2B3] hover:text-[#1E3FAA] transition-colors" aria-label="Close">
+        <button onClick={handleClose} className="absolute top-5 right-5 text-[#98A2B3] hover:text-[#1E3FAA] transition-colors z-10" aria-label="Close">
           <X size={20} />
         </button>
         
+        {/* Header with logo */}
         <div className="px-6 pt-10 pb-5 text-center">
           <div className="flex flex-col items-center gap-2 mb-6">
             <img src="/lovable-uploads/revwheel-logo.png" alt="RevWheel logo" className="h-12 w-auto" />
           </div>
           
           <div className="flex items-center justify-center gap-4 mb-4">
-            <button type="button" onClick={() => setMode('login')} className={mode === 'login' ? activeToggleClass : inactiveToggleClass}>
+            <button type="button" onClick={() => setMode('login')} className={mode === 'login' ? "px-8 py-2 rounded-full text-sm font-semibold text-white shadow-[0_15px_30px_rgba(61,139,255,0.3)] bg-[#3D8BFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 transition-all" : "text-sm font-semibold text-[#3D8BFF] hover:text-[#1E4FD8] transition-colors px-3 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/40 rounded-full"}>
               {t('login')}
             </button>
-            <button type="button" onClick={() => setMode('register')} className={mode === 'register' ? activeToggleClass : inactiveToggleClass}>
+            <button type="button" onClick={() => setMode('register')} className={mode === 'register' ? "px-8 py-2 rounded-full text-sm font-semibold text-white shadow-[0_15px_30px_rgba(61,139,255,0.3)] bg-[#3D8BFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 transition-all" : "text-sm font-semibold text-[#3D8BFF] hover:text-[#1E4FD8] transition-colors px-3 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/40 rounded-full"}>
               {t('register')}
             </button>
           </div>
-          
-          <p className="text-sm text-[#8A94A6]">{t('wheelReadyText')}</p>
         </div>
 
+        {/* Form */}
         <div className="px-6 pb-6">
           {/* Google Sign In Button */}
           <div className="mb-4">
@@ -204,9 +206,7 @@ export const AuthModal = ({
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
               <span className="whitespace-nowrap">
-                {mode === 'login' 
-                  ? (t('signInWithGoogle') || 'Se connecter avec Google') 
-                  : (t('signUpWithGoogle') || "S'inscrire avec Google")}
+                {mode === 'login' ? 'Se connecter avec Google' : "S'inscrire avec Google"}
               </span>
             </button>
             
@@ -216,7 +216,7 @@ export const AuthModal = ({
                 <div className="w-full border-t border-[#E3E8F4]"></div>
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="bg-white px-3 text-[#8A94A6]">{t('or') || 'ou'}</span>
+                <span className="bg-white px-3 text-[#8A94A6]">ou</span>
               </div>
             </div>
           </div>
@@ -227,8 +227,8 @@ export const AuthModal = ({
                   {t('fullName')}
                 </Label>
                 <div className="relative">
-                  <User className={iconClasses} />
-                  <Input id="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} className={inputClasses} required />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#90A1C0]" />
+                  <Input id="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} className="h-12 pl-11 rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
                 </div>
               </div>}
 
@@ -237,8 +237,8 @@ export const AuthModal = ({
                 {t('emailAddress')}
               </Label>
               <div className="relative">
-                <Mail className={iconClasses} />
-                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className={inputClasses} required />
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#90A1C0]" />
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="h-12 pl-11 rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
               </div>
             </div>
 
@@ -247,8 +247,8 @@ export const AuthModal = ({
                   {t('phoneNumber')}
                 </Label>
                 <div className="relative">
-                  <Phone className={iconClasses} />
-                  <Input id="phone" type="tel" value={phone} onChange={e => setPhone(e.target.value)} className={inputClasses} required />
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#90A1C0]" />
+                  <Input id="phone" type="tel" value={phone} onChange={e => setPhone(e.target.value)} className="h-12 pl-11 rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
                 </div>
               </div>}
 
@@ -257,8 +257,8 @@ export const AuthModal = ({
                 {t('passwordField')}
               </Label>
               <div className="relative">
-                <Lock className={iconClasses} />
-                <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className={inputClasses} required />
+                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#90A1C0]" />
+                <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="h-12 pl-11 rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
               </div>
             </div>
 
@@ -273,11 +273,14 @@ export const AuthModal = ({
                 </button>}
             </div>
 
-            <button type="submit" className={ctaButtonClass} disabled={isLoading}>
-              {isLoading ? mode === 'login' ? t('loggingIn') || 'Logging in...' : t('registering') || 'Registering...' : mode === 'login' ? t('login') : t('register')}
+            <button type="submit" className="w-full h-12 rounded-full bg-gradient-to-r from-[#3D8BFF] to-[#1E62FF] text-base font-semibold text-white shadow-[0_18px_35px_rgba(61,139,255,0.35)] transform transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 disabled:opacity-70 disabled:cursor-not-allowed" disabled={isLoading}>
+              {isLoading 
+                ? (mode === 'login' ? (t('loggingIn') || 'Logging in...') : (t('registering') || 'Registering...'))
+                : (mode === 'login' ? t('login') : t('register'))}
             </button>
           </form>
 
+          {/* Switch mode */}
           <div className="mt-6 text-center text-sm text-[#8A94A6]">
             {mode === 'login' ? <>
                 {t('noAccountYet')}{' '}
@@ -293,47 +296,48 @@ export const AuthModal = ({
           </div>
         </div>
       </div>
+    </div>
 
-      {/* Email Confirmation Dialog */}
-      <AlertDialog open={showEmailConfirmation} onOpenChange={setShowEmailConfirmation}>
-        <AlertDialogContent className="max-w-md">
-          <AlertDialogHeader>
-            <AlertDialogTitle className="text-xl font-semibold text-center">
-              {t('checkYourEmail') || 'Consultez votre boîte mail.'}
-            </AlertDialogTitle>
-            <AlertDialogDescription className="text-center text-base pt-2">
-              {t('emailVerificationSent') || 'Cliquez sur le lien que nous avons envoyé à'}{' '}
-              <span className="font-medium text-foreground">{email}</span>{' '}
-              {t('toFinalizeAccount') || 'pour finaliser la création de votre compte.'}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter className="flex-col sm:flex-col gap-2">
-            <Button
-              onClick={() => {
-                setShowEmailConfirmation(false);
-                setMode('login');
-                setFullName('');
-                setPhone('');
-              }}
-              className="w-full"
-              variant="default"
-            >
-              {t('understood') || 'Compris'}
-            </Button>
-            <button
-              onClick={handleResendEmail}
-              disabled={isResendingEmail}
-              className="text-sm text-muted-foreground hover:text-primary transition-colors disabled:opacity-50"
-            >
-              {t('didntReceiveEmail') || "Vous n'avez pas reçu l'e-mail ?"}{' '}
-              <span className="text-primary font-medium">
-                {isResendingEmail 
-                  ? (t('sending') || 'Envoi en cours...') 
-                  : (t('resendEmail') || "Renvoyer l'e-mail.")}
-              </span>
-            </button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </div>;
+    {/* Email Confirmation Dialog */}
+    <AlertDialog open={showEmailConfirmation} onOpenChange={setShowEmailConfirmation}>
+      <AlertDialogContent className="max-w-md">
+        <AlertDialogHeader>
+          <AlertDialogTitle className="text-xl font-semibold text-center">
+            {t('checkYourEmail') || 'Consultez votre boîte mail.'}
+          </AlertDialogTitle>
+          <AlertDialogDescription className="text-center text-base pt-2">
+            {t('emailVerificationSent') || 'Cliquez sur le lien que nous avons envoyé à'}{' '}
+            <span className="font-medium text-foreground">{email}</span>{' '}
+            {t('toFinalizeAccount') || 'pour finaliser la création de votre compte.'}
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter className="flex-col sm:flex-col gap-2">
+          <Button
+            onClick={() => {
+              setShowEmailConfirmation(false);
+              setMode('login');
+              setFullName('');
+              setPhone('');
+            }}
+            className="w-full"
+            variant="cta"
+          >
+            {t('understood') || 'Compris'}
+          </Button>
+          <button
+            onClick={handleResendEmail}
+            disabled={isResendingEmail}
+            className="text-sm text-muted-foreground hover:text-primary transition-colors disabled:opacity-50"
+          >
+            {t('didntReceiveEmail') || "Vous n'avez pas reçu l'e-mail ?"}{' '}
+            <span className="text-primary font-medium">
+              {isResendingEmail 
+                ? (t('sending') || 'Envoi en cours...') 
+                : (t('resendEmail') || "Renvoyer l'e-mail.")}
+            </span>
+          </button>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  </>;
 };

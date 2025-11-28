@@ -13,7 +13,8 @@ const buttonVariants = cva("inline-flex items-center justify-center gap-2 whites
       link: "text-primary underline-offset-4 hover:underline",
       hero: "bg-primary text-white shadow-button hover:bg-white hover:text-primary font-semibold border-0 transition-all duration-1000 relative overflow-hidden before:absolute before:inset-0 before:bg-white before:-translate-x-full before:transition-transform before:duration-1000 hover:before:translate-x-0 before:z-0",
       cta: "bg-primary text-white shadow-button hover:bg-white hover:text-primary font-semibold border-0 transition-all duration-1000 relative overflow-hidden before:absolute before:inset-0 before:bg-white before:-translate-x-full before:transition-transform before:duration-1000 hover:before:translate-x-0 before:z-0",
-      "nav-cta": "bg-primary text-white shadow-soft hover:bg-white hover:text-primary font-medium text-sm px-6 py-2.5 rounded-full transition-all duration-1000 relative overflow-hidden before:absolute before:inset-0 before:bg-white before:-translate-x-full before:transition-transform before:duration-1000 hover:before:translate-x-0 before:z-0"
+      "nav-cta": "bg-primary text-white shadow-soft hover:bg-white hover:text-primary font-medium text-sm px-6 py-2.5 rounded-full transition-all duration-1000 relative overflow-hidden before:absolute before:inset-0 before:bg-white before:-translate-x-full before:transition-transform before:duration-1000 hover:before:translate-x-0 before:z-0",
+      google: "bg-muted text-foreground border border-border shadow-soft hover:bg-foreground hover:text-background font-medium transition-all duration-1000 relative overflow-hidden before:absolute before:inset-0 before:bg-foreground before:-translate-x-full before:transition-transform before:duration-1000 hover:before:translate-x-0 before:z-0"
     },
     size: {
       default: "h-10 px-4 py-2",
@@ -45,9 +46,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
     size,
     className
   }))} ref={ref} {...props}>
-        <span className="relative z-10 text-base rounded-full text-center px-0 mx-0 py-[8px]">
-          {children}
-        </span>
+        <span className="relative z-10 inline-flex items-center gap-2">{children}</span>
       </Comp>;
 });
 Button.displayName = "Button";
