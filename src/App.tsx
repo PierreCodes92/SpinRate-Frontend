@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import VerifyEmail from "./pages/VerifyEmail";
 // Dashboard pages
 import Dashboard from "./pages/Dashboard";
 import Customers from "./pages/Customers";
@@ -43,6 +44,7 @@ const App = () => (
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/terms" element={<Terms />} />
                     <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/verify-email" element={<VerifyEmail />} />
                     {/* Dashboard routes */}
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/dashboard/customers" element={<Customers />} />

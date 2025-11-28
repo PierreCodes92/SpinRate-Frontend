@@ -32,6 +32,36 @@ export const translations = {
     'incorrectPassword': 'Mot de passe incorrect',
     'allFieldsMustBeFilled': 'Tous les champs doivent être remplis',
     
+    // Google Sign-In
+    'signInWithGoogle': 'Se connecter avec Google',
+    'signUpWithGoogle': 'S\'inscrire avec Google',
+    'or': 'ou',
+    
+    // Email Verification
+    'checkYourEmail': 'Consultez votre boîte mail.',
+    'emailVerificationSent': 'Cliquez sur le lien que nous avons envoyé à',
+    'toFinalizeAccount': 'pour finaliser la création de votre compte.',
+    'understood': 'Compris',
+    'didntReceiveEmail': 'Vous n\'avez pas reçu l\'e-mail ?',
+    'resendEmail': 'Renvoyer l\'e-mail.',
+    'sending': 'Envoi en cours...',
+    'verificationEmailResent': 'E-mail de vérification renvoyé avec succès',
+    'verificationEmailFailed': 'Échec de l\'envoi de l\'e-mail de vérification',
+    
+    // Verify Email Page
+    'verifyingEmail': 'Vérification en cours...',
+    'pleaseWait': 'Veuillez patienter pendant que nous vérifions votre email.',
+    'emailVerified': 'Email vérifié avec succès !',
+    'emailVerifiedDescription': 'Votre compte a été activé. Vous pouvez maintenant vous connecter et accéder à toutes les fonctionnalités de RevWheel.',
+    'goToLogin': 'Se connecter',
+    'verificationError': 'Erreur de vérification',
+    'backToHome': 'Retour à l\'accueil',
+    'linkExpired': 'Lien expiré',
+    'linkExpiredDescription': 'Ce lien de vérification a expiré. Veuillez vous inscrire à nouveau ou demander un nouveau lien de vérification.',
+    'invalidVerificationLink': 'Lien de vérification invalide',
+    'verificationLinkExpired': 'Le lien de vérification a expiré',
+    'verificationFailed': 'La vérification a échoué. Veuillez réessayer.',
+    
     // Form labels and texts
     'wheelReadyText': 'En seulement 4 clics, votre roue est prête.',
     'fullName': 'Nom complet',
@@ -575,6 +605,36 @@ export const translations = {
     'incorrectEmail': 'Incorrect email',
     'incorrectPassword': 'Incorrect password',
     'allFieldsMustBeFilled': 'All fields must be filled',
+    
+    // Google Sign-In
+    'signInWithGoogle': 'Sign in with Google',
+    'signUpWithGoogle': 'Sign up with Google',
+    'or': 'or',
+    
+    // Email Verification
+    'checkYourEmail': 'Check your email.',
+    'emailVerificationSent': 'Click on the link we sent to',
+    'toFinalizeAccount': 'to finalize your account creation.',
+    'understood': 'Got it',
+    'didntReceiveEmail': 'Didn\'t receive the email?',
+    'resendEmail': 'Resend email.',
+    'sending': 'Sending...',
+    'verificationEmailResent': 'Verification email resent successfully',
+    'verificationEmailFailed': 'Failed to send verification email',
+    
+    // Verify Email Page
+    'verifyingEmail': 'Verifying...',
+    'pleaseWait': 'Please wait while we verify your email.',
+    'emailVerified': 'Email verified successfully!',
+    'emailVerifiedDescription': 'Your account has been activated. You can now log in and access all RevWheel features.',
+    'goToLogin': 'Log in',
+    'verificationError': 'Verification Error',
+    'backToHome': 'Back to Home',
+    'linkExpired': 'Link Expired',
+    'linkExpiredDescription': 'This verification link has expired. Please sign up again or request a new verification link.',
+    'invalidVerificationLink': 'Invalid verification link',
+    'verificationLinkExpired': 'Verification link has expired',
+    'verificationFailed': 'Verification failed. Please try again.',
     
     // Form labels and texts
     'wheelReadyText': 'In just 4 clicks, your wheel is ready.',
