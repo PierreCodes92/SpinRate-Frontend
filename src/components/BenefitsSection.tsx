@@ -17,14 +17,14 @@ const BenefitsSection = () => {
     openModal('register');
   };
 
-  const { count: count209, startAnimation: start209, isAnimating: isAnimating209 } = useAnimatedCounter(209, 2000, 187);
+  const { count: count117, startAnimation: start117, isAnimating: isAnimating117 } = useAnimatedCounter(209, 2000, 180);
   const { count: count38, startAnimation: start38, isAnimating: isAnimating38 } = useAnimatedCounter(38, 2500, 30);
   
   useEffect(() => {
-    if (statsVisible && !isAnimating209 && count209 === 187) {
-      start209();
+    if (statsVisible && !isAnimating117 && count117 === 180) {
+      start117();
     }
-  }, [statsVisible, start209, isAnimating209, count209]);
+  }, [statsVisible, start117, isAnimating117, count117]);
 
   useEffect(() => {
     if (statsVisible && !isAnimating38 && count38 === 30) {
@@ -78,7 +78,7 @@ const BenefitsSection = () => {
             <div className="grid grid-cols-2 gap-8 md:gap-10" ref={statsRef}>
               {[
                 {
-                  number: statsVisible ? count209 : "209",
+                  number: statsVisible ? count117 : "209",
                   label: t('reviewsPerMonth'),
                   color: "text-primary"
                 },

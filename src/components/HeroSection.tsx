@@ -55,7 +55,7 @@ const HeroSection = () => {
           {/* Left Content */}
           <div className={`space-y-8 transition-all duration-1000 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
             <div className="space-y-6">
-              <h1 className="text-4xl lg:text-5xl font-bold text-foreground leading-relaxed">
+              <h1 className="text-5xl lg:text-6xl font-bold text-foreground leading-tight">
                 {t('collectGoogleReviews')}{" "}
                 <span className="text-primary">{t('effortlessly')}</span>
               </h1>

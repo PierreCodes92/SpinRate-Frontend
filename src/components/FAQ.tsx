@@ -75,7 +75,7 @@ const FAQ = () => {
     question: t('faq12Question'),
     answer: t('faq12Answer')
   }];
-  return <section ref={sectionRef} className="py-24 bg-white/30 backdrop-blur-sm relative overflow-hidden md:py-28">
+  return <section ref={sectionRef} className="py-24 px-6 bg-white/30 backdrop-blur-sm relative overflow-hidden md:py-28">
       {/* Animated shapes */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-20 right-10 w-16 h-16 bg-primary/20 rounded-full animate-pulse delay-1000"></div>
@@ -86,7 +86,7 @@ const FAQ = () => {
         <div className="absolute bottom-1/4 right-1/3 w-4 h-4 bg-primary/35 animate-pulse delay-3000"></div>
       </div>
 
-      <div className="mx-auto max-w-5xl relative px-3 md:px-6">
+      <div className="max-w-5xl mx-auto relative px-4 md:px-6">
         <div className={`text-center mb-16 transition-all duration-1000 md:mb-20 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="lg:text-5xl font-bold text-foreground mb-4 text-4xl md:text-[46px] md:leading-[52px] md:mb-6">
             {t('faqTitle').split(' ')[0]} <span className="text-primary">{t('faqTitle').split(' ').slice(1).join(' ')}</span>

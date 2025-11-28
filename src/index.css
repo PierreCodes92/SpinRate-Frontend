@@ -131,28 +131,13 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
-  * {
-    font-family: "Poppins", "Nunito", sans-serif;
-  }
-
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    font-family: "Poppins", "Nunito", sans-serif;
     background: var(--gradient-background);
     min-height: 100vh;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
-  }
-
-  /* Ensure headings also use the font */
-  h1, h2, h3, h4, h5, h6 {
-    font-family: "Poppins", "Nunito", sans-serif;
-  }
-
-  /* Apply to form elements which sometimes don't inherit font */
-  input, button, textarea, select {
-    font-family: "Poppins", "Nunito", sans-serif;
   }
 
   html {
