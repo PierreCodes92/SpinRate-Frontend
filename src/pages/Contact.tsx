@@ -2,6 +2,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "@/components/TranslationProvider";
+import SEO from "@/components/SEO";
 
 const Contact = () => {
   const { t } = useTranslation();
@@ -11,8 +12,16 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+    <>
+      <SEO 
+        titleFr="Contact - RevWheel"
+        titleEn="Contact - RevWheel"
+        descriptionFr="Contactez l'équipe RevWheel pour toute question sur notre solution de collecte d'avis Google. Prenez rendez-vous pour une démonstration gratuite."
+        descriptionEn="Contact the RevWheel team for any questions about our Google review collection solution. Schedule a free demo."
+        canonical="/contact"
+      />
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
       
       <main className="flex-1 py-20">
         <div className="container mx-auto px-6 text-center">
@@ -45,7 +54,8 @@ const Contact = () => {
       </main>
       
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

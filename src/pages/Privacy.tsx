@@ -1,11 +1,20 @@
 import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
 
 const Privacy = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <SEO 
+        titleFr="Politique de Confidentialité - RevWheel"
+        titleEn="Privacy Policy - RevWheel"
+        descriptionFr="Consultez notre politique de confidentialité et découvrez comment RevWheel protège vos données personnelles conformément au RGPD."
+        descriptionEn="Read our privacy policy and learn how RevWheel protects your personal data in compliance with GDPR."
+        canonical="/privacy"
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
       
       <main className="py-12 px-6">
         <div className="container mx-auto max-w-4xl">
@@ -106,7 +115,8 @@ const Privacy = () => {
       </main>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

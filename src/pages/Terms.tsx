@@ -2,13 +2,22 @@ import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useTranslation } from "@/components/TranslationProvider";
+import SEO from "@/components/SEO";
 
 const Terms = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <>
+      <SEO 
+        titleFr="Conditions Générales d'Utilisation - RevWheel"
+        titleEn="Terms and Conditions - RevWheel"
+        descriptionFr="Consultez les conditions générales d'utilisation de RevWheel, la solution de collecte d'avis Google pour les commerces locaux."
+        descriptionEn="Read the terms and conditions of RevWheel, the Google review collection solution for local businesses."
+        canonical="/terms"
+      />
+      <div className="min-h-screen bg-background">
+        <Header />
       
       <main className="py-12 px-6">
         <div className="container mx-auto max-w-4xl">
@@ -133,7 +142,8 @@ const Terms = () => {
       </main>
 
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 

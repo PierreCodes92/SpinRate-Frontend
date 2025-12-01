@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <!-- Homepage - French (default) -->
+  <url>
+    <loc>https://revwheel.com/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://revwheel.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://revwheel.com/?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://revwheel.com/"/>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Contact Page -->
+  <url>
+    <loc>https://revwheel.com/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://revwheel.com/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://revwheel.com/contact?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://revwheel.com/contact"/>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Page -->
+  <url>
+    <loc>https://revwheel.com/blog</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://revwheel.com/blog"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://revwheel.com/blog?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://revwheel.com/blog"/>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Terms of Service -->
+  <url>
+    <loc>https://revwheel.com/terms</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://revwheel.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://revwheel.com/terms?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://revwheel.com/terms"/>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://revwheel.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://revwheel.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://revwheel.com/privacy?lang=en"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://revwheel.com/privacy"/>
+    <lastmod>2024-12-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+</urlset>
+

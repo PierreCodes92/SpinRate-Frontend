@@ -1,0 +1,29 @@
+{
+  "name": "RevWheel - Collectez des Avis Google",
+  "short_name": "RevWheel",
+  "description": "La meilleure solution pour avoir des avis positifs sur Google de la part de tous vos clients pour être premier dans les recherches.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6366f1",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "fr",
+  "icons": [
+    {
+      "src": "/lovable-uploads/revwheel-logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/lovable-uploads/revwheel-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity"],
+  "prefer_related_applications": false
+}
+

@@ -11,7 +11,9 @@ const Footer = () => {
           {/* Logo & Description */}
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
-              <img src="/lovable-uploads/revwheel-logo.webp" alt="RevWheel logo" className="h-10 md:h-12 w-auto" />
+              <a href="/" aria-label="RevWheel - Retour à l'accueil">
+                <img src="/lovable-uploads/revwheel-logo.webp" alt="RevWheel logo" className="h-10 md:h-12 w-auto" />
+              </a>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">
               {t('footerDescription')}
@@ -19,16 +21,15 @@ const Footer = () => {
           </div>
 
           {/* Navigation */}
-          <div className="space-y-4">
+          <nav className="space-y-4" aria-label="Footer Navigation">
             <h3 className="font-semibold text-foreground">{t('navigation')}</h3>
             <ul className="space-y-2 text-sm">
               <li><a href="/" className="text-muted-foreground hover:text-primary transition-smooth">{t('home')}</a></li>
-              <li><a href="#pricing" className="text-muted-foreground hover:text-primary transition-smooth">{t('pricing')}</a></li>
+              <li><a href="/#pricing" className="text-muted-foreground hover:text-primary transition-smooth">{t('pricing')}</a></li>
               <li><a href="/blog" className="text-muted-foreground hover:text-primary transition-smooth">{t('blog')}</a></li>
               <li><a href="/contact" className="text-muted-foreground hover:text-primary transition-smooth">{t('contact')}</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-primary transition-smooth">{t('proSpace')}</a></li>
             </ul>
-          </div>
+          </nav>
 
           {/* CTA */}
           <div className="space-y-4">
@@ -53,17 +54,17 @@ const Footer = () => {
             <div className="text-sm text-muted-foreground">
               © 2024 RevWheel. {t('allRightsReserved')}
             </div>
-             <div className="flex space-x-6 text-sm">
+             <nav className="flex space-x-6 text-sm" aria-label="Legal links">
                <a href="/terms" className="text-muted-foreground hover:text-primary transition-smooth">
                  {t('termsOfService')}
                </a>
                <a href="/privacy" className="text-muted-foreground hover:text-primary transition-smooth">
                  {t('privacyPolicy')}
                </a>
-               <a href="#" className="text-muted-foreground hover:text-primary transition-smooth">
+               <a href="/terms" className="text-muted-foreground hover:text-primary transition-smooth">
                  {t('legalNotices')}
                </a>
-             </div>
+             </nav>
           </div>
         </div>
       </div>

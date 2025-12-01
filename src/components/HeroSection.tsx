@@ -117,14 +117,14 @@ const HeroSection = () => {
               <div className="text-primary">{t('effortlessly')}</div>
             </h1>
             
-            <h2 className="font-poppins text-foreground/75 text-center font-normal md:text-[18px] md:leading-[28px]" style={{
+            <p className="font-poppins text-foreground/75 text-center font-normal md:text-[18px] md:leading-[28px]" style={{
             fontSize: '14px',
             lineHeight: '24px',
             letterSpacing: '0.3px',
             wordSpacing: '4px'
           }}>
               {t('bestSolutionForReviews')}
-            </h2>
+            </p>
           </div>
 
           {/* CTA Button */}

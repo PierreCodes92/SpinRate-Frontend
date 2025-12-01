@@ -1,13 +1,22 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { useTranslation } from "@/components/TranslationProvider";
+import SEO from "@/components/SEO";
 
 const Blog = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/10">
-      <Header />
+    <>
+      <SEO 
+        titleFr="Blog - RevWheel"
+        titleEn="Blog - RevWheel"
+        descriptionFr="Découvrez nos articles et conseils pour maximiser vos avis Google et fidéliser vos clients. Astuces, guides et bonnes pratiques."
+        descriptionEn="Discover our articles and tips to maximize your Google reviews and build customer loyalty. Tips, guides and best practices."
+        canonical="/blog"
+      />
+      <div className="min-h-screen bg-gradient-to-br from-background to-secondary/10">
+        <Header />
       
       <main className="flex-1 flex items-center justify-center py-24 px-6">
         <div className="text-center space-y-8">
@@ -29,7 +38,8 @@ const Blog = () => {
       </main>
       
       <Footer />
-    </div>
+      </div>
+    </>
   );
 };
 
