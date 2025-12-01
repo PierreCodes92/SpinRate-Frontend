@@ -535,6 +535,11 @@ export const translations = {
     'subscription.checkoutError': 'Erreur lors de la création de la session de paiement',
     'subscription.paymentSuccess': 'Paiement réussi ! Votre abonnement est maintenant actif.',
     'subscription.creatingSession': 'Création de la session...',
+    'subscription.changePlan': 'Changer de plan',
+    'subscription.cancelSubscription': 'Résilier',
+    'subscription.manageSubscription': 'Gérer l\'abonnement',
+    'subscription.switchToPlan': 'Passer à ce plan',
+    'subscription.yourCurrentPlan': 'Votre plan actuel',
     
     // Terms of Service
     'terms.title': 'Conditions Générales d\'Utilisation',
@@ -1114,6 +1119,11 @@ export const translations = {
     'subscription.checkoutError': 'Failed to create checkout session',
     'subscription.paymentSuccess': 'Payment successful! Your subscription is now active.',
     'subscription.creatingSession': 'Creating session...',
+    'subscription.changePlan': 'Change Plan',
+    'subscription.cancelSubscription': 'Cancel',
+    'subscription.manageSubscription': 'Manage Subscription',
+    'subscription.switchToPlan': 'Switch to this Plan',
+    'subscription.yourCurrentPlan': 'Your Current Plan',
     
     // Terms of Service
     'terms.title': 'Terms and Conditions',
