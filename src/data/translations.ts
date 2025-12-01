@@ -39,14 +39,19 @@ export const translations = {
     
     // Email Verification
     'checkYourEmail': 'Consultez votre boîte mail.',
+    'checkYourInbox': 'Consultez votre boîte mail.',
     'emailVerificationSent': 'Cliquez sur le lien que nous avons envoyé à',
+    'emailSentTo': 'Un e-mail vient de vous être envoyé à',
+    'clickLinkToActivate': 'Cliquez sur le lien pour activer votre compte.',
     'toFinalizeAccount': 'pour finaliser la création de votre compte.',
     'understood': 'Compris',
+    'allSet': 'Tout est prêt',
     'didntReceiveEmail': 'Vous n\'avez pas reçu l\'e-mail ?',
     'resendEmail': 'Renvoyer l\'e-mail.',
     'sending': 'Envoi en cours...',
     'verificationEmailResent': 'E-mail de vérification renvoyé avec succès',
     'verificationEmailFailed': 'Échec de l\'envoi de l\'e-mail de vérification',
+    'linkNotClicked': 'Lien non cliqué ! Vérifiez votre boîte mail pour activer votre compte.',
     
     // Verify Email Page
     'verifyingEmail': 'Vérification en cours...',
@@ -613,14 +618,19 @@ export const translations = {
     
     // Email Verification
     'checkYourEmail': 'Check your email.',
+    'checkYourInbox': 'Check your inbox.',
     'emailVerificationSent': 'Click on the link we sent to',
+    'emailSentTo': 'An email has just been sent to',
+    'clickLinkToActivate': 'Click the link to activate your account.',
     'toFinalizeAccount': 'to finalize your account creation.',
     'understood': 'Got it',
+    'allSet': 'All set',
     'didntReceiveEmail': 'Didn\'t receive the email?',
     'resendEmail': 'Resend email.',
     'sending': 'Sending...',
     'verificationEmailResent': 'Verification email resent successfully',
     'verificationEmailFailed': 'Failed to send verification email',
+    'linkNotClicked': 'Link not clicked! Check your inbox to activate your account.',
     
     // Verify Email Page
     'verifyingEmail': 'Verifying...',
