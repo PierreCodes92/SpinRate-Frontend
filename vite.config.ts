@@ -33,14 +33,8 @@ export default defineConfig(({ mode }) => ({
         },
       },
     },
-    // Enable minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production',
-      },
-    },
+    // Use esbuild for minification (built into Vite, faster than terser)
+    minify: 'esbuild',
     // Generate source maps only in development
     sourcemap: mode === 'development',
     // Chunk size warnings
