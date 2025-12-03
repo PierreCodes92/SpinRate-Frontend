@@ -8,14 +8,14 @@ export const useLogin = () => {
   const [error, setError] = useState<string | null>(null);
   const { dispatch } = useAuthContext();
 
-  const login = async (email: string, password: string): Promise<string | undefined> => {
+  const login = async (email: string, password: string, isGoogleLogin: string = ''): Promise<string | undefined> => {
     setError(null);
 
     try {
       const response = await fetch(`${API_BASE_URL}/user/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email, password, isGoogleLogin }),
       });
 
       const json = await response.json();

@@ -8,8 +8,10 @@ import { useTranslation } from '@/components/TranslationProvider';
 import { useLogin } from '@/hooks/useLogin';
 import { useSignup } from '@/hooks/useSignup';
 import { toast } from 'sonner';
-import { X, User, Mail, Phone, Lock } from 'lucide-react';
+import { X, User, Mail, Lock } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
+import { signInWithPopup } from 'firebase/auth';
+import { auth, googleProvider } from '@/config/firebase';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -26,13 +28,13 @@ export const AuthModal = ({
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
-  const [phone, setPhone] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
   const [hasOpened, setHasOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [showEmailConfirmation, setShowEmailConfirmation] = useState(false);
   const [isResendingEmail, setIsResendingEmail] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const { login } = useLogin();
   const { signup } = useSignup();
   const { t } = useTranslation();
@@ -77,6 +79,45 @@ export const AuthModal = ({
     }
   };
 
+  // Function to handle Google Sign-In
+  const handleGoogleSignIn = async () => {
+    if (isGoogleLoading) return;
+    setIsGoogleLoading(true);
+
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+      
+      // Get user info from Google
+      const googleFullName = user.displayName || '';
+      const googleEmail = user.email || '';
+
+      if (!googleEmail) {
+        toast.error(t('googleSignInFailed') || 'Failed to get email from Google');
+        return;
+      }
+
+      // Call login API with isGoogleLogin containing the fullName
+      const error = await login(googleEmail, 'google-oauth', googleFullName);
+      
+      if (error) {
+        toast.error(error);
+      } else {
+        toast.success(t('successfullyLoggedIn') || 'Successfully logged in');
+        handleClose();
+      }
+    } catch (error: any) {
+      console.error('Google sign-in error:', error);
+      if (error.code === 'auth/popup-closed-by-user') {
+        // User closed the popup, no need to show error
+        return;
+      }
+      toast.error(t('googleSignInFailed') || 'Google sign-in failed. Please try again.');
+    } finally {
+      setIsGoogleLoading(false);
+    }
+  };
+
   const handleClose = () => {
     setIsClosing(true);
     setTimeout(() => {
@@ -113,7 +154,8 @@ export const AuthModal = ({
 
     try {
       if (mode === 'login') {
-        const error = await login(email, password);
+        // Normal login - send isGoogleLogin as empty string
+        const error = await login(email, password, '');
         if (error) {
           if (error === 'Incorrect email.!.') {
             toast.error(t('incorrectEmail') || 'Incorrect email');
@@ -130,7 +172,7 @@ export const AuthModal = ({
         }
       } else {
         // Register mode
-        const result = await signup(fullName, email, phone, password);
+        const result = await signup(fullName, email, password);
         if (typeof result === 'string') {
           // It's an error
           toast.error(result);
@@ -190,7 +232,8 @@ export const AuthModal = ({
             <Button
               type="button"
               variant="google"
-              onClick={() => console.log('Google sign in clicked')}
+              onClick={handleGoogleSignIn}
+              disabled={isGoogleLoading}
               className="w-full h-11 md:h-10 text-xs sm:text-xs md:text-sm"
             >
               <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" viewBox="0 0 24 24">
@@ -200,7 +243,9 @@ export const AuthModal = ({
                 <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
               <span className="whitespace-nowrap">
-                {mode === 'login' ? t('signInWithGoogle') || 'Se connecter avec Google' : t('signUpWithGoogle') || "S'inscrire avec Google"}
+                {isGoogleLoading 
+                  ? (t('loading') || 'Chargement...') 
+                  : (mode === 'login' ? t('signInWithGoogle') || 'Se connecter avec Google' : t('signUpWithGoogle') || "S'inscrire avec Google")}
               </span>
             </Button>
             
@@ -235,16 +280,6 @@ export const AuthModal = ({
                 <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="h-12 pl-11 rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
               </div>
             </div>
-
-            {mode === 'register' && <div className="space-y-2">
-                <Label htmlFor="phone" className="text-sm font-semibold text-[#1F2A44]">
-                  {t('phoneNumber')}
-                </Label>
-                <div className="relative">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-[#90A1C0]" />
-                  <Input id="phone" type="tel" value={phone} onChange={e => setPhone(e.target.value)} className="h-12 pl-11 rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
-                </div>
-              </div>}
 
             <div className="space-y-2">
               <Label htmlFor="password" className="text-sm font-semibold text-[#1F2A44]">
@@ -299,7 +334,6 @@ export const AuthModal = ({
         setShowEmailConfirmation(false);
         setMode('login');
         setFullName('');
-        setPhone('');
       }}
       email={email}
       onResendEmail={handleResendEmail}

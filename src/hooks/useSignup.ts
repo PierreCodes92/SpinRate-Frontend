@@ -9,7 +9,6 @@ export const useSignup = () => {
   const signup = async (
     fullName: string,
     email: string,
-    phoneNumber: string,
     password: string
   ): Promise<any> => {
     setError(null);
@@ -18,7 +17,7 @@ export const useSignup = () => {
       const response = await fetch(`${API_BASE_URL}/user/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName, email, phoneNumber, password }),
+        body: JSON.stringify({ fullName, email, password }),
       });
 
       const json = await response.json();
