@@ -69,6 +69,20 @@
     <!-- DNS Prefetch for external video domain -->
     <link rel="dns-prefetch" href="https://pierrecodin.github.io" />
     
+    <!-- Critical CSS for faster first paint -->
+    <style>
+      /* Critical CSS - inlined for faster FCP */
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth}
+      body{font-family:'Poppins','Nunito',system-ui,-apple-system,sans-serif;background:#f8f9fc;color:#1e293b;min-height:100vh;-webkit-font-smoothing:antialiased}
+      #root{min-height:100vh}
+      .min-h-screen{min-height:100vh}
+      /* Loading state */
+      #root:empty{display:flex;align-items:center;justify-content:center;min-height:100vh}
+      #root:empty::after{content:'';width:40px;height:40px;border:3px solid #e2e8f0;border-top-color:#6366f1;border-radius:50%;animation:spin 1s linear infinite}
+      @keyframes spin{to{transform:rotate(360deg)}}
+    </style>
+    
     <!-- Structured Data (JSON-LD) - Organization -->
     <script type="application/ld+json">
     {

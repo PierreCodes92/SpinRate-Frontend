@@ -24,29 +24,14 @@ const HeroSection = () => {
     openModal('register');
   };
   return <section className="relative py-12 px-6 overflow-hidden">
-      {/* Background decorations with animated shapes */}
-      <div className="absolute inset-0 opacity-30 px-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-48 h-48 bg-primary/5 rounded-full blur-2xl animate-pulse"></div>
-        
-        {/* Animated geometric shapes */}
-        <div className="absolute top-1/4 left-1/3 w-6 h-6 bg-primary/20 rotate-45 animate-bounce delay-1000"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-8 h-8 bg-primary/15 rounded-full animate-pulse delay-2000"></div>
-        <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-primary/25 rotate-12 animate-bounce delay-3000"></div>
-        <div className="absolute top-3/4 right-1/3 w-5 h-5 bg-primary/18 rounded-full animate-pulse delay-1500"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-7 h-7 border-2 border-primary/20 rotate-45 animate-bounce delay-2500"></div>
-        <div className="absolute top-1/3 right-1/5 w-3 h-3 bg-primary/28 animate-pulse delay-500"></div>
-        <div className="absolute bottom-2/3 left-1/6 w-6 h-6 border border-primary/15 rounded-full animate-spin" style={{
-        animationDuration: '6s'
-      }}></div>
-        
-        {/* Additional animated shapes */}
-        <div className="absolute top-1/6 right-2/3 w-5 h-5 bg-primary/22 rotate-12 animate-bounce delay-4000 my-[13px]"></div>
-        <div className="absolute bottom-1/6 left-3/4 w-4 h-4 bg-primary/18 rounded-full animate-pulse delay-3500"></div>
-        <div className="absolute top-2/3 left-1/5 w-6 h-6 border border-primary/20 rotate-45 animate-spin delay-1800" style={{
-        animationDuration: '8s'
-      }}></div>
-        <div className="absolute bottom-1/2 right-1/6 w-3 h-3 bg-primary/25 animate-bounce delay-2800"></div>
+      {/* Background decorations - simplified for better mobile performance */}
+      {/* Only show animated shapes on desktop to improve mobile LCP */}
+      <div className="absolute inset-0 opacity-30 px-0 hidden lg:block">
+        <div className="absolute top-20 left-10 w-32 h-32 bg-primary/10 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-10 w-48 h-48 bg-primary/5 rounded-full blur-2xl"></div>
+        <div className="absolute top-1/4 left-1/3 w-6 h-6 bg-primary/20 rotate-45"></div>
+        <div className="absolute bottom-1/3 right-1/4 w-8 h-8 bg-primary/15 rounded-full"></div>
+        <div className="absolute top-1/2 left-1/4 w-4 h-4 bg-primary/25 rotate-12"></div>
       </div>
       
       <div className="container mx-auto max-w-7xl relative px-0">
@@ -89,16 +74,11 @@ const HeroSection = () => {
               />
             </div>
             
-            {/* Floating decorations */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 gradient-hero rounded-full opacity-20 blur-xl"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 gradient-primary rounded-full opacity-15 blur-2xl"></div>
-            
-            {/* Additional animated shapes */}
-            <div className="absolute top-1/4 -right-8 w-5 h-5 bg-primary/30 rotate-45 animate-bounce delay-1500"></div>
-            <div className="absolute bottom-1/3 -left-6 w-4 h-4 bg-primary/35 rounded-full animate-pulse delay-2500"></div>
-            <div className="absolute top-2/3 -right-12 w-6 h-6 border border-primary/25 rounded-full animate-spin delay-3000" style={{
-            animationDuration: '6s'
-          }}></div>
+            {/* Floating decorations - desktop only for performance */}
+            <div className="hidden lg:block">
+              <div className="absolute -top-4 -right-4 w-24 h-24 gradient-hero rounded-full opacity-20 blur-xl"></div>
+              <div className="absolute -bottom-4 -left-4 w-32 h-32 gradient-primary rounded-full opacity-15 blur-2xl"></div>
+            </div>
           </div>
         </div>
 

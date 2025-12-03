@@ -289,6 +289,38 @@ img {
   contain: layout style;
 }
 
+/* Disable heavy animations on mobile for better performance */
+@media (max-width: 1023px) {
+  .animate-pulse,
+  .animate-bounce,
+  .animate-spin {
+    animation: none !important;
+  }
+  
+  /* Reduce blur effects on mobile */
+  .blur-xl,
+  .blur-2xl {
+    filter: none !important;
+  }
+  
+  /* Simplify transitions */
+  .transition-all {
+    transition-property: opacity, transform !important;
+    transition-duration: 150ms !important;
+  }
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 /* Dashboard-specific font styling */
 .dashboard-fonts,
 .dashboard-fonts * {

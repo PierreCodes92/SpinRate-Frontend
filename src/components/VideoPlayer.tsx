@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, useCallback } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { useTranslation } from '@/components/TranslationProvider';
 
@@ -11,6 +11,7 @@ interface VideoPlayerProps {
 const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlayerProps) => {
   const { t } = useTranslation();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(true);
   const [showContinueButton, setShowContinueButton] = useState(false);
@@ -19,9 +20,45 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
   const [duration, setDuration] = useState(0);
   const [showControls, setShowControls] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Autoplay initial
+  // Intersection Observer - only load video when visible
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1, rootMargin: '100px' }
+    );
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Load video only when visible
+  useEffect(() => {
+    if (!isVisible || isVideoLoaded) return;
+    
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Set the src only when visible
+    video.src = src;
+    video.load();
+    setIsVideoLoaded(true);
+  }, [isVisible, src, isVideoLoaded]);
+
+  // Autoplay only after video is loaded and visible
+  useEffect(() => {
+    if (!isVideoLoaded || !isVisible) return;
+    
     const video = videoRef.current;
     if (!video) return;
 
@@ -32,7 +69,6 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
         await video.play();
         setIsPlaying(true);
 
-        // Arrêt après 4-5 secondes
         const timer = setTimeout(() => {
           video.pause();
           setIsPlaying(false);
@@ -46,8 +82,10 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
       }
     };
 
-    attemptAutoplay();
-  }, [autoplayDuration]);
+    // Small delay to ensure video is ready
+    const timeout = setTimeout(attemptAutoplay, 100);
+    return () => clearTimeout(timeout);
+  }, [isVideoLoaded, isVisible, autoplayDuration]);
 
   // Update time and duration
   useEffect(() => {
@@ -68,7 +106,7 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
     };
   }, []);
 
-  const handleContinue = async () => {
+  const handleContinue = useCallback(async () => {
     const video = videoRef.current;
     if (!video) return;
 
@@ -79,9 +117,9 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
     setIsPlaying(true);
     setShowContinueButton(false);
     setHasStartedFull(true);
-  };
+  }, []);
 
-  const togglePlayPause = () => {
+  const togglePlayPause = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
 
@@ -92,29 +130,29 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
       video.pause();
       setIsPlaying(false);
     }
-  };
+  }, []);
 
-  const toggleMute = () => {
+  const toggleMute = useCallback(() => {
     const video = videoRef.current;
     if (!video) return;
 
     video.muted = !video.muted;
     setIsMuted(video.muted);
-  };
+  }, []);
 
-  const handleProgressClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleProgressClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const video = videoRef.current;
     if (!video) return;
 
     const rect = e.currentTarget.getBoundingClientRect();
     const pos = (e.clientX - rect.left) / rect.width;
     video.currentTime = pos * video.duration;
-  };
+  }, []);
 
-  const handleProgressDrag = (e: React.MouseEvent<HTMLDivElement>) => {
+  const handleProgressDrag = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     if (!isDragging) return;
     handleProgressClick(e);
-  };
+  }, [isDragging, handleProgressClick]);
 
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
@@ -124,16 +162,29 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
 
   return (
     <div 
+      ref={containerRef}
       className={`relative group ${className}`}
       onMouseEnter={() => hasStartedFull && setShowControls(true)}
       onMouseLeave={() => hasStartedFull && setShowControls(false)}
     >
+      {/* Placeholder shown before video loads */}
+      {!isVideoLoaded && (
+        <div 
+          className="w-full h-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center"
+          style={{ aspectRatio: '9/16' }}
+        >
+          <div className="text-center">
+            <Play className="w-16 h-16 text-primary/50 mx-auto mb-2" />
+            <span className="text-sm text-muted-foreground">{t('loadingVideo') || 'Loading...'}</span>
+          </div>
+        </div>
+      )}
+      
       <video
         ref={videoRef}
-        src={src}
-        className="w-full h-full cursor-pointer"
+        className={`w-full h-full cursor-pointer ${!isVideoLoaded ? 'hidden' : ''}`}
         playsInline
-        preload="metadata"
+        preload="none"
         onClick={hasStartedFull ? togglePlayPause : undefined}
         style={{
           aspectRatio: '9/16',
@@ -148,10 +199,10 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
         <div className="absolute inset-0 flex items-center justify-center bg-black/30">
           <button
             onClick={handleContinue}
-            className="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-full flex items-center space-x-3 shadow-button transition-all hover:scale-105"
+            className="bg-primary hover:bg-primary/90 text-white px-6 py-3 md:px-8 md:py-4 rounded-full flex items-center space-x-2 md:space-x-3 shadow-button transition-all hover:scale-105"
           >
-            <Play className="w-6 h-6 fill-white" />
-            <span className="text-lg font-semibold">{t('watchTheRest')}</span>
+            <Play className="w-5 h-5 md:w-6 md:h-6 fill-white" />
+            <span className="text-base md:text-lg font-semibold">{t('watchTheRest')}</span>
           </button>
         </div>
       )}
