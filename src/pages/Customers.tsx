@@ -564,7 +564,8 @@ export default function Customers() {
           </Button>
         </div>
 
-        {monthlyCount > 0 && <ClientPopup count={monthlyCount} />}
+        {/* Always show ClientPopup - at least 1 for the dummy customer (Mia@revwheel.fr) */}
+        <ClientPopup count={Math.max(1, monthlyCount)} />
 
         <Card className="border-border shadow-lg">
           <CardHeader className="border-b border-border bg-muted/30">

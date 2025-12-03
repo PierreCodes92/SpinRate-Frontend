@@ -336,14 +336,16 @@ export const translations = {
     'onboarding.clientsMenu.title': '⚡ Menu Actions',
     'onboarding.clientsMenu.message': `Ici, vous pouvez cliquer sur les **trois petits points** pour afficher les actions disponibles :
 
-• 🎁 Voir le lot
-• 👁️ Voir les détails
-• ➕ Enrichir (ajouter des infos supplémentaires)
-• 🗑️ Supprimer`,
+✅ Marquer le lot comme réclamé lorsque le client l'a récupéré
+
+✏️ Enrichir la fiche client avec des informations complémentaires pour votre CRM
+
+_Vous pouvez également cliquer sur l'icône Télécharger 📥 pour obtenir un fichier CSV complet de vos clients._`,
     'onboarding.clientsMenu.messageMobile': `Ici, vous pouvez scroller tout à droite sur les **trois petits points** dans actions pour afficher les actions disponibles :
 
-• 🎁 Voir le lot
-• 👁️ Voir les détails`,
+✅ Marquer le lot comme réclamé lorsque le client l'a récupéré
+
+✏️ Enrichir la fiche client avec des informations complémentaires pour votre CRM`,
     'onboarding.clientsMenu.action': 'Continuer',
 
     'onboarding.settings.title': '⚙️ Paramètres',
@@ -920,14 +922,16 @@ export const translations = {
     'onboarding.clientsMenu.title': '⚡ Actions Menu',
     'onboarding.clientsMenu.message': `Here, you can click on the **three dots** to display available actions:
 
-• 🎁 View prize
-• 👁️ View details
-• ➕ Enrich (add additional information)
-• 🗑️ Delete`,
+✅ Mark the prize as claimed when the customer has picked it up
+
+✏️ Enrich the customer record with additional information for your CRM
+
+_You can also click the Download 📥 icon to get a complete CSV file of your customers._`,
     'onboarding.clientsMenu.messageMobile': `Here, you can scroll all the way right on the **three dots** in actions to display available actions:
 
-• 🎁 View prize
-• 👁️ View details`,
+✅ Mark the prize as claimed when the customer has picked it up
+
+✏️ Enrich the customer record with additional information for your CRM`,
     'onboarding.clientsMenu.action': 'Continue',
 
     'onboarding.settings.title': '⚙️ Settings',
