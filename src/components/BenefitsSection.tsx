@@ -52,7 +52,10 @@ const BenefitsSection = () => {
                   src={language === 'en' ? '/lovable-uploads/etsi-en.webp' : '/lovable-uploads/etsi-fr.webp'} 
                   alt="Résultats clients RevWheel" 
                   className="w-full h-auto object-contain rounded-2xl" 
-                  loading="lazy" 
+                  loading="lazy"
+                  decoding="async"
+                  width={500}
+                  height={400}
                   style={{
                     imageRendering: 'crisp-edges',
                     maxHeight: 'none',

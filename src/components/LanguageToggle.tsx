@@ -23,6 +23,10 @@ export const LanguageToggle = ({ isScrolled }: LanguageToggleProps = {}) => {
         src={language === 'fr' ? ukFlag : frFlag}
         alt={language === 'fr' ? 'Switch to English' : 'Passer en français'}
         className="w-8 h-8 rounded-md object-cover"
+        width={32}
+        height={32}
+        loading="eager"
+        decoding="async"
       />
     </button>
   );

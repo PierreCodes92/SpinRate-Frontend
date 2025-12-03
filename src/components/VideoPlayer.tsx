@@ -133,7 +133,7 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
         src={src}
         className="w-full h-full cursor-pointer"
         playsInline
-        preload="auto"
+        preload="metadata"
         onClick={hasStartedFull ? togglePlayPause : undefined}
         style={{
           aspectRatio: '9/16',

@@ -41,6 +41,10 @@ const LogoCarousel = () => {
             src={logo}
             alt={`Partner logo ${index + 1}`}
             className="h-8 object-contain"
+            width={100}
+            height={32}
+            loading="lazy"
+            decoding="async"
             initial={{ opacity: 0.5 }}
             whileHover={{ 
               opacity: 1,

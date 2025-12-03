@@ -50,13 +50,21 @@ const BeforeAfterSection = () => {
               <img 
                 src={language === 'en' ? '/lovable-uploads/avant-apres-en.webp' : '/lovable-uploads/avant-apres-fr.webp'} 
                 alt="Avant/Après - Résultats RevWheel" 
-                className="w-full h-auto hidden lg:block scale-105" 
+                className="w-full h-auto hidden lg:block scale-105"
+                width={600}
+                height={400}
+                loading="lazy"
+                decoding="async"
               />
-              {/* Image pour mobile et tablet */}
+              {/* Image pour mobile and tablet */}
               <img 
                 src={(language?.toLowerCase?.().startsWith('en')) ? '/lovable-uploads/mobile-avant-apres-en-new.webp' : '/lovable-uploads/mobile-avant-apres-fr.webp'} 
                 alt="Avant/Après - Résultats RevWheel" 
-                className="w-full h-auto lg:hidden" 
+                className="w-full h-auto lg:hidden"
+                width={400}
+                height={600}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             

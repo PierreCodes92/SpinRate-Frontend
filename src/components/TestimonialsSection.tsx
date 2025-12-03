@@ -59,7 +59,15 @@ const TestimonialsSection = () => {
         <div className="relative px-4 md:px-24">
           <div className={`bg-white rounded-2xl shadow-card p-4 md:p-10 text-center max-w-3xl mx-auto transition-all duration-500 ease-in-out ${isTransitioning ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
             <div className="mb-4 md:mb-6">
-              <img src={testimonials[currentIndex].image} alt={testimonials[currentIndex].name} className="w-14 h-14 rounded-full mx-auto object-cover md:w-20 md:h-20" />
+              <img 
+                src={testimonials[currentIndex].image} 
+                alt={testimonials[currentIndex].name} 
+                className="w-14 h-14 rounded-full mx-auto object-cover md:w-20 md:h-20"
+                width={80}
+                height={80}
+                loading="lazy"
+                decoding="async"
+              />
             </div>
             
             {/* Stars */}

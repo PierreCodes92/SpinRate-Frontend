@@ -71,7 +71,15 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center space-x-3 lg:ml-6">
             <a href="/" className="flex items-center space-x-3">
-              <img src="/lovable-uploads/revwheel-logo.webp" alt="RevWheel logo" className="h-12 w-auto" />
+              <img 
+                src="/lovable-uploads/revwheel-logo.webp" 
+                alt="RevWheel logo" 
+                className="h-12 w-auto" 
+                width={120} 
+                height={48} 
+                loading="eager"
+                fetchPriority="high"
+              />
             </a>
           </div>
 

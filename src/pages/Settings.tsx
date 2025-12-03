@@ -641,7 +641,16 @@ export default function Settings() {
               </label>
               <input type="url" value={googleReviewLink} onChange={e => setGoogleReviewLink(e.target.value)} placeholder={t('settings.googleReviewLinkPlaceholder')} className="w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary focus:border-primary" disabled={isLoading} />
               <div className="mt-2">
-                <img src={googleReviewHelp} alt="Google Review Link Help" className="w-full max-w-md mx-auto rounded-lg border shadow-sm" />
+                <img 
+                  src={googleReviewHelp} 
+                  alt="Google Review Link Help" 
+                  className="w-full max-w-md mx-auto rounded-lg border shadow-sm"
+                  width={448}
+                  height={252}
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="sync"
+                />
                 <p className="text-xs text-muted-foreground italic text-center mt-2">
                   {t('settings.googleReviewHelper')}
                 </p>
@@ -726,8 +735,21 @@ export default function Settings() {
                   <Upload className="w-8 h-8 text-muted-foreground mb-2" />
                   <span className="text-muted-foreground font-medium">{t('settings.logoUpload')}</span>
                 </label>
-                <div className="w-32 h-24 bg-muted rounded-lg border flex items-center justify-center overflow-hidden">
-                  {logoPreview ? <img src={logoPreview} alt="Logo preview" className="w-full h-full object-cover" /> : <span className="text-muted-foreground text-sm">{t('settings.noLogo')}</span>}
+                {/* Logo preview frame - circular to match wheel center */}
+                <div className="w-28 h-28 bg-muted rounded-full border-2 border-dashed border-primary/30 flex items-center justify-center overflow-hidden relative">
+                  {logoPreview ? (
+                    <img 
+                      src={logoPreview} 
+                      alt="Logo preview" 
+                      className="w-[140%] h-[140%] object-cover" 
+                      style={{ 
+                        objectPosition: 'center',
+                        transform: 'scale(1)'
+                      }}
+                    />
+                  ) : (
+                    <span className="text-muted-foreground text-sm text-center px-2">{t('settings.noLogo')}</span>
+                  )}
                 </div>
               </div>
             </div>
@@ -938,15 +960,21 @@ export default function Settings() {
                     </div>;
               })}
 
-                {/* Center hole for logo */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden" style={{
-                background: 'rgba(255,255,255,0.5)',
-                backdropFilter: 'blur(8px)',
-                border: `3px solid ${mainColors.color1}30`,
-                boxShadow: `inset 0 2px 8px ${mainColors.color1}20`,
+                {/* Center hole for logo - scaled to fit inner circular content */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75px] h-[75px] rounded-full flex items-center justify-center overflow-hidden" style={{
+                background: 'rgba(255,255,255,0.95)',
+                border: `3px solid ${mainColors.color1}`,
+                boxShadow: `0 0 10px ${mainColors.color1}50, inset 0 2px 8px ${mainColors.color1}20`,
                 zIndex: 4
               }}>
-                  {logoPreview && <img src={logoPreview} alt="Logo" className="w-[80%] h-[80%] object-contain" />}
+                  {logoPreview && (
+                    <img 
+                      src={logoPreview} 
+                      alt="Logo" 
+                      className="w-[140%] h-[140%] object-cover" 
+                      style={{ objectPosition: 'center' }}
+                    />
+                  )}
                 </div>
               </div>
 

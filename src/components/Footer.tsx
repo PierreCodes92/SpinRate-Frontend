@@ -12,7 +12,15 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-3">
               <a href="/" aria-label="RevWheel - Retour à l'accueil">
-                <img src="/lovable-uploads/revwheel-logo.webp" alt="RevWheel logo" className="h-10 md:h-12 w-auto" />
+                <img 
+                  src="/lovable-uploads/revwheel-logo.webp" 
+                  alt="RevWheel logo" 
+                  className="h-10 md:h-12 w-auto"
+                  width={100}
+                  height={48}
+                  loading="lazy"
+                  decoding="async"
+                />
               </a>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed">

@@ -754,7 +754,6 @@ export default function WheelGame() {
             backgroundColor: 'white',
             borderRadius: '50%',
             boxShadow: '0 8px 25px rgba(15,23,42,0.12)',
-            padding: '10px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -762,28 +761,17 @@ export default function WheelGame() {
             zIndex: 10
           }}
         >
-          <div
+          {/* Circular frame that crops to show inner circle of logo */}
+          <img 
+            src={logoPreview} 
+            alt="Logo" 
             style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              backgroundColor: '#ffffff',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center'
+              width: '140%',
+              height: '140%',
+              objectFit: 'cover',
+              objectPosition: 'center'
             }}
-          >
-            <img 
-              src={logoPreview} 
-              alt="Logo" 
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain',
-                borderRadius: '50%'
-              }}
-            />
-          </div>
+          />
         </div>
       )}
 
@@ -898,14 +886,13 @@ export default function WheelGame() {
               );
             })}
 
-            {/* Center hole for logo */}
+            {/* Center hole for logo - scaled to fit inner circular content */}
             <div 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75px] h-[75px] rounded-full flex items-center justify-center overflow-hidden"
               style={{
-                background: 'rgba(255,255,255,0.5)',
-                backdropFilter: 'blur(8px)',
-                border: `3px solid ${config.mainColors.color1}30`,
-                boxShadow: `inset 0 2px 8px ${config.mainColors.color1}20`,
+                background: 'rgba(255,255,255,0.95)',
+                border: `3px solid ${config.mainColors.color1}`,
+                boxShadow: `0 0 10px ${config.mainColors.color1}50, inset 0 2px 8px ${config.mainColors.color1}20`,
                 zIndex: 4
               }}
             >
@@ -913,7 +900,8 @@ export default function WheelGame() {
                 <img 
                   src={logoPreview} 
                   alt="Logo" 
-                  className="w-[80%] h-[80%] object-contain"
+                  className="w-[140%] h-[140%] object-cover"
+                  style={{ objectPosition: 'center' }}
                 />
               )}
             </div>

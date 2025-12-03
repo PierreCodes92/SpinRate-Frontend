@@ -56,7 +56,18 @@
     <!-- Preconnect to External Resources -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://pierrecodin.github.io" crossorigin />
+    
+    <!-- Preload critical fonts with font-display swap for better LCP -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" /></noscript>
+    
+    <!-- Preload LCP images for Landing page -->
+    <link rel="preload" href="/lovable-uploads/revwheel-logo.webp" as="image" type="image/webp" fetchpriority="high" />
+    <link rel="preload" href="/lovable-uploads/avant-apres-fr.webp" as="image" type="image/webp" />
+    
+    <!-- DNS Prefetch for external video domain -->
+    <link rel="dns-prefetch" href="https://pierrecodin.github.io" />
     
     <!-- Structured Data (JSON-LD) - Organization -->
     <script type="application/ld+json">

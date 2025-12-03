@@ -83,7 +83,16 @@ export function AppSidebar() {
           <X className="h-5 w-5" />
         </Button>
         <a href="/" className="block">
-          <img src={revwheelLogo} alt="RevWheel" className="h-[132px] w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity" loading="eager" fetchPriority="high" />
+          <img 
+            src={revwheelLogo} 
+            alt="RevWheel" 
+            className="h-[132px] w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity" 
+            loading="eager" 
+            fetchPriority="high"
+            width={132}
+            height={132}
+            decoding="sync"
+          />
         </a>
       </SidebarHeader>
 
