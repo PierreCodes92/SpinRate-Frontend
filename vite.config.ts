@@ -11,11 +11,20 @@ function asyncCssPlugin(): Plugin {
     transformIndexHtml(html) {
       // Convert CSS links to async loading pattern
       // Uses media="print" onload="this.media='all'" trick
-      return html.replace(
+      let result = html.replace(
         /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/g,
         `<link rel="stylesheet" href="$1" media="print" onload="this.media='all'" data-async>
     <noscript><link rel="stylesheet" href="$1"></noscript>`
       );
+      
+      // Add fetchpriority="high" to the main module script for faster loading
+      result = result.replace(
+        /<script type="module" crossorigin src="(\/assets\/index-[^"]+\.js)">/g,
+        `<link rel="modulepreload" href="$1" as="script" crossorigin>
+    <script type="module" crossorigin src="$1" fetchpriority="high">`
+      );
+      
+      return result;
     },
   };
 }
