@@ -1,7 +1,24 @@
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 import { componentTagger } from "lovable-tagger";
+
+// Custom plugin to make CSS load asynchronously (non-render-blocking)
+function asyncCssPlugin(): Plugin {
+  return {
+    name: 'async-css',
+    enforce: 'post',
+    transformIndexHtml(html) {
+      // Convert CSS links to async loading pattern
+      // Uses media="print" onload="this.media='all'" trick
+      return html.replace(
+        /<link rel="stylesheet" crossorigin href="(\/assets\/[^"]+\.css)">/g,
+        `<link rel="stylesheet" href="$1" media="print" onload="this.media='all'" data-async>
+    <noscript><link rel="stylesheet" href="$1"></noscript>`
+      );
+    },
+  };
+}
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -11,8 +28,8 @@ export default defineConfig(({ mode }) => ({
   },
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === 'development' && componentTagger(),
+    mode === 'production' && asyncCssPlugin(),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -39,6 +56,8 @@ export default defineConfig(({ mode }) => ({
     sourcemap: mode === 'development',
     // Chunk size warnings
     chunkSizeWarningLimit: 500,
+    // CSS code splitting for better loading
+    cssCodeSplit: true,
   },
   // Optimize dependencies
   optimizeDeps: {

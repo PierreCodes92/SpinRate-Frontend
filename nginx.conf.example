@@ -1,0 +1,104 @@
+# Nginx Configuration for RevWheel
+# Add this to your server block in /etc/nginx/sites-available/revwheel.fr
+# or /etc/nginx/conf.d/revwheel.conf
+
+server {
+    listen 80;
+    listen 443 ssl http2;
+    server_name revwheel.fr www.revwheel.fr;
+
+    # Your SSL certificate configuration here
+    # ssl_certificate /path/to/cert.pem;
+    # ssl_certificate_key /path/to/key.pem;
+
+    root /var/www/revwheel.fr/dist;  # Adjust to your actual path
+    index index.html;
+
+    # Gzip compression
+    gzip on;
+    gzip_vary on;
+    gzip_min_length 1024;
+    gzip_proxied any;
+    gzip_types text/plain text/css text/xml text/javascript application/javascript application/x-javascript application/xml application/json image/svg+xml;
+    gzip_comp_level 6;
+
+    # Cache static assets for 1 year (immutable - Vite uses content hashing)
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cache uploaded images for 1 year
+    location /lovable-uploads/ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cache video files for 1 year
+    location /video/ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cache all image formats
+    location ~* \.(webp|png|jpg|jpeg|gif|ico|svg)$ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cache JavaScript and CSS files
+    location ~* \.(js|css)$ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cache font files
+    location ~* \.(woff|woff2|ttf|eot|otf)$ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cache video and audio files
+    location ~* \.(mp4|webm|ogg|mp3|wav)$ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Cache Lottie animations
+    location ~* \.(lottie|json)$ {
+        expires 1y;
+        add_header Cache-Control "public, max-age=31536000, immutable";
+        access_log off;
+    }
+
+    # Service worker - never cache
+    location = /sw.js {
+        expires -1;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+    }
+
+    # HTML files - no cache (for SPA updates)
+    location ~* \.html$ {
+        expires -1;
+        add_header Cache-Control "no-cache, no-store, must-revalidate";
+    }
+
+    # SPA fallback - all routes go to index.html
+    location / {
+        try_files $uri $uri/ /index.html;
+        
+        # No cache for index.html
+        location = /index.html {
+            expires -1;
+            add_header Cache-Control "no-cache, no-store, must-revalidate";
+        }
+    }
+}
+
