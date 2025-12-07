@@ -1,15 +1,27 @@
 # Netlify Headers Configuration
-# Long cache for static assets (1 year)
+# Cache static assets for 1 year (immutable with content hashing)
 
+# JS and CSS bundles (hashed by Vite)
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Uploaded images
+/lovable-uploads/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Video files
 /video/*
   Cache-Control: public, max-age=31536000, immutable
 
-/*.mp4
+# All JavaScript files
+/*.js
   Cache-Control: public, max-age=31536000, immutable
 
-/*.webm
+# All CSS files
+/*.css
   Cache-Control: public, max-age=31536000, immutable
 
+# Image formats
 /*.webp
   Cache-Control: public, max-age=31536000, immutable
 
@@ -25,21 +37,47 @@
 /*.svg
   Cache-Control: public, max-age=31536000, immutable
 
+/*.gif
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# Video formats
+/*.mp4
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.webm
+  Cache-Control: public, max-age=31536000, immutable
+
+# Font files
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
-/assets/*
+/*.ttf
   Cache-Control: public, max-age=31536000, immutable
 
-# Service worker should not be cached
+/*.eot
+  Cache-Control: public, max-age=31536000, immutable
+
+# Lottie animations
+/*.lottie
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.json
+  Cache-Control: public, max-age=31536000, immutable
+
+# Service worker - never cache
 /sw.js
   Cache-Control: no-cache, no-store, must-revalidate
   Service-Worker-Allowed: /
 
-# HTML files should not be cached long-term
-/*.html
-  Cache-Control: no-cache, no-store, must-revalidate
-
+# HTML files - short cache for updates
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
 
+/
+  Cache-Control: no-cache, no-store, must-revalidate
