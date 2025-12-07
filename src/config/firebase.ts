@@ -1,5 +1,5 @@
-import { initializeApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import type { Auth } from "firebase/auth";
+import type { FirebaseApp } from "firebase/app";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -12,14 +12,40 @@ const firebaseConfig = {
   measurementId: "G-9KSC6TV48M"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Lazy-loaded Firebase instances
+let app: FirebaseApp | null = null;
+let auth: Auth | null = null;
+let googleProvider: any = null;
 
-// Initialize Firebase Authentication
-export const auth = getAuth(app);
+// Lazy initialize Firebase - only when needed
+export const getFirebaseApp = async (): Promise<FirebaseApp> => {
+  if (!app) {
+    const { initializeApp } = await import("firebase/app");
+    app = initializeApp(firebaseConfig);
+  }
+  return app;
+};
 
-// Initialize Google Auth Provider
-export const googleProvider = new GoogleAuthProvider();
+// Lazy initialize Auth - only when needed
+export const getFirebaseAuth = async (): Promise<Auth> => {
+  if (!auth) {
+    const firebaseApp = await getFirebaseApp();
+    const { getAuth } = await import("firebase/auth");
+    auth = getAuth(firebaseApp);
+  }
+  return auth;
+};
 
-export default app;
+// Lazy initialize Google Provider - only when needed
+export const getGoogleProvider = async () => {
+  if (!googleProvider) {
+    const { GoogleAuthProvider } = await import("firebase/auth");
+    googleProvider = new GoogleAuthProvider();
+  }
+  return googleProvider;
+};
 
+// For backwards compatibility - these will lazy load on first access
+export { app, auth, googleProvider };
+
+export default { getFirebaseApp, getFirebaseAuth, getGoogleProvider };

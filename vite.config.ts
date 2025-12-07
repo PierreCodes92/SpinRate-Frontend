@@ -47,6 +47,8 @@ export default defineConfig(({ mode }) => ({
           'vendor-utils': ['date-fns', 'clsx', 'tailwind-merge'],
           'vendor-charts': ['recharts'],
           'vendor-animations': ['framer-motion'],
+          // Firebase - separate chunk, lazy loaded
+          'vendor-firebase': ['firebase/app', 'firebase/auth'],
         },
       },
     },

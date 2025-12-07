@@ -10,8 +10,7 @@ import { useSignup } from '@/hooks/useSignup';
 import { toast } from 'sonner';
 import { X, User, Mail, Lock } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
-import { signInWithPopup } from 'firebase/auth';
-import { auth, googleProvider } from '@/config/firebase';
+import { getFirebaseAuth, getGoogleProvider } from '@/config/firebase';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -85,6 +84,13 @@ export const AuthModal = ({
     setIsGoogleLoading(true);
 
     try {
+      // Lazy load Firebase auth
+      const [{ signInWithPopup }, auth, googleProvider] = await Promise.all([
+        import('firebase/auth'),
+        getFirebaseAuth(),
+        getGoogleProvider()
+      ]);
+      
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
       
