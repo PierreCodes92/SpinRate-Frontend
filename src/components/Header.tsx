@@ -72,7 +72,8 @@ const Header = () => {
           <div className="flex items-center space-x-3 lg:ml-6">
             <a href="/" className="flex items-center space-x-3">
               <img 
-                src="/lovable-uploads/revwheel-logo.webp" 
+                src="/lovable-uploads/revwheel-logo-sm.webp" 
+                srcSet="/lovable-uploads/revwheel-logo-sm.webp 1x, /lovable-uploads/revwheel-logo-md.webp 2x"
                 alt="RevWheel logo" 
                 className="h-12 w-auto" 
                 width={120} 

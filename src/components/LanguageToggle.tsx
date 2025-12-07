@@ -1,6 +1,8 @@
 import { useLanguage } from '@/contexts/LanguageContext';
-import frFlag from '@/assets/france.webp';
-import ukFlag from '@/assets/uk.webp';
+import frFlagSm from '@/assets/france-sm.webp';
+import frFlagMd from '@/assets/france-md.webp';
+import ukFlagSm from '@/assets/uk-sm.webp';
+import ukFlagMd from '@/assets/uk-md.webp';
 
 interface LanguageToggleProps {
   isScrolled?: boolean;
@@ -13,6 +15,9 @@ export const LanguageToggle = ({ isScrolled }: LanguageToggleProps = {}) => {
     setLanguage(language === 'fr' ? 'en' : 'fr');
   };
 
+  const flagSm = language === 'fr' ? ukFlagSm : frFlagSm;
+  const flagMd = language === 'fr' ? ukFlagMd : frFlagMd;
+
   return (
     <button
       onClick={toggleLanguage}
@@ -20,7 +25,8 @@ export const LanguageToggle = ({ isScrolled }: LanguageToggleProps = {}) => {
       aria-label={`Switch to ${language === 'fr' ? 'English' : 'French'}`}
     >
       <img
-        src={language === 'fr' ? ukFlag : frFlag}
+        src={flagSm}
+        srcSet={`${flagSm} 1x, ${flagMd} 2x`}
         alt={language === 'fr' ? 'Switch to English' : 'Passer en français'}
         className="w-8 h-8 rounded-md object-cover"
         width={32}

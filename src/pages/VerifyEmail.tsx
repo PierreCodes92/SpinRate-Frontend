@@ -59,7 +59,8 @@ export default function VerifyEmail() {
         {/* Logo */}
         <div className="flex justify-center mb-4">
           <img 
-            src="/lovable-uploads/revwheel-logo.webp" 
+            src="/lovable-uploads/revwheel-logo-sm.webp" 
+            srcSet="/lovable-uploads/revwheel-logo-sm.webp 1x, /lovable-uploads/revwheel-logo-md.webp 2x"
             alt="RevWheel logo" 
             className="h-12 w-auto" 
           />

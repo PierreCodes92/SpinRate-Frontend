@@ -13,7 +13,8 @@ const Footer = () => {
             <div className="flex items-center space-x-3">
               <a href="/" aria-label="RevWheel - Retour à l'accueil">
                 <img 
-                  src="/lovable-uploads/revwheel-logo.webp" 
+                  src="/lovable-uploads/revwheel-logo-sm.webp" 
+                  srcSet="/lovable-uploads/revwheel-logo-sm.webp 1x, /lovable-uploads/revwheel-logo-md.webp 2x"
                   alt="RevWheel logo" 
                   className="h-10 md:h-12 w-auto"
                   width={100}
