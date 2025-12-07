@@ -1,4 +1,3 @@
-import { Button } from '@/components/ui/button';
 import {
   AlertDialog,
   AlertDialogContent,
@@ -8,7 +7,6 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 import { useTranslation } from '@/components/TranslationProvider';
-import { toast } from 'sonner';
 
 interface EmailConfirmationDialogProps {
   isOpen: boolean;
@@ -34,13 +32,9 @@ export const EmailConfirmationDialog = ({
     }
   };
 
-  const handleAllSetClick = () => {
-    toast.info(t('linkNotClicked') || 'Link not clicked! Check your inbox to activate your account.');
-  };
-
   return (
     <AlertDialog open={isOpen} onOpenChange={onClose}>
-      <AlertDialogContent className="max-w-md border-border/50 bg-card/95 backdrop-blur-sm shadow-sm z-[150]">
+      <AlertDialogContent className="w-full max-w-md rounded-[28px] border-border/50 bg-card/95 backdrop-blur-sm shadow-sm z-[150]">
         <AlertDialogHeader className="space-y-4">
           {/* Logo */}
           <div className="flex justify-center mb-2">
@@ -65,14 +59,6 @@ export const EmailConfirmationDialog = ({
         </AlertDialogHeader>
         
         <AlertDialogFooter className="flex-col sm:flex-col gap-3 mt-2">
-          <Button
-            onClick={handleAllSetClick}
-            className="w-full h-12 text-lg font-semibold shadow-button hover-glow"
-            variant="cta"
-          >
-            {t('allSet') || 'All set'}
-          </Button>
-          
           <button
             onClick={handleResendEmail}
             disabled={isResendingEmail}

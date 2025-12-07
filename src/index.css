@@ -248,6 +248,7 @@ All colors MUST be HSL.
     color: white;
     padding: 12px 24px;
     font-weight: 600;
+    font-size: 12px !important;
     text-align: center;
     cursor: pointer;
     border: none;
