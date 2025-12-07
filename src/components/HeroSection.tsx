@@ -69,7 +69,7 @@ const HeroSection = () => {
           <div className={`relative flex justify-end transition-all duration-1000 delay-300 ${heroVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
             <div className="relative z-10 shadow-card rounded-2xl overflow-hidden aspect-[9/16] max-w-xs ml-20 video-neon-glow">
               <VideoPlayer 
-                src="https://pierrecodin.github.io/VideoRevwheel/VideoRevwheel.mp4"
+                src="/video/VideoRevwheel.mp4"
                 className="w-full h-full"
               />
             </div>
@@ -149,7 +149,7 @@ const HeroSection = () => {
             aspectRatio: '9/16'
           }}>
               <VideoPlayer 
-                src="https://pierrecodin.github.io/VideoRevwheel/VideoRevwheel.mp4"
+                src="/video/VideoRevwheel.mp4"
                 className="w-full h-full"
               />
             </div>

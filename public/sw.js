@@ -2,9 +2,9 @@
 const CACHE_NAME = 'revwheel-video-cache-v1';
 const VIDEO_CACHE_NAME = 'revwheel-video-cache-v1';
 
-// URLs to cache with long TTL
+// URLs to cache with long TTL (local video)
 const VIDEO_URLS = [
-  'https://pierrecodin.github.io/VideoRevwheel/VideoRevwheel.mp4'
+  '/video/VideoRevwheel.mp4'
 ];
 
 // Cache duration: 30 days for videos

@@ -1,6 +1,9 @@
 # Netlify Headers Configuration
 # Long cache for static assets (1 year)
 
+/video/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /*.mp4
   Cache-Control: public, max-age=31536000, immutable
 
