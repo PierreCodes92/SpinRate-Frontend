@@ -68,40 +68,13 @@
     <!-- Preload hero video for better LCP -->
     <link rel="preload" href="/video/VideoRevwheel.mp4" as="video" type="video/mp4" />
     
-    <!-- Critical CSS for faster first paint - expanded for above-the-fold content -->
+    <!-- Critical CSS for faster first paint -->
     <style>
-      /* Critical CSS - inlined for faster FCP */
+      /* Critical CSS - minimal styles for FCP */
       *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
       html{scroll-behavior:smooth}
-      body{font-family:'Poppins','Nunito',system-ui,-apple-system,sans-serif;background:#f8f9fc;color:#1e293b;min-height:100vh;-webkit-font-smoothing:antialiased;line-height:1.5}
+      body{font-family:'Poppins','Nunito',system-ui,-apple-system,sans-serif;background:#f8f9fc;color:#1e293b;min-height:100vh;-webkit-font-smoothing:antialiased}
       #root{min-height:100vh}
-      .min-h-screen{min-height:100vh}
-      
-      /* Header critical styles */
-      header{position:sticky;top:0;z-index:50;width:100%;background:rgba(255,255,255,0.95);backdrop-filter:blur(8px);border-bottom:1px solid rgba(0,0,0,0.1)}
-      .container{width:100%;max-width:1280px;margin:0 auto;padding:0 1rem}
-      
-      /* Hero section critical styles */
-      section{padding:3rem 1.5rem}
-      h1{font-size:2.25rem;font-weight:700;line-height:1.2;color:#1e293b}
-      @media(min-width:1024px){h1{font-size:3.75rem}}
-      .text-primary{color:#6366f1}
-      p{color:#64748b;font-size:1rem}
-      
-      /* Button critical styles */
-      button{font-family:inherit;cursor:pointer;border:none;border-radius:9999px;font-weight:600;transition:all 0.2s}
-      .bg-primary{background:#6366f1;color:white}
-      .bg-primary:hover{background:#4f46e5}
-      
-      /* Flex and grid utilities */
-      .flex{display:flex}
-      .items-center{align-items:center}
-      .justify-center{justify-content:center}
-      .justify-between{justify-content:space-between}
-      .space-x-2>*+*{margin-left:0.5rem}
-      .space-x-3>*+*{margin-left:0.75rem}
-      .hidden{display:none}
-      @media(min-width:1024px){.lg\:flex{display:flex}.lg\:hidden{display:none}}
       
       /* Loading state */
       #root:empty{display:flex;align-items:center;justify-content:center;min-height:100vh}
