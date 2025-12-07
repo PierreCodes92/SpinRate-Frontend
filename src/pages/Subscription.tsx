@@ -252,11 +252,11 @@ export default function Subscription() {
 
           {freeTrialActive && (
             <div className="mb-8 bg-warning/10 border border-warning/20 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-amber-600 mb-2 flex items-center gap-2">
+              <h2 className="text-xl font-semibold text-[#FFAE05] mb-2 flex items-center gap-2">
                 <Clock className="w-5 h-5" />
                 {t('subscription.freeTrialTitle') || 'Free Trial Active'}
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-muted-foreground text-[#4A4B50]">
                 {t('subscription.freeTrialSubtitle') || 'Your free trial is active. Choose a plan to continue after your trial ends.'}
               </p>
             </div>

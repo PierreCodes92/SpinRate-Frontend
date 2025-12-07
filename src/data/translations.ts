@@ -179,6 +179,16 @@ export const translations = {
     
     // Video Player
     'watchTheRest': 'Écouter la suite',
+    'loadingVideo': 'Chargement...',
+    
+    // Accessibility
+    'openMenu': 'Ouvrir le menu',
+    'closeMenu': 'Fermer le menu',
+    'previousTestimonial': 'Témoignage précédent',
+    'nextTestimonial': 'Témoignage suivant',
+    'testimonialNavigation': 'Navigation des témoignages',
+    'testimonialIndicators': 'Indicateurs de témoignages',
+    'testimonialFrom': 'Témoignage de',
     
     // Testimonials
     'testimonial1Name': 'Marie D.',
@@ -767,6 +777,16 @@ _Vous pouvez également cliquer sur l'icône Télécharger 📥 pour obtenir un 
     
     // Video Player
     'watchTheRest': 'Watch the rest',
+    'loadingVideo': 'Loading...',
+    
+    // Accessibility
+    'openMenu': 'Open menu',
+    'closeMenu': 'Close menu',
+    'previousTestimonial': 'Previous testimonial',
+    'nextTestimonial': 'Next testimonial',
+    'testimonialNavigation': 'Testimonial navigation',
+    'testimonialIndicators': 'Testimonial indicators',
+    'testimonialFrom': 'Testimonial from',
     
     // Testimonials
     'testimonial1Name': 'Marie D.',

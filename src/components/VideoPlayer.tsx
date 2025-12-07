@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Play, Pause, Volume2, VolumeX } from 'lucide-react';
 import { useTranslation } from '@/components/TranslationProvider';
+import { isVideoCached, preCacheVideo } from '@/utils/serviceWorker';
 
 interface VideoPlayerProps {
   src: string;
@@ -22,6 +23,19 @@ const VideoPlayer = ({ src, className = "", autoplayDuration = 4500 }: VideoPlay
   const [isDragging, setIsDragging] = useState(false);
   const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isCached, setIsCached] = useState(false);
+
+  // Check if video is cached on mount
+  useEffect(() => {
+    isVideoCached(src).then(setIsCached);
+  }, [src]);
+
+  // Pre-cache video when component mounts (for future visits)
+  useEffect(() => {
+    if (!isCached) {
+      preCacheVideo(src);
+    }
+  }, [src, isCached]);
 
   // Intersection Observer - only load video when visible
   useEffect(() => {

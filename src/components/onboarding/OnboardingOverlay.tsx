@@ -163,13 +163,13 @@ export const OnboardingOverlay = () => {
         } else if (currentConfig.arrowDirection === 'right') {
           if (currentStep === 'clients-open-menu') {
             // Position tooltip to the LEFT of the 3-dots button, with arrow pointing right
-            // Tooltip is ~500px wide, so offset by that amount
             if (isMobile) {
               calculatedX = rect.left - 520;
               calculatedY = rect.top - 120;
             } else {
-              calculatedX = rect.left - 540;
-              calculatedY = rect.top - 140;
+              // Position closer to the three-dots button
+              calculatedX = rect.left - 680;
+              calculatedY = rect.top - 205;
             }
           } else {
             calculatedX = rect.right + 20;
@@ -253,7 +253,7 @@ export const OnboardingOverlay = () => {
   // Écran de bienvenue
   if (currentStep === 'welcome') {
     return (
-      <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm dashboard-fonts">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -307,7 +307,7 @@ export const OnboardingOverlay = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            className="fixed inset-0 z-[10000] flex items-center justify-center bg-black/60 backdrop-blur-sm dashboard-fonts"
           >
             <div className={`bg-card rounded-2xl shadow-2xl p-8 max-w-lg mx-4 border-2 border-primary/20 relative transform transition-all duration-150 ease-out ${
               hasOpened && !isExiting ? 'translate-y-0 opacity-100 scale-100' : isExiting ? 'translate-y-8 opacity-0 scale-95' : '-translate-y-8 opacity-0 scale-95'
@@ -451,7 +451,7 @@ export const OnboardingOverlay = () => {
           )}
 
           {/* Tooltip */}
-          <div className="pointer-events-auto">
+          <div className="pointer-events-auto dashboard-fonts">
             <OnboardingTooltip 
               step={currentStep} 
               position={tooltipPosition} 

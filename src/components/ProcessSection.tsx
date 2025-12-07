@@ -51,7 +51,7 @@ const ProcessSection = () => {
                 {index < steps.length - 1 && <div className="hidden lg:block absolute top-6 left-full w-full h-0.5 bg-gradient-to-r from-primary to-transparent opacity-30"></div>}
               </div>
               
-              <h3 className="text-xl font-semibold text-foreground md:text-2xl h-[3.5rem] flex items-start justify-center">
+              <h3 className="text-xl font-semibold text-foreground md:text-2xl h-auto md:h-[3.5rem] flex items-start justify-center">
                 {step.title}
               </h3>
               

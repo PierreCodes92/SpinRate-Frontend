@@ -205,38 +205,38 @@ export const AuthModal = ({
       
       {/* Modal */}
       <div className={`relative w-full max-w-md bg-white rounded-[28px] shadow-[0_35px_90px_rgba(15,23,42,0.12)] border border-[#E8EEFA] overflow-hidden transition-all duration-500 ease-out ${isClosing ? 'opacity-0 scale-95' : hasOpened ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-        <button onClick={handleClose} className="absolute top-3 right-3 md:top-5 md:right-5 text-[#98A2B3] hover:text-[#1E3FAA] transition-colors z-10" aria-label="Close">
-          <X className="w-4 h-4 md:w-5 md:h-5" />
+        <button onClick={handleClose} className="absolute top-4 right-4 md:top-5 md:right-5 text-[#98A2B3] hover:text-[#1E3FAA] transition-colors z-10" aria-label="Close">
+          <X className="w-5 h-5 md:w-5 md:h-5" />
         </button>
         
         {/* Header with logo */}
-        <div className="px-4 pt-4 pb-2 md:px-6 md:pt-10 md:pb-5 text-center">
-          <div className="flex flex-col items-center gap-1 mb-2 md:gap-2 md:mb-6">
-            <img src="/lovable-uploads/revwheel-logo.png" alt="RevWheel logo" className="h-8 md:h-12 w-auto" />
+        <div className="px-5 pt-6 pb-3 md:px-6 md:pt-10 md:pb-5 text-center">
+          <div className="flex flex-col items-center gap-2 mb-4 md:gap-2 md:mb-6">
+            <img src="/lovable-uploads/revwheel-logo.png" alt="RevWheel logo" className="h-12 md:h-14 w-auto" />
           </div>
           
-          <div className="flex items-center justify-center gap-2 mb-2 md:gap-4 md:mb-4">
-            <button type="button" onClick={() => setMode('login')} className={mode === 'login' ? "px-5 py-1 md:px-8 md:py-2 rounded-full text-[11px] md:text-sm font-semibold text-white shadow-[0_15px_30px_rgba(61,139,255,0.3)] bg-[#3D8BFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 transition-all" : "text-[11px] md:text-sm font-semibold text-[#3D8BFF] hover:text-[#1E4FD8] transition-colors px-2 py-1 md:px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/40 rounded-full"}>
+          <div className="flex items-center justify-center gap-3 mb-3 md:gap-4 md:mb-4">
+            <button type="button" onClick={() => setMode('login')} className={mode === 'login' ? "px-6 py-1.5 md:px-8 md:py-2 rounded-full text-xs md:text-sm font-semibold text-white shadow-[0_15px_30px_rgba(61,139,255,0.3)] bg-[#3D8BFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 transition-all" : "text-xs md:text-sm font-semibold text-[#3D8BFF] hover:text-[#1E4FD8] transition-colors px-3 py-1.5 md:px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/40 rounded-full"}>
               {t('login')}
             </button>
-            <button type="button" onClick={() => setMode('register')} className={mode === 'register' ? "px-5 py-1 md:px-8 md:py-2 rounded-full text-[11px] md:text-sm font-semibold text-white shadow-[0_15px_30px_rgba(61,139,255,0.3)] bg-[#3D8BFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 transition-all" : "text-[11px] md:text-sm font-semibold text-[#3D8BFF] hover:text-[#1E4FD8] transition-colors px-2 py-1 md:px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/40 rounded-full"}>
+            <button type="button" onClick={() => setMode('register')} className={mode === 'register' ? "px-6 py-1.5 md:px-8 md:py-2 rounded-full text-xs md:text-sm font-semibold text-white shadow-[0_15px_30px_rgba(61,139,255,0.3)] bg-[#3D8BFF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/60 transition-all" : "text-xs md:text-sm font-semibold text-[#3D8BFF] hover:text-[#1E4FD8] transition-colors px-3 py-1.5 md:px-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#3D8BFF]/40 rounded-full"}>
               {t('register')}
             </button>
           </div>
         </div>
 
         {/* Form */}
-        <div className="px-4 pb-3 md:px-6 md:pb-6">
+        <div className="px-5 pb-5 md:px-6 md:pb-6">
           {/* Google Sign In Button */}
-          <div className="mb-2 md:mb-4">
+          <div className="mb-3 md:mb-4">
             <Button
               type="button"
               variant="google"
               onClick={handleGoogleSignIn}
               disabled={isGoogleLoading}
-              className="w-full h-8 md:h-10 text-[11px] md:text-sm"
+              className="w-full h-10 md:h-10 text-xs md:text-sm"
             >
-              <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4 h-4 sm:w-4 sm:h-4 flex-shrink-0" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
                 <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
@@ -250,7 +250,7 @@ export const AuthModal = ({
             </Button>
             
             {/* Divider */}
-            <div className="relative my-2 md:my-5">
+            <div className="relative my-3 md:my-5">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-[#E3E8F4]"></div>
               </div>
@@ -260,49 +260,49 @@ export const AuthModal = ({
             </div>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-2 md:space-y-4">
-            {mode === 'register' && <div className="space-y-1 md:space-y-2">
+          <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4">
+            {mode === 'register' && <div className="space-y-1.5 md:space-y-2">
                 <Label htmlFor="fullName" className="text-xs md:text-sm font-semibold text-[#1F2A44]">
                   {t('fullName')}
                 </Label>
                 <div className="relative">
-                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 md:w-4 md:h-4 text-[#90A1C0]" />
-                  <Input id="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} className="h-9 md:h-12 pl-9 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
+                  <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 md:w-4 md:h-4 text-[#90A1C0]" />
+                  <Input id="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
                 </div>
               </div>}
 
-            <div className="space-y-1 md:space-y-2">
+            <div className="space-y-1.5 md:space-y-2">
               <Label htmlFor="email" className="text-xs md:text-sm font-semibold text-[#1F2A44]">
                 {t('emailAddress')}
               </Label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 md:w-4 md:h-4 text-[#90A1C0]" />
-                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="h-9 md:h-12 pl-9 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 md:w-4 md:h-4 text-[#90A1C0]" />
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
               </div>
             </div>
 
-            <div className="space-y-1 md:space-y-2">
+            <div className="space-y-1.5 md:space-y-2">
               <Label htmlFor="password" className="text-xs md:text-sm font-semibold text-[#1F2A44]">
                 {t('passwordField')}
               </Label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 md:w-4 md:h-4 text-[#90A1C0]" />
-                <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="h-9 md:h-12 pl-9 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 md:w-4 md:h-4 text-[#90A1C0]" />
+                <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
               </div>
             </div>
 
-            <div className="flex items-center justify-between flex-wrap gap-1 md:gap-3">
-              <label htmlFor="remember" className="flex items-center gap-1.5 md:gap-3 text-[11px] md:text-sm font-medium text-[#4B5674]">
-                <Checkbox id="remember" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked as boolean)} className="w-3.5 h-3.5 md:w-5 md:h-5 rounded-full border-2 border-[#CAD3E6] data-[state=checked]:bg-white data-[state=checked]:border-[#3D8BFF] data-[state=checked]:text-[#3D8BFF]" />
+            <div className="flex items-center justify-between flex-wrap gap-2 md:gap-3">
+              <label htmlFor="remember" className="flex items-center gap-2 md:gap-3 text-xs md:text-sm font-medium text-[#4B5674]">
+                <Checkbox id="remember" checked={rememberMe} onCheckedChange={checked => setRememberMe(checked as boolean)} className="w-4 h-4 md:w-5 md:h-5 rounded-full border-2 border-[#CAD3E6] data-[state=checked]:bg-white data-[state=checked]:border-[#3D8BFF] data-[state=checked]:text-[#3D8BFF]" />
                 {t('rememberMe')}
               </label>
               
-              {mode === 'login' && <button type="button" className="text-[11px] md:text-sm font-semibold text-[#397BFF] hover:underline">
+              {mode === 'login' && <button type="button" className="text-xs md:text-sm font-semibold text-[#397BFF] hover:underline">
                   {t('forgotPassword')}
                 </button>}
             </div>
 
-            <Button type="submit" className="w-full h-8 md:h-12 font-semibold text-xs md:text-base" variant="cta" disabled={isLoading}>
+            <Button type="submit" className="w-full h-10 md:h-12 font-semibold text-sm md:text-base" variant="cta" disabled={isLoading}>
               {isLoading 
                 ? (mode === 'login' ? (t('loggingIn') || 'Logging in...') : (t('registering') || 'Registering...'))
                 : (mode === 'login' ? t('login') : t('register'))}
@@ -310,7 +310,7 @@ export const AuthModal = ({
           </form>
 
           {/* Switch mode */}
-          <div className="mt-2 md:mt-6 text-center text-[11px] md:text-sm text-[#8A94A6]">
+          <div className="mt-4 md:mt-6 text-center text-xs md:text-sm text-[#8A94A6]">
             {mode === 'login' ? <>
                 {t('noAccountYet')}{' '}
                 <button type="button" onClick={() => setMode('register')} className="text-[#397BFF] font-semibold hover:underline">

@@ -88,33 +88,58 @@ const TestimonialsSection = () => {
           </div>
 
           {/* Navigation buttons - Hidden on mobile, shown on desktop */}
-          <button onClick={prevTestimonial} className="hidden md:block absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white shadow-soft rounded-full p-3 hover:bg-primary/10 transition-smooth z-10">
-            <ChevronLeft className="w-6 h-6 text-primary" />
+          <button 
+            onClick={prevTestimonial} 
+            className="hidden md:block absolute -left-12 top-1/2 transform -translate-y-1/2 bg-white shadow-soft rounded-full p-3 hover:bg-primary/10 transition-smooth z-10"
+            aria-label={t('previousTestimonial') || 'Previous testimonial'}
+          >
+            <ChevronLeft className="w-6 h-6 text-primary" aria-hidden="true" />
           </button>
           
-          <button onClick={nextTestimonial} className="hidden md:block absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white shadow-soft rounded-full p-3 hover:bg-primary/10 transition-smooth z-10">
-            <ChevronRight className="w-6 h-6 text-primary" />
+          <button 
+            onClick={nextTestimonial} 
+            className="hidden md:block absolute -right-12 top-1/2 transform -translate-y-1/2 bg-white shadow-soft rounded-full p-3 hover:bg-primary/10 transition-smooth z-10"
+            aria-label={t('nextTestimonial') || 'Next testimonial'}
+          >
+            <ChevronRight className="w-6 h-6 text-primary" aria-hidden="true" />
           </button>
 
           {/* Mobile navigation buttons */}
-          <div className="flex md:hidden justify-center mt-4 space-x-4">
-            <button onClick={prevTestimonial} className="bg-white shadow-soft rounded-full p-2 hover:bg-primary/10 transition-smooth">
-              <ChevronLeft className="w-5 h-5 text-primary" />
+          <div className="flex md:hidden justify-center mt-4 space-x-4" role="group" aria-label={t('testimonialNavigation') || 'Testimonial navigation'}>
+            <button 
+              onClick={prevTestimonial} 
+              className="bg-white shadow-soft rounded-full p-2 hover:bg-primary/10 transition-smooth"
+              aria-label={t('previousTestimonial') || 'Previous testimonial'}
+            >
+              <ChevronLeft className="w-5 h-5 text-primary" aria-hidden="true" />
             </button>
-            <button onClick={nextTestimonial} className="bg-white shadow-soft rounded-full p-2 hover:bg-primary/10 transition-smooth">
-              <ChevronRight className="w-5 h-5 text-primary" />
+            <button 
+              onClick={nextTestimonial} 
+              className="bg-white shadow-soft rounded-full p-2 hover:bg-primary/10 transition-smooth"
+              aria-label={t('nextTestimonial') || 'Next testimonial'}
+            >
+              <ChevronRight className="w-5 h-5 text-primary" aria-hidden="true" />
             </button>
           </div>
 
           {/* Dots indicator */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {testimonials.map((_, index) => <button key={index} onClick={() => {
-            setIsTransitioning(true);
-            setTimeout(() => {
-              setCurrentIndex(index);
-              setIsTransitioning(false);
-            }, 250);
-          }} className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? 'bg-primary' : 'bg-primary/30'}`} />)}
+          <div className="flex justify-center mt-6 space-x-2" role="tablist" aria-label={t('testimonialIndicators') || 'Testimonial indicators'}>
+            {testimonials.map((testimonial, index) => (
+              <button 
+                key={index} 
+                onClick={() => {
+                  setIsTransitioning(true);
+                  setTimeout(() => {
+                    setCurrentIndex(index);
+                    setIsTransitioning(false);
+                  }, 250);
+                }} 
+                className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? 'bg-primary' : 'bg-primary/30'}`}
+                role="tab"
+                aria-selected={index === currentIndex}
+                aria-label={`${t('testimonialFrom') || 'Testimonial from'} ${testimonial.name}`}
+              />
+            ))}
           </div>
         </div>
         
