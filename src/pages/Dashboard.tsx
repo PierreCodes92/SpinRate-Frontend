@@ -311,7 +311,8 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Tables with Tabs */}
+        {/* Tables with Tabs - Admin Only */}
+        {isAdmin && (
         <Card className="overflow-hidden">
           {/* Tab Navigation */}
           <div className="flex border-b border-border">
@@ -569,6 +570,7 @@ export default function Dashboard() {
             </div>
           )}
         </Card>
+        )}
       </div>
     </DashboardLayout>
   );

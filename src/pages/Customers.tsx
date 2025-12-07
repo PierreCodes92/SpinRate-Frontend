@@ -356,7 +356,7 @@ export default function Customers() {
           {customer.enrichi === "Oui" ? t('customers.yes') : t('customers.no')}
         </Badge>
       </TableCell>
-      <TableCell data-onboarding={!isDemo && index === 0 ? "client-actions-cell" : undefined}>
+      <TableCell data-onboarding={isDemo ? "client-actions-cell" : undefined}>
         <DropdownMenu
           open={openDropdownId === customer.id}
           onOpenChange={(isOpen) => {
@@ -374,7 +374,7 @@ export default function Customers() {
               className="focus:outline-none"
               type="button"
               aria-label="Actions"
-              data-onboarding={!isDemo && index === 0 ? "client-menu-marie" : undefined}
+              data-onboarding={isDemo ? "client-menu-marie" : undefined}
             >
               <MoreVertical className="h-5 w-5" />
             </Button>

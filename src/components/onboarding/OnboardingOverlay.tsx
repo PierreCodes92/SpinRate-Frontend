@@ -94,7 +94,7 @@ export const OnboardingOverlay = () => {
       waitForElement: true
     },
     'clients-open-menu': {
-      targetSelector: '[data-onboarding="client-actions-cell"]',
+      targetSelector: '[data-onboarding="client-menu-marie"]',
       title: t('onboarding.clientsMenu.title'),
       message: t('onboarding.clientsMenu.message'),
       mobileMessage: t('onboarding.clientsMenu.messageMobile'),
@@ -162,12 +162,14 @@ export const OnboardingOverlay = () => {
           calculatedY = rect.top + rect.height / 2;
         } else if (currentConfig.arrowDirection === 'right') {
           if (currentStep === 'clients-open-menu') {
+            // Position tooltip to the LEFT of the 3-dots button, with arrow pointing right
+            // Tooltip is ~500px wide, so offset by that amount
             if (isMobile) {
-              calculatedX = rect.left - 660;
-              calculatedY = rect.top - 204;
+              calculatedX = rect.left - 520;
+              calculatedY = rect.top - 120;
             } else {
-              calculatedX = rect.left - 799;
-              calculatedY = rect.top - 202;
+              calculatedX = rect.left - 540;
+              calculatedY = rect.top - 140;
             }
           } else {
             calculatedX = rect.right + 20;

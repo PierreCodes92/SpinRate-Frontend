@@ -45,6 +45,7 @@ export default function WheelGame() {
   const [isVerified, setIsVerified] = useState(false);
   const [language, setLanguage] = useState<'fr' | 'en'>('fr');
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
+  const [logoBackgroundColor, setLogoBackgroundColor] = useState<string>('rgba(255,255,255,0.95)');
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -196,6 +197,95 @@ export default function WheelGame() {
     };
   }, [config]);
 
+  // Detect logo background color from corner pixels
+  useEffect(() => {
+    if (!logoPreview) return;
+
+    const detectBackgroundColor = () => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      
+      img.onload = () => {
+        try {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+          if (!ctx) return;
+
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          // Sample corners and edges to detect background color
+          const samplePoints = [
+            { x: 0, y: 0 },                           // Top-left
+            { x: img.width - 1, y: 0 },               // Top-right
+            { x: 0, y: img.height - 1 },              // Bottom-left
+            { x: img.width - 1, y: img.height - 1 },  // Bottom-right
+            { x: 2, y: 2 },                           // Near top-left
+            { x: img.width - 3, y: 2 },               // Near top-right
+            { x: 2, y: img.height - 3 },              // Near bottom-left
+            { x: img.width - 3, y: img.height - 3 },  // Near bottom-right
+          ];
+
+          const colors: { r: number; g: number; b: number; a: number }[] = [];
+          
+          for (const point of samplePoints) {
+            const pixelData = ctx.getImageData(point.x, point.y, 1, 1).data;
+            colors.push({
+              r: pixelData[0],
+              g: pixelData[1],
+              b: pixelData[2],
+              a: pixelData[3]
+            });
+          }
+
+          // Find the most common color (mode) among corners
+          const colorMap = new Map<string, { count: number; color: typeof colors[0] }>();
+          
+          for (const color of colors) {
+            // Round colors to reduce variance from anti-aliasing
+            const key = `${Math.round(color.r / 10) * 10}-${Math.round(color.g / 10) * 10}-${Math.round(color.b / 10) * 10}-${Math.round(color.a / 10) * 10}`;
+            const existing = colorMap.get(key);
+            if (existing) {
+              existing.count++;
+            } else {
+              colorMap.set(key, { count: 1, color });
+            }
+          }
+
+          // Get the most frequent color
+          let dominantColor = colors[0];
+          let maxCount = 0;
+          
+          for (const [, value] of colorMap) {
+            if (value.count > maxCount) {
+              maxCount = value.count;
+              dominantColor = value.color;
+            }
+          }
+
+          // If alpha is very low (transparent), use white
+          if (dominantColor.a < 50) {
+            setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
+          } else {
+            setLogoBackgroundColor(`rgba(${dominantColor.r}, ${dominantColor.g}, ${dominantColor.b}, 0.98)`);
+          }
+        } catch (error) {
+          console.log('Could not detect logo background color, using default white');
+          setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
+        }
+      };
+
+      img.onerror = () => {
+        console.log('Could not load logo for color detection');
+        setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
+      };
+
+      img.src = logoPreview;
+    };
+
+    detectBackgroundColor();
+  }, [logoPreview]);
 
   
   const handlePlayClick = () => {
@@ -298,12 +388,6 @@ export default function WheelGame() {
       console.log("Verification response:", response.data);
 
       if (response.data && response.data.verified) {
-        toast({
-          title: language === 'fr'
-            ? "Vérification réussie ! Vous pouvez maintenant jouer."
-            : "Verification successful! You can now play.",
-        });
-
         console.log("User verified successfully, setting isVerified to true");
         setIsVerified(true);
         scrollToWheel();
@@ -487,7 +571,46 @@ export default function WheelGame() {
   // Show subscription expired interface
   if (isSubscriptionExpired && wheelOwner) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center px-4">
+      <div className="min-h-screen bg-background flex items-center justify-center px-4 relative">
+        {/* Language Switcher for Expired Popup */}
+        <div className="fixed top-4 right-4 z-50 flex gap-2">
+          <button
+            onClick={() => setLanguage('fr')}
+            className="w-8 h-6 rounded overflow-hidden border-2 transition-all"
+            style={{
+              borderColor: language === 'fr' ? '#3b82f6' : '#d1d5db',
+              transform: language === 'fr' ? 'scale(1.1)' : 'scale(1)'
+            }}
+            aria-label="Passer en français"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" className="w-full h-full">
+              <rect width="900" height="600" fill="#ED2939"/>
+              <rect width="600" height="600" fill="#fff"/>
+              <rect width="300" height="600" fill="#002395"/>
+            </svg>
+          </button>
+          <button
+            onClick={() => setLanguage('en')}
+            className="w-8 h-6 rounded overflow-hidden border-2 transition-all"
+            style={{
+              borderColor: language === 'en' ? '#3b82f6' : '#d1d5db',
+              transform: language === 'en' ? 'scale(1.1)' : 'scale(1)'
+            }}
+            aria-label="Switch to English"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" className="w-full h-full">
+              <clipPath id="expired-t">
+                <path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/>
+              </clipPath>
+              <path d="M0,0 v30 h60 v-30 z" fill="#00247d"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" strokeWidth="6"/>
+              <path d="M0,0 L60,30 M60,0 L0,30" clipPath="url(#expired-t)" stroke="#cf142b" strokeWidth="4"/>
+              <path d="M30,0 v30 M0,15 h60" stroke="#fff" strokeWidth="10"/>
+              <path d="M30,0 v30 M0,15 h60" stroke="#cf142b" strokeWidth="6"/>
+            </svg>
+          </button>
+        </div>
+
         <div className="bg-card p-8 rounded-xl shadow-lg max-w-md w-full text-center border-2 border-destructive">
           <div className="text-destructive text-5xl mb-4">⚠️</div>
           <h2 className="text-2xl font-bold text-foreground mb-2">
@@ -751,7 +874,7 @@ export default function WheelGame() {
             left: '24px',
             width: '90px',
             height: '90px',
-            backgroundColor: 'white',
+            backgroundColor: logoBackgroundColor,
             borderRadius: '50%',
             boxShadow: '0 8px 25px rgba(15,23,42,0.12)',
             display: 'flex',
@@ -890,7 +1013,7 @@ export default function WheelGame() {
             <div 
               className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75px] h-[75px] rounded-full flex items-center justify-center overflow-hidden"
               style={{
-                background: 'rgba(255,255,255,0.95)',
+                background: logoBackgroundColor,
                 border: `3px solid ${config.mainColors.color1}`,
                 boxShadow: `0 0 10px ${config.mainColors.color1}50, inset 0 2px 8px ${config.mainColors.color1}20`,
                 zIndex: 4

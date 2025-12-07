@@ -1,4 +1,4 @@
-import { BarChart3, Users, Settings, CreditCard, LogOut, X, Sparkles } from "lucide-react";
+import { BarChart3, Users, Settings, CreditCard, LogOut, X, Sparkles, Clock } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import revwheelLogo from "@/assets/revwheel-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -40,6 +40,16 @@ export function AppSidebar() {
 
   // Check if user is on trial (subscriptionRemaining === 7 means free trial)
   const isOnTrial = user?.user?.subscriptionRemaining === 7 && trialDaysRemaining > 0;
+  const isTrialExpired = user?.user?.subscriptionRemaining === 7 && trialDaysRemaining < 1;
+
+  // Get the trial message dynamically
+  const getTrialMessage = () => {
+    if (trialDaysRemaining < 1) {
+      return t('sidebar.trialExpired') || 'Free trial expired';
+    }
+    const dayWord = trialDaysRemaining === 1 ? t('sidebar.day') : t('sidebar.days');
+    return `${t('sidebar.trialExpiresIn') || 'Free trial expires in'} ${trialDaysRemaining} ${dayWord}`;
+  };
 
   const menuItems = [
     {
@@ -126,16 +136,17 @@ export function AppSidebar() {
       </SidebarContent>
 
       <SidebarFooter className="p-4 border-t border-sidebar-border space-y-4">
-        {isOnTrial && isTrialVisible && (
-          <Card className="border-orange-200 bg-orange-50 shadow-sm p-3">
+        {(isOnTrial || isTrialExpired) && isTrialVisible && (
+          <Card className={`shadow-sm p-3 ${isTrialExpired ? 'border-red-200 bg-red-50' : 'border-orange-200 bg-orange-50'}`}>
             <div className="flex flex-col gap-2">
-              <p className="text-xs font-semibold text-orange-800 whitespace-nowrap text-center">
-                {t('sidebar.trialExpires')}
+              <p className={`text-xs font-semibold whitespace-nowrap text-center ${isTrialExpired ? 'text-red-800' : 'text-orange-800'}`}>
+                {getTrialMessage()}
               </p>
               <Button 
                 className="text-xs h-8 px-4 font-semibold bg-red-400 text-white hover:bg-red-500 rounded-md w-full whitespace-nowrap"
                 onClick={() => navigate("/dashboard/subscription")}
               >
+                <Clock className="w-3.5 h-3.5 shrink-0 -mr-1.5" />
                 {t('sidebar.upgradeNow')}
               </Button>
             </div>

@@ -1,6 +1,6 @@
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { Button } from "@/components/ui/button";
-import { Check, CreditCard, XCircle } from "lucide-react";
+import { Check, CreditCard, XCircle, Clock } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuthContext } from "@/hooks/useAuthContext";
@@ -252,7 +252,8 @@ export default function Subscription() {
 
           {freeTrialActive && (
             <div className="mb-8 bg-warning/10 border border-warning/20 rounded-lg p-6">
-              <h2 className="text-xl font-semibold text-warning mb-2">
+              <h2 className="text-xl font-semibold text-amber-600 mb-2 flex items-center gap-2">
+                <Clock className="w-5 h-5" />
                 {t('subscription.freeTrialTitle') || 'Free Trial Active'}
               </h2>
               <p className="text-muted-foreground">
