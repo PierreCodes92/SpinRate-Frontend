@@ -81,7 +81,6 @@ export default function Settings() {
   }]);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
-  const [logoBackgroundColor, setLogoBackgroundColor] = useState<string>('rgba(255,255,255,0.95)');
   const [isLoading, setIsLoading] = useState(false);
   const [isFetching, setIsFetching] = useState(true);
   const [showPreview, setShowPreview] = useState(false);
@@ -168,96 +167,6 @@ export default function Settings() {
     window.addEventListener('resize', drawWheelLines);
     return () => window.removeEventListener('resize', drawWheelLines);
   }, [showPreview]);
-
-  // Detect logo background color from corner pixels
-  useEffect(() => {
-    if (!logoPreview) return;
-
-    const detectBackgroundColor = () => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      
-      img.onload = () => {
-        try {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return;
-
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0, 0);
-
-          // Sample corners and edges to detect background color
-          const samplePoints = [
-            { x: 0, y: 0 },                           // Top-left
-            { x: img.width - 1, y: 0 },               // Top-right
-            { x: 0, y: img.height - 1 },              // Bottom-left
-            { x: img.width - 1, y: img.height - 1 },  // Bottom-right
-            { x: 2, y: 2 },                           // Near top-left
-            { x: img.width - 3, y: 2 },               // Near top-right
-            { x: 2, y: img.height - 3 },              // Near bottom-left
-            { x: img.width - 3, y: img.height - 3 },  // Near bottom-right
-          ];
-
-          const colors: { r: number; g: number; b: number; a: number }[] = [];
-          
-          for (const point of samplePoints) {
-            const pixelData = ctx.getImageData(point.x, point.y, 1, 1).data;
-            colors.push({
-              r: pixelData[0],
-              g: pixelData[1],
-              b: pixelData[2],
-              a: pixelData[3]
-            });
-          }
-
-          // Find the most common color (mode) among corners
-          const colorMap = new Map<string, { count: number; color: typeof colors[0] }>();
-          
-          for (const color of colors) {
-            // Round colors to reduce variance from anti-aliasing
-            const key = `${Math.round(color.r / 10) * 10}-${Math.round(color.g / 10) * 10}-${Math.round(color.b / 10) * 10}-${Math.round(color.a / 10) * 10}`;
-            const existing = colorMap.get(key);
-            if (existing) {
-              existing.count++;
-            } else {
-              colorMap.set(key, { count: 1, color });
-            }
-          }
-
-          // Get the most frequent color
-          let dominantColor = colors[0];
-          let maxCount = 0;
-          
-          for (const [, value] of colorMap) {
-            if (value.count > maxCount) {
-              maxCount = value.count;
-              dominantColor = value.color;
-            }
-          }
-
-          // If alpha is very low (transparent), use white
-          if (dominantColor.a < 50) {
-            setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
-          } else {
-            setLogoBackgroundColor(`rgba(${dominantColor.r}, ${dominantColor.g}, ${dominantColor.b}, 0.98)`);
-          }
-        } catch (error) {
-          console.log('Could not detect logo background color, using default white');
-          setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
-        }
-      };
-
-      img.onerror = () => {
-        console.log('Could not load logo for color detection');
-        setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
-      };
-
-      img.src = logoPreview;
-    };
-
-    detectBackgroundColor();
-  }, [logoPreview]);
 
   const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -371,12 +280,18 @@ export default function Settings() {
       if (wheelId) {
         // Update existing wheel
         response = await wheelApi.updateWheel(wheelId, wheelData);
+        if (response.wheel?.logoUrl) {
+          setLogoPreview(response.wheel.logoUrl);
+        }
         toast.success(t('settings.wheelUpdateSuccess') || "Wheel updated successfully");
       } else {
         // Create new wheel
         response = await wheelApi.createWheel(wheelData);
         if (response.wheel?._id) {
           setWheelId(response.wheel._id);
+        }
+        if (response.wheel?.logoUrl) {
+          setLogoPreview(response.wheel.logoUrl);
         }
         toast.success(t('settings.wheelCreateSuccess') || "Wheel created successfully");
       }
@@ -826,26 +741,21 @@ export default function Settings() {
                   <Upload className="w-8 h-8 text-muted-foreground mb-2" />
                   <span className="text-muted-foreground font-medium">{t('settings.logoUpload')}</span>
                 </label>
-                {/* Logo preview frame - circular to match wheel center */}
-                <div 
-                  className="w-28 h-28 rounded-full border-2 border-dashed border-primary/30 flex items-center justify-center overflow-hidden relative"
-                  style={{ backgroundColor: logoPreview ? logoBackgroundColor : undefined }}
-                >
+                <div className="w-32 h-24 bg-muted rounded-lg border flex items-center justify-center overflow-hidden">
                   {logoPreview ? (
                     <img 
                       src={logoPreview} 
                       alt="Logo preview" 
-                      className="w-[140%] h-[140%] object-cover" 
-                      style={{ 
-                        objectPosition: 'center',
-                        transform: 'scale(1)'
-                      }}
+                      className="max-w-full max-h-full object-contain" 
                     />
                   ) : (
-                    <span className="text-muted-foreground text-sm text-center px-2 bg-muted w-full h-full flex items-center justify-center">{t('settings.noLogo')}</span>
+                    <span className="text-muted-foreground text-sm">{t('settings.noLogo')}</span>
                   )}
                 </div>
               </div>
+              <p className="text-sm text-muted-foreground">
+                {t('settings.logoBackgroundHint')}
+              </p>
             </div>
           </Card>
 
@@ -1054,19 +964,19 @@ export default function Settings() {
                     </div>;
               })}
 
-                {/* Center hole for logo - scaled to fit inner circular content */}
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75px] h-[75px] rounded-full flex items-center justify-center overflow-hidden" style={{
-                background: logoBackgroundColor,
-                border: `3px solid ${mainColors.color1}`,
-                boxShadow: `0 0 10px ${mainColors.color1}50, inset 0 2px 8px ${mainColors.color1}20`,
+                {/* Center hole for logo */}
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden" style={{
+                background: 'rgba(255,255,255,0.5)',
+                backdropFilter: 'blur(8px)',
+                border: `3px solid ${mainColors.color1}30`,
+                boxShadow: `inset 0 2px 8px ${mainColors.color1}20`,
                 zIndex: 4
               }}>
                   {logoPreview && (
                     <img 
                       src={logoPreview} 
                       alt="Logo" 
-                      className="w-[140%] h-[140%] object-cover" 
-                      style={{ objectPosition: 'center' }}
+                      className="w-[80%] h-[80%] object-contain" 
                     />
                   )}
                 </div>

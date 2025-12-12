@@ -246,9 +246,9 @@ All colors MUST be HSL.
     border-radius: 9999px;
     background-color: #1A73E8;
     color: white;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-weight: 600;
-    font-size: 18px !important;
+    font-size: 14px !important;
     text-align: center;
     cursor: pointer;
     border: none;

@@ -85,7 +85,7 @@ export function AppSidebar() {
     isActive: boolean;
   }) => isActive ? "flex items-center w-full px-4 py-2 rounded-xl border border-primary/20 bg-primary/10 text-primary transition-all duration-200 font-medium" : "flex items-center w-full px-4 py-2 rounded-xl border border-transparent text-gray-800 hover:border-gray-200 hover:bg-gray-50 hover:scale-105 transition-all duration-200 font-medium";
   return <Sidebar className="border-r border-sidebar-border">
-      <SidebarHeader className="p-6 border-b border-border relative">
+      <SidebarHeader className="p-4 md:p-6 border-b border-border relative">
         <Button
           variant="ghost"
           size="icon"
@@ -98,7 +98,7 @@ export function AppSidebar() {
           <img 
             src={revwheelLogo} 
             alt="RevWheel" 
-            className="h-[132px] w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity" 
+            className="h-20 md:h-[132px] w-auto mx-auto cursor-pointer hover:opacity-80 transition-opacity" 
             loading="eager" 
             fetchPriority="high"
             width={132}

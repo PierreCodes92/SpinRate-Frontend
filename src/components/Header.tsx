@@ -1,16 +1,17 @@
 
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useScrollPosition } from "@/hooks/useScrollAnimation";
 import { useNotificationContext } from "@/components/NotificationProvider";
 import { useTranslation } from '@/components/TranslationProvider';
 import { LanguageToggle } from "@/components/LanguageToggle";
-import { AuthModal } from "@/components/AuthModal";
 import { useAuthModal } from "@/hooks/useAuthModal";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
 import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import pricingIcon from "@/assets/pricing-icon.webp";
+
+const AuthModal = lazy(() => import("@/components/AuthModal").then(mod => ({ default: mod.AuthModal })));
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -246,11 +247,15 @@ const Header = () => {
       )}
       
       {/* Auth Modal */}
-      <AuthModal 
-        isOpen={isAuthModalOpen}
-        onClose={closeModal}
-        initialMode={authModalMode}
-      />
+      {isAuthModalOpen && (
+        <Suspense fallback={null}>
+          <AuthModal 
+            isOpen={isAuthModalOpen}
+            onClose={closeModal}
+            initialMode={authModalMode}
+          />
+        </Suspense>
+      )}
     </>
   );
 };

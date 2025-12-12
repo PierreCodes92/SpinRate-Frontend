@@ -70,8 +70,8 @@ const BenefitsSection = () => {
             </div>
             
             {/* Animated decorations */}
-            <div className="absolute -top-4 -right-4 w-24 h-24 gradient-hero rounded-full opacity-[0.21] blur-xl animate-pulse"></div>
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 gradient-primary rounded-full opacity-[0.16] blur-2xl animate-pulse delay-1000"></div>
+            <div className="hidden md:block absolute -top-4 -right-4 w-24 h-24 gradient-hero rounded-full opacity-[0.21] blur-xl animate-pulse"></div>
+            <div className="hidden md:block absolute -bottom-4 -left-4 w-32 h-32 gradient-primary rounded-full opacity-[0.16] blur-2xl animate-pulse delay-1000"></div>
           </div>
 
           {/* Right Content - Metrics */}

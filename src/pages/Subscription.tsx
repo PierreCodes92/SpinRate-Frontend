@@ -256,7 +256,7 @@ export default function Subscription() {
                 <Clock className="w-5 h-5" />
                 {t('subscription.freeTrialTitle') || 'Free Trial Active'}
               </h2>
-              <p className="text-muted-foreground text-[#4A4B50]">
+              <p className="text-muted-foreground text-slate-800">
                 {t('subscription.freeTrialSubtitle') || 'Your free trial is active. Choose a plan to continue after your trial ends.'}
               </p>
             </div>

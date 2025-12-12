@@ -44,8 +44,8 @@ const ProcessSection = () => {
               
               
               {/* Numéro de l'étape */}
-              <div className="relative">
-                <div className="w-14 h-14 mx-auto gradient-hero rounded-full flex items-center justify-center text-white text-lg font-bold shadow-button hover:scale-[1.32] transition-all duration-300 cursor-pointer md:w-16 md:h-16 md:text-xl">
+              <div className="relative md:pt-0 pt-10">
+                <div className="PT-10 w-14 h-14 mx-auto gradient-hero rounded-full flex items-center justify-center text-white text-lg font-bold shadow-button hover:scale-[1.32] transition-all duration-300 cursor-pointer md:w-16 md:h-16 md:text-xl">
                   {step.number}
                 </div>
                 {index < steps.length - 1 && <div className="hidden lg:block absolute top-6 left-full w-full h-0.5 bg-gradient-to-r from-primary to-transparent opacity-30"></div>}
@@ -55,7 +55,7 @@ const ProcessSection = () => {
                 {step.title}
               </h3>
               
-              <p className="text-muted-foreground md:text-lg h-[5rem] flex items-start justify-center">
+              <p className="text-muted-foreground md:text-lg h-[4rem] flex md:items-start items-center justify-center">
                 {step.description}
               </p>
             </div>)}

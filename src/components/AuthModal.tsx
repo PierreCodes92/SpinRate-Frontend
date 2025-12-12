@@ -277,7 +277,7 @@ export const AuthModal = ({
                 </Label>
                 <div className="relative">
                   <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 md:w-4 md:h-4 text-[#90A1C0]" />
-                  <Input id="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
+                  <Input id="fullName" type="text" value={fullName} onChange={e => setFullName(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
                 </div>
               </div>}
 
@@ -287,7 +287,7 @@ export const AuthModal = ({
               </Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 md:w-4 md:h-4 text-[#90A1C0]" />
-                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
+                <Input id="email" type="email" value={email} onChange={e => setEmail(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
               </div>
             </div>
 
@@ -297,7 +297,7 @@ export const AuthModal = ({
               </Label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 md:w-4 md:h-4 text-[#90A1C0]" />
-                <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] text-sm placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
+                <Input id="password" type="password" value={password} onChange={e => setPassword(e.target.value)} className="h-10 md:h-12 pl-10 md:pl-11 rounded-xl md:rounded-2xl bg-[#F5F7FB] border border-[#E3E8F4] text-[#0F1F3B] placeholder:text-[#94A3B8] focus-visible:ring-2 focus-visible:ring-[#5B86FF] focus-visible:border-[#5B86FF]" required />
               </div>
             </div>
 

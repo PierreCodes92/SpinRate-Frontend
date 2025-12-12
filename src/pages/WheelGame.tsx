@@ -49,7 +49,6 @@ export default function WheelGame() {
   const [isVerified, setIsVerified] = useState(false);
   const [language, setLanguage] = useState<'fr' | 'en'>('fr');
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
-  const [logoBackgroundColor, setLogoBackgroundColor] = useState<string>('rgba(255,255,255,0.95)');
   const [firstName, setFirstName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -144,6 +143,13 @@ export default function WheelGame() {
     }
   }, [wheelId, toast]);
 
+  // Keep preview synced with config logo updates
+  useEffect(() => {
+    if (config?.logoUrl) {
+      setLogoPreview(config.logoUrl);
+    }
+  }, [config?.logoUrl]);
+
   // Update wheel scan count when page loads - only if subscription is not expired
   useEffect(() => {
     const updateScanCount = async () => {
@@ -201,97 +207,6 @@ export default function WheelGame() {
     };
   }, [config]);
 
-  // Detect logo background color from corner pixels
-  useEffect(() => {
-    if (!logoPreview) return;
-
-    const detectBackgroundColor = () => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      
-      img.onload = () => {
-        try {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return;
-
-          canvas.width = img.width;
-          canvas.height = img.height;
-          ctx.drawImage(img, 0, 0);
-
-          // Sample corners and edges to detect background color
-          const samplePoints = [
-            { x: 0, y: 0 },                           // Top-left
-            { x: img.width - 1, y: 0 },               // Top-right
-            { x: 0, y: img.height - 1 },              // Bottom-left
-            { x: img.width - 1, y: img.height - 1 },  // Bottom-right
-            { x: 2, y: 2 },                           // Near top-left
-            { x: img.width - 3, y: 2 },               // Near top-right
-            { x: 2, y: img.height - 3 },              // Near bottom-left
-            { x: img.width - 3, y: img.height - 3 },  // Near bottom-right
-          ];
-
-          const colors: { r: number; g: number; b: number; a: number }[] = [];
-          
-          for (const point of samplePoints) {
-            const pixelData = ctx.getImageData(point.x, point.y, 1, 1).data;
-            colors.push({
-              r: pixelData[0],
-              g: pixelData[1],
-              b: pixelData[2],
-              a: pixelData[3]
-            });
-          }
-
-          // Find the most common color (mode) among corners
-          const colorMap = new Map<string, { count: number; color: typeof colors[0] }>();
-          
-          for (const color of colors) {
-            // Round colors to reduce variance from anti-aliasing
-            const key = `${Math.round(color.r / 10) * 10}-${Math.round(color.g / 10) * 10}-${Math.round(color.b / 10) * 10}-${Math.round(color.a / 10) * 10}`;
-            const existing = colorMap.get(key);
-            if (existing) {
-              existing.count++;
-            } else {
-              colorMap.set(key, { count: 1, color });
-            }
-          }
-
-          // Get the most frequent color
-          let dominantColor = colors[0];
-          let maxCount = 0;
-          
-          for (const [, value] of colorMap) {
-            if (value.count > maxCount) {
-              maxCount = value.count;
-              dominantColor = value.color;
-            }
-          }
-
-          // If alpha is very low (transparent), use white
-          if (dominantColor.a < 50) {
-            setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
-          } else {
-            setLogoBackgroundColor(`rgba(${dominantColor.r}, ${dominantColor.g}, ${dominantColor.b}, 0.98)`);
-          }
-        } catch (error) {
-          console.log('Could not detect logo background color, using default white');
-          setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
-        }
-      };
-
-      img.onerror = () => {
-        console.log('Could not load logo for color detection');
-        setLogoBackgroundColor('rgba(255, 255, 255, 0.95)');
-      };
-
-      img.src = logoPreview;
-    };
-
-    detectBackgroundColor();
-  }, [logoPreview]);
-
-  
   const handlePlayClick = () => {
     // Open Google Review link
     if (config?.googleReviewLink) {
@@ -878,9 +793,10 @@ export default function WheelGame() {
             left: '24px',
             width: '90px',
             height: '90px',
-            backgroundColor: logoBackgroundColor,
+            backgroundColor: 'white',
             borderRadius: '50%',
-            boxShadow: '0 8px 25px rgba(15,23,42,0.12)',
+            padding: '10px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -888,15 +804,13 @@ export default function WheelGame() {
             zIndex: 10
           }}
         >
-          {/* Circular frame that crops to show inner circle of logo */}
           <img 
             src={logoPreview} 
             alt="Logo" 
             style={{
-              width: '140%',
-              height: '140%',
-              objectFit: 'cover',
-              objectPosition: 'center'
+              width: '100%',
+              height: '100%',
+              objectFit: 'contain'
             }}
           />
         </div>
@@ -1013,13 +927,14 @@ export default function WheelGame() {
               );
             })}
 
-            {/* Center hole for logo - scaled to fit inner circular content */}
+            {/* Center hole for logo */}
             <div 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[75px] h-[75px] rounded-full flex items-center justify-center overflow-hidden"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[70px] h-[70px] rounded-full flex items-center justify-center overflow-hidden"
               style={{
-                background: logoBackgroundColor,
-                border: `3px solid ${config.mainColors.color1}`,
-                boxShadow: `0 0 10px ${config.mainColors.color1}50, inset 0 2px 8px ${config.mainColors.color1}20`,
+                background: 'rgba(255,255,255,0.5)',
+                backdropFilter: 'blur(8px)',
+                border: `3px solid ${config.mainColors.color1}30`,
+                boxShadow: `inset 0 2px 8px ${config.mainColors.color1}20`,
                 zIndex: 4
               }}
             >
@@ -1027,8 +942,7 @@ export default function WheelGame() {
                 <img 
                   src={logoPreview} 
                   alt="Logo" 
-                  className="w-[140%] h-[140%] object-cover"
-                  style={{ objectPosition: 'center' }}
+                  className="w-[80%] h-[80%] object-contain"
                 />
               )}
             </div>

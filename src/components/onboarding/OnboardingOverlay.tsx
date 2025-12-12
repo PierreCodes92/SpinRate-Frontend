@@ -472,3 +472,5 @@ export const OnboardingOverlay = () => {
   );
 };
 
+export default OnboardingOverlay;
+

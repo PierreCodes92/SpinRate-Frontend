@@ -8,8 +8,7 @@ import { TranslationProvider } from "@/components/TranslationProvider";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthContextProvider } from "@/contexts/AuthContext";
 import { OnboardingProvider } from "@/contexts/OnboardingContext";
-import { OnboardingOverlay } from "@/components/onboarding/OnboardingOverlay";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, type ReactNode } from "react";
 
 // Eager load critical landing page
 import Index from "./pages/Index";
@@ -28,6 +27,7 @@ const Customers = lazy(() => import("./pages/Customers"));
 const Settings = lazy(() => import("./pages/Settings"));
 const Subscription = lazy(() => import("./pages/Subscription"));
 const WheelGame = lazy(() => import("./pages/WheelGame"));
+const OnboardingOverlayLazy = lazy(() => import("./components/onboarding/OnboardingOverlay"));
 
 // Loading fallback component
 const PageLoader = () => (
@@ -37,6 +37,15 @@ const PageLoader = () => (
 );
 
 const queryClient = new QueryClient();
+
+const DashboardShell = ({ children }: { children: ReactNode }) => (
+  <OnboardingProvider>
+    <Suspense fallback={null}>
+      <OnboardingOverlayLazy />
+    </Suspense>
+    {children}
+  </OnboardingProvider>
+);
 
 // Shared routes component to avoid duplication
 const AppRoutes = () => (
@@ -50,10 +59,10 @@ const AppRoutes = () => (
       <Route path="/privacy" element={<Privacy />} />
       <Route path="/verify-email" element={<VerifyEmail />} />
       {/* Dashboard routes - lazy loaded */}
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/dashboard/customers" element={<Customers />} />
-      <Route path="/dashboard/settings" element={<Settings />} />
-      <Route path="/dashboard/subscription" element={<Subscription />} />
+      <Route path="/dashboard" element={<DashboardShell><Dashboard /></DashboardShell>} />
+      <Route path="/dashboard/customers" element={<DashboardShell><Customers /></DashboardShell>} />
+      <Route path="/dashboard/settings" element={<DashboardShell><Settings /></DashboardShell>} />
+      <Route path="/dashboard/subscription" element={<DashboardShell><Subscription /></DashboardShell>} />
       <Route path="/wheelGame/:wheelId" element={<WheelGame />} />
       {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
       <Route path="*" element={<NotFound />} />
@@ -64,21 +73,18 @@ const AppRoutes = () => (
 // Main app content with language-aware routing
 const AppContent = () => (
   <LanguageProvider>
-    <OnboardingProvider>
-      <TranslationProvider>
-        <NotificationProvider>
-          <Toaster />
-          <Sonner />
-          <OnboardingOverlay />
-          <Routes>
-            {/* English routes - /en prefix */}
-            <Route path="/en/*" element={<AppRoutes />} />
-            {/* French routes - default (no prefix) */}
-            <Route path="/*" element={<AppRoutes />} />
-          </Routes>
-        </NotificationProvider>
-      </TranslationProvider>
-    </OnboardingProvider>
+    <TranslationProvider>
+      <NotificationProvider>
+        <Toaster />
+        <Sonner />
+        <Routes>
+          {/* English routes - /en prefix */}
+          <Route path="/en/*" element={<AppRoutes />} />
+          {/* French routes - default (no prefix) */}
+          <Route path="/*" element={<AppRoutes />} />
+        </Routes>
+      </NotificationProvider>
+    </TranslationProvider>
   </LanguageProvider>
 );
 
