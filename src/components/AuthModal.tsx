@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
 import { EmailConfirmationDialog } from '@/components/EmailConfirmationDialog';
+import { ForgotPasswordDialog } from '@/components/ForgotPasswordDialog';
 import { useTranslation } from '@/components/TranslationProvider';
 import { useLogin } from '@/hooks/useLogin';
 import { useSignup } from '@/hooks/useSignup';
@@ -11,6 +12,7 @@ import { toast } from 'sonner';
 import { X, User, Mail, Lock } from 'lucide-react';
 import { API_BASE_URL } from '@/config/api';
 import { getFirebaseAuth, getGoogleProvider } from '@/config/firebase';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -34,9 +36,11 @@ export const AuthModal = ({
   const [showEmailConfirmation, setShowEmailConfirmation] = useState(false);
   const [isResendingEmail, setIsResendingEmail] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
+  const [showForgotPassword, setShowForgotPassword] = useState(false);
   const { login } = useLogin();
   const { signup } = useSignup();
   const { t } = useTranslation();
+  const { language } = useLanguage();
 
   // Function to send verification email
   const sendVerificationEmail = async (userFullName: string, userEmail: string) => {
@@ -44,7 +48,7 @@ export const AuthModal = ({
       const response = await fetch(`${API_BASE_URL}/user/send-verification-email`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ fullName: userFullName, email: userEmail }),
+        body: JSON.stringify({ fullName: userFullName, email: userEmail, language }),
       });
 
       if (!response.ok) {
@@ -303,7 +307,11 @@ export const AuthModal = ({
                 {t('rememberMe')}
               </label>
               
-              {mode === 'login' && <button type="button" className="text-xs md:text-sm font-semibold text-[#397BFF] hover:underline">
+              {mode === 'login' && <button 
+                  type="button" 
+                  onClick={() => setShowForgotPassword(true)}
+                  className="text-xs md:text-sm font-semibold text-[#397BFF] hover:underline"
+                >
                   {t('forgotPassword')}
                 </button>}
             </div>
@@ -344,6 +352,16 @@ export const AuthModal = ({
       email={email}
       onResendEmail={handleResendEmail}
       isResendingEmail={isResendingEmail}
+    />
+
+    {/* Forgot Password Dialog */}
+    <ForgotPasswordDialog
+      isOpen={showForgotPassword}
+      onClose={() => setShowForgotPassword(false)}
+      onBackToLogin={() => {
+        setShowForgotPassword(false);
+        setMode('login');
+      }}
     />
   </>;
 };

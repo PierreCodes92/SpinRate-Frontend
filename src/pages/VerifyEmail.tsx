@@ -6,6 +6,7 @@ import { Card } from '@/components/ui/card';
 import { API_BASE_URL } from '@/config/api';
 import { useTranslation } from '@/components/TranslationProvider';
 import { useLocalizedPath } from '@/hooks/useLocalizedPath';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 type VerificationStatus = 'loading' | 'success' | 'error' | 'expired';
 
@@ -14,6 +15,7 @@ export default function VerifyEmail() {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { localizedPath } = useLocalizedPath();
+  const { language } = useLanguage();
   const [status, setStatus] = useState<VerificationStatus>('loading');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -28,7 +30,8 @@ export default function VerifyEmail() {
       }
 
       try {
-        const response = await fetch(`${API_BASE_URL}/user/verify-email/${token}`);
+        // Pass language parameter for welcome email
+        const response = await fetch(`${API_BASE_URL}/user/verify-email/${token}?language=${language}`);
         const data = await response.json();
 
         if (response.ok) {
