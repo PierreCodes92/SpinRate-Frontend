@@ -26,10 +26,10 @@ const Index = () => {
   return (
     <>
       <SEO 
-        titleFr="RevWheel - Collectez des Avis Google (sans effort)"
-        titleEn="RevWheel - Get Google Reviews (effortlessly)"
-        descriptionFr="La meilleure solution pour avoir des avis positifs sur Google de la part de tous vos clients pour être premier dans les recherches. 7 jours gratuits, sans engagement."
-        descriptionEn="The best solution to get positive Google reviews from all your customers to be first in searches. 7 days free, no commitment."
+        titleFr="RevWheel | Boostez vos avis Google & fidélisez vos clients automatiquement"
+        titleEn="RevWheel | Boost Google Reviews & Retain Your Customers Automatically"
+        descriptionFr="Collectez plus d'avis 5 étoiles sur Google sans effort. RevWheel fait revenir vos clients et améliore votre visibilité locale en quelques minutes."
+        descriptionEn="Get more 5-star Google reviews effortlessly. RevWheel drives repeat visits and improves your local business visibility in just minutes."
         canonical="/"
       />
       <div className="min-h-screen">

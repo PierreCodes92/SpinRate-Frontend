@@ -14,10 +14,10 @@ const Contact = () => {
   return (
     <>
       <SEO 
-        titleFr="Contact - RevWheel"
-        titleEn="Contact - RevWheel"
-        descriptionFr="Contactez l'équipe RevWheel pour toute question sur notre solution de collecte d'avis Google. Prenez rendez-vous pour une démonstration gratuite."
-        descriptionEn="Contact the RevWheel team for any questions about our Google review collection solution. Schedule a free demo."
+        titleFr="Contact RevWheel | Besoin d'aide ou d'une démo ?"
+        titleEn="Contact RevWheel | Get Help or Request a Demo Today"
+        descriptionFr="Besoin d'assistance ou envie d'essayer RevWheel ? Contactez notre équipe support disponible 7j/7 pour vous aider à booster vos avis Google."
+        descriptionEn="Need help or want a demo? Contact RevWheel's support team—we're available 7 days a week to guide you and boost your Google review strategy."
         canonical="/contact"
       />
       <div className="min-h-screen flex flex-col bg-background">

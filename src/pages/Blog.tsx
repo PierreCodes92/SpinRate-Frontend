@@ -9,10 +9,10 @@ const Blog = () => {
   return (
     <>
       <SEO 
-        titleFr="Blog - RevWheel"
-        titleEn="Blog - RevWheel"
-        descriptionFr="Découvrez nos articles et conseils pour maximiser vos avis Google et fidéliser vos clients. Astuces, guides et bonnes pratiques."
-        descriptionEn="Discover our articles and tips to maximize your Google reviews and build customer loyalty. Tips, guides and best practices."
+        titleFr="Blog RevWheel | Astuces pour obtenir plus d'avis Google et fidéliser vos clients"
+        titleEn="RevWheel Blog | Tips to Get More Google Reviews & Boost Loyalty"
+        descriptionFr="Découvrez nos guides et conseils pour augmenter vos avis Google, fidéliser vos clients et renforcer votre réputation locale avec RevWheel."
+        descriptionEn="Discover guides and strategies to grow your Google reviews, engage customers, and build your local business reputation with RevWheel."
         canonical="/blog"
       />
       <div className="min-h-screen bg-gradient-to-br from-background to-secondary/10">
