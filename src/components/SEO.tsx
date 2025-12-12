@@ -1,5 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocation } from 'react-router-dom';
+import { stripLanguagePrefix } from '@/hooks/useLocalizedPath';
 
 interface SEOProps {
   title?: string;
@@ -27,8 +29,9 @@ const SEO = ({
   noindex = false,
 }: SEOProps) => {
   const { language } = useLanguage();
+  const location = useLocation();
   
-  const baseUrl = 'https://revwheel.com';
+  const baseUrl = 'https://revwheel.fr';
   
   // Determine the correct title based on language
   const pageTitle = title || (language === 'fr' ? titleFr : titleEn) || 'RevWheel';
@@ -43,12 +46,18 @@ const SEO = ({
   // Full image URL
   const imageUrl = image.startsWith('http') ? image : `${baseUrl}${image}`;
   
-  // Canonical URL
-  const canonicalUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
+  // Get the path without language prefix for building canonical/hreflang URLs
+  const pathWithoutLang = canonical || stripLanguagePrefix(location.pathname);
+  const normalizedPath = pathWithoutLang === '/' ? '' : pathWithoutLang;
   
-  // Alternate URLs for hreflang
-  const frUrl = canonical ? `${baseUrl}${canonical}` : baseUrl;
-  const enUrl = canonical ? `${baseUrl}${canonical}?lang=en` : `${baseUrl}?lang=en`;
+  // Canonical URL based on current language
+  const canonicalUrl = language === 'en' 
+    ? `${baseUrl}/en${normalizedPath}`
+    : `${baseUrl}${normalizedPath || '/'}`;
+  
+  // Alternate URLs for hreflang - French is default (no prefix), English uses /en
+  const frUrl = `${baseUrl}${normalizedPath || '/'}`;
+  const enUrl = `${baseUrl}/en${normalizedPath}`;
 
   return (
     <Helmet>
@@ -70,7 +79,7 @@ const SEO = ({
       {/* Canonical */}
       <link rel="canonical" href={canonicalUrl} />
       
-      {/* Hreflang */}
+      {/* Hreflang - French default, English at /en */}
       <link rel="alternate" hreflang="fr" href={frUrl} />
       <link rel="alternate" hreflang="en" href={enUrl} />
       <link rel="alternate" hreflang="x-default" href={frUrl} />
@@ -100,4 +109,3 @@ const SEO = ({
 };
 
 export default SEO;
-

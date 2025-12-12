@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { API_BASE_URL } from '@/config/api';
 import { useTranslation } from '@/components/TranslationProvider';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 type VerificationStatus = 'loading' | 'success' | 'error' | 'expired';
 
@@ -12,6 +13,7 @@ export default function VerifyEmail() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { localizedPath } = useLocalizedPath();
   const [status, setStatus] = useState<VerificationStatus>('loading');
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -50,7 +52,7 @@ export default function VerifyEmail() {
   }, [searchParams, t]);
 
   const handleGoToLogin = () => {
-    navigate('/');
+    navigate(localizedPath('/'));
   };
 
   return (
@@ -152,4 +154,3 @@ export default function VerifyEmail() {
     </div>
   );
 }
-

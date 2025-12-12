@@ -12,16 +12,18 @@ export const LanguageToggle = ({ isScrolled }: LanguageToggleProps = {}) => {
   const { language, setLanguage } = useLanguage();
 
   const toggleLanguage = () => {
+    // Navigate to the other language version
     setLanguage(language === 'fr' ? 'en' : 'fr');
   };
 
+  // Show the flag of the language we can switch TO (opposite of current)
   const flagSm = language === 'fr' ? ukFlagSm : frFlagSm;
   const flagMd = language === 'fr' ? ukFlagMd : frFlagMd;
 
   return (
     <button
       onClick={toggleLanguage}
-      className="flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
+      className="flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity bg-muted/50 hover:bg-muted"
       aria-label={`Switch to ${language === 'fr' ? 'English' : 'French'}`}
     >
       <img

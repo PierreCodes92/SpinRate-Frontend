@@ -9,6 +9,7 @@ import { AuthModal } from "@/components/AuthModal";
 import { useAuthModal } from "@/hooks/useAuthModal";
 import { useAuthContext } from "@/hooks/useAuthContext";
 import { useNavigate } from "react-router-dom";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import pricingIcon from "@/assets/pricing-icon.webp";
 
 const Header = () => {
@@ -22,6 +23,7 @@ const Header = () => {
   const { isOpen: isAuthModalOpen, mode: authModalMode, openModal, closeModal } = useAuthModal();
   const { user } = useAuthContext();
   const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
   
   const isScrolled = scrollY > 50;
   const isAuthenticated = !!user;
@@ -45,7 +47,7 @@ const Header = () => {
 
   const handleCTAClick = () => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      navigate(localizedPath('/dashboard'));
     } else {
       showTrialNotification();
       openModal('register');
@@ -54,7 +56,7 @@ const Header = () => {
 
   const handleProSpaceClick = () => {
     if (isAuthenticated) {
-      navigate('/dashboard');
+      navigate(localizedPath('/dashboard'));
     } else {
       openModal('login');
     }
@@ -70,7 +72,7 @@ const Header = () => {
         <div className="container mx-auto flex items-center justify-between px-4 lg:px-6 h-20">
           {/* Logo */}
           <div className="flex items-center space-x-3 lg:ml-6">
-            <a href="/" className="flex items-center space-x-3">
+            <a href={localizedPath('/')} className="flex items-center space-x-3">
               <img 
                 src="/lovable-uploads/revwheel-logo-sm.webp" 
                 srcSet="/lovable-uploads/revwheel-logo-sm.webp 1x, /lovable-uploads/revwheel-logo-md.webp 2x"
@@ -86,10 +88,10 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
-            <a href="/" className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
+            <a href={localizedPath('/')} className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
               {t('home')}
             </a>
-            <a href="/#pricing" className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
+            <a href={localizedPath('/#pricing')} className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
               {t('pricing')}
             </a>
             <button
@@ -98,10 +100,10 @@ const Header = () => {
             >
               {t('proSpace')}
             </button>
-            <a href="/contact" className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
+            <a href={localizedPath('/contact')} className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
               {t('contact')}
             </a>
-            <a href="/blog" className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
+            <a href={localizedPath('/blog')} className="text-foreground/80 hover:text-foreground transition-smooth font-medium">
               {t('blog')}
             </a>
           </nav>
@@ -161,7 +163,7 @@ const Header = () => {
             <nav className="container mx-auto px-6 py-8">
               <div className="flex flex-col space-y-6">
                 <a 
-                  href="/" 
+                  href={localizedPath('/')} 
                   className="text-foreground/80 hover:text-foreground transition-smooth font-medium text-lg py-2 flex items-center space-x-3"
                   onClick={toggleMobileMenu}
                 >
@@ -173,7 +175,7 @@ const Header = () => {
                   <span>{t('home')}</span>
                 </a>
                 <a 
-                  href="/#pricing" 
+                  href={localizedPath('/#pricing')} 
                   className="text-foreground/80 hover:text-foreground transition-smooth font-medium text-lg py-2 flex items-center space-x-3"
                   onClick={toggleMobileMenu}
                 >
@@ -195,7 +197,7 @@ const Header = () => {
                   <span>{t('proSpace')}</span>
                 </button>
                 <a 
-                  href="/contact" 
+                  href={localizedPath('/contact')} 
                   className="text-foreground/80 hover:text-foreground transition-smooth font-medium text-lg py-2 flex items-center space-x-3"
                   onClick={toggleMobileMenu}
                 >
@@ -207,7 +209,7 @@ const Header = () => {
                   <span>{t('contact')}</span>
                 </a>
                 <a 
-                  href="/blog" 
+                  href={localizedPath('/blog')} 
                   className="text-foreground/80 hover:text-foreground transition-smooth font-medium text-lg py-2 flex items-center space-x-3"
                   onClick={toggleMobileMenu}
                 >

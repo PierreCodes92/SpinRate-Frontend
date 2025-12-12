@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -34,7 +34,11 @@ interface WheelConfig {
 export default function WheelGame() {
   const { wheelId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
   const { toast } = useToast();
+  
+  // Get localized home path based on current URL
+  const getHomePath = () => location.pathname.startsWith('/en') ? '/en' : '/';
   const [isSpinning, setIsSpinning] = useState(false);
   const [result, setResult] = useState<Lot | null>(null);
   const [rotationDegrees, setRotationDegrees] = useState(0);
@@ -623,7 +627,7 @@ export default function WheelGame() {
             }
           </p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate(getHomePath())}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2 px-6 rounded-lg transition duration-200"
           >
             {language === "fr" ? "Retour à l'accueil" : "Go Home"}
@@ -645,7 +649,7 @@ export default function WheelGame() {
             Sorry, we couldn't find the prize wheel you're looking for.
           </p>
           <button
-            onClick={() => navigate('/')}
+            onClick={() => navigate(getHomePath())}
             className="bg-primary hover:bg-primary/90 text-primary-foreground font-medium py-2 px-6 rounded-lg transition duration-200"
           >
             Go Home

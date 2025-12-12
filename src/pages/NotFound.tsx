@@ -1,11 +1,13 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useTranslation } from "@/components/TranslationProvider";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import SEO from "@/components/SEO";
 
 const NotFound = () => {
   const location = useLocation();
   const { t } = useTranslation();
+  const { localizedPath } = useLocalizedPath();
 
   useEffect(() => {
     console.error(
@@ -27,7 +29,7 @@ const NotFound = () => {
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">404</h1>
           <p className="text-xl text-gray-600 mb-4">{t('pageNotFound')}</p>
-          <a href="/" className="text-blue-500 hover:text-blue-700 underline">
+          <a href={localizedPath('/')} className="text-blue-500 hover:text-blue-700 underline">
             {t('returnToHome')}
           </a>
         </div>

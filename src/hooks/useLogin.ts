@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuthContext } from './useAuthContext';
 import { API_BASE_URL } from '@/config/api';
 
 export const useLogin = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [error, setError] = useState<string | null>(null);
   const { dispatch } = useAuthContext();
 
@@ -27,7 +28,10 @@ export const useLogin = () => {
       if (response.ok) {
         localStorage.setItem('user', JSON.stringify(json));
         dispatch({ type: 'LOGIN', payload: json });
-        navigate('/dashboard');
+        
+        // Preserve language prefix when navigating to dashboard
+        const isEnglish = location.pathname.startsWith('/en');
+        navigate(isEnglish ? '/en/dashboard' : '/dashboard');
       }
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : 'Login failed';
@@ -38,4 +42,3 @@ export const useLogin = () => {
 
   return { login, error };
 };
-

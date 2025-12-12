@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import revwheelLogo from "@/assets/revwheel-logo.webp";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useOnboarding } from "@/contexts/OnboardingContext";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarHeader, SidebarFooter, useSidebar } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ export function AppSidebar() {
   const [isTrialVisible, setIsTrialVisible] = useState(true);
   const { setOpenMobile } = useSidebar();
   const { startOnboarding } = useOnboarding();
+  const { localizedPath } = useLocalizedPath();
 
   // Calculate remaining days for the current user
   const trialDaysRemaining = useMemo(() => {
@@ -54,25 +56,25 @@ export function AppSidebar() {
   const menuItems = [
     {
       title: t('sidebar.analytics'),
-      url: "/dashboard",
+      url: localizedPath("/dashboard"),
       icon: BarChart3,
       onboardingId: "analytics"
     },
     {
       title: t('sidebar.clients'),
-      url: "/dashboard/customers",
+      url: localizedPath("/dashboard/customers"),
       icon: Users,
       onboardingId: "clients"
     },
     {
       title: t('sidebar.settings'),
-      url: "/dashboard/settings",
+      url: localizedPath("/dashboard/settings"),
       icon: Settings,
       onboardingId: "settings"
     },
     {
       title: t('sidebar.subscription'),
-      url: "/dashboard/subscription",
+      url: localizedPath("/dashboard/subscription"),
       icon: CreditCard,
       onboardingId: "subscription"
     }
@@ -92,7 +94,7 @@ export function AppSidebar() {
         >
           <X className="h-5 w-5" />
         </Button>
-        <a href="/" className="block">
+        <a href={localizedPath('/')} className="block">
           <img 
             src={revwheelLogo} 
             alt="RevWheel" 
@@ -144,7 +146,7 @@ export function AppSidebar() {
               </p>
               <Button 
                 className="text-xs h-8 px-4 font-semibold bg-red-400 text-white hover:bg-red-500 rounded-md w-full whitespace-nowrap"
-                onClick={() => navigate("/dashboard/subscription")}
+                onClick={() => navigate(localizedPath("/dashboard/subscription"))}
               >
                 <Clock className="w-3.5 h-3.5 shrink-0 -mr-1.5" />
                 {t('sidebar.upgradeNow')}

@@ -38,42 +38,57 @@ const PageLoader = () => (
 
 const queryClient = new QueryClient();
 
+// Shared routes component to avoid duplication
+const AppRoutes = () => (
+  <Suspense fallback={<PageLoader />}>
+    <Routes>
+      {/* Landing pages - Index is eagerly loaded for best LCP */}
+      <Route path="/" element={<Index />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/terms" element={<Terms />} />
+      <Route path="/privacy" element={<Privacy />} />
+      <Route path="/verify-email" element={<VerifyEmail />} />
+      {/* Dashboard routes - lazy loaded */}
+      <Route path="/dashboard" element={<Dashboard />} />
+      <Route path="/dashboard/customers" element={<Customers />} />
+      <Route path="/dashboard/settings" element={<Settings />} />
+      <Route path="/dashboard/subscription" element={<Subscription />} />
+      <Route path="/wheelGame/:wheelId" element={<WheelGame />} />
+      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+      <Route path="*" element={<NotFound />} />
+    </Routes>
+  </Suspense>
+);
+
+// Main app content with language-aware routing
+const AppContent = () => (
+  <LanguageProvider>
+    <OnboardingProvider>
+      <TranslationProvider>
+        <NotificationProvider>
+          <Toaster />
+          <Sonner />
+          <OnboardingOverlay />
+          <Routes>
+            {/* English routes - /en prefix */}
+            <Route path="/en/*" element={<AppRoutes />} />
+            {/* French routes - default (no prefix) */}
+            <Route path="/*" element={<AppRoutes />} />
+          </Routes>
+        </NotificationProvider>
+      </TranslationProvider>
+    </OnboardingProvider>
+  </LanguageProvider>
+);
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <AuthContextProvider>
-        <LanguageProvider>
-          <OnboardingProvider>
-            <TranslationProvider>
-              <NotificationProvider>
-                <Toaster />
-                <Sonner />
-                <BrowserRouter>
-                  <OnboardingOverlay />
-                  <Suspense fallback={<PageLoader />}>
-                    <Routes>
-                      {/* Landing pages - Index is eagerly loaded for best LCP */}
-                      <Route path="/" element={<Index />} />
-                      <Route path="/blog" element={<Blog />} />
-                      <Route path="/contact" element={<Contact />} />
-                      <Route path="/terms" element={<Terms />} />
-                      <Route path="/privacy" element={<Privacy />} />
-                      <Route path="/verify-email" element={<VerifyEmail />} />
-                      {/* Dashboard routes - lazy loaded */}
-                      <Route path="/dashboard" element={<Dashboard />} />
-                      <Route path="/dashboard/customers" element={<Customers />} />
-                      <Route path="/dashboard/settings" element={<Settings />} />
-                      <Route path="/dashboard/subscription" element={<Subscription />} />
-                      <Route path="/wheelGame/:wheelId" element={<WheelGame />} />
-                      {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                      <Route path="*" element={<NotFound />} />
-                    </Routes>
-                  </Suspense>
-                </BrowserRouter>
-              </NotificationProvider>
-            </TranslationProvider>
-          </OnboardingProvider>
-        </LanguageProvider>
+        <BrowserRouter>
+          <AppContent />
+        </BrowserRouter>
       </AuthContextProvider>
     </TooltipProvider>
   </QueryClientProvider>

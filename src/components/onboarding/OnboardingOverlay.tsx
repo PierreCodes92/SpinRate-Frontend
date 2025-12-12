@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { useLocalizedPath, stripLanguagePrefix } from '@/hooks/useLocalizedPath';
 
 // Hook to detect mobile (simple version)
 const useIsMobile = () => {
@@ -45,6 +46,7 @@ export const OnboardingOverlay = () => {
     startOnboarding
   } = useOnboarding();
   const { t } = useLanguage();
+  const { localizedPath } = useLocalizedPath();
   const [tooltipPosition, setTooltipPosition] = useState({
     x: 0,
     y: 0
@@ -56,7 +58,7 @@ export const OnboardingOverlay = () => {
   const navigate = useNavigate();
   const isMobile = useIsMobile();
   
-  // Generate step configs dynamically with translations
+  // Generate step configs dynamically with translations and localized paths
   const stepConfigs: Record<OnboardingStep, StepConfig | null> = {
     welcome: null,
     analytics: {
@@ -65,7 +67,7 @@ export const OnboardingOverlay = () => {
       message: t('onboarding.analytics.message'),
       actionText: t('onboarding.analytics.action'),
       arrowDirection: 'bottom',
-      requireRoute: '/dashboard'
+      requireRoute: localizedPath('/dashboard')
     },
     'analytics-dashboard': {
       targetSelector: '[data-onboarding="analytics-metrics"]',
@@ -73,7 +75,7 @@ export const OnboardingOverlay = () => {
       message: t('onboarding.analyticsDashboard.message'),
       actionText: t('onboarding.analyticsDashboard.action'),
       arrowDirection: 'bottom',
-      requireRoute: '/dashboard',
+      requireRoute: localizedPath('/dashboard'),
       waitForElement: true
     },
     clients: {
@@ -82,7 +84,7 @@ export const OnboardingOverlay = () => {
       message: t('onboarding.clients.message'),
       actionText: t('onboarding.clients.action'),
       arrowDirection: 'bottom',
-      requireRoute: '/dashboard/customers'
+      requireRoute: localizedPath('/dashboard/customers')
     },
     'clients-popup-1': {
       targetSelector: '[data-onboarding="monthly-reviews"]',
@@ -90,7 +92,7 @@ export const OnboardingOverlay = () => {
       message: t('onboarding.clientsPopup.message'),
       actionText: t('onboarding.clientsPopup.action'),
       arrowDirection: 'bottom',
-      requireRoute: '/dashboard/customers',
+      requireRoute: localizedPath('/dashboard/customers'),
       waitForElement: true
     },
     'clients-open-menu': {
@@ -100,7 +102,7 @@ export const OnboardingOverlay = () => {
       mobileMessage: t('onboarding.clientsMenu.messageMobile'),
       actionText: t('onboarding.clientsMenu.action'),
       arrowDirection: 'right',
-      requireRoute: '/dashboard/customers',
+      requireRoute: localizedPath('/dashboard/customers'),
       waitForElement: true
     },
     settings: {
@@ -109,7 +111,7 @@ export const OnboardingOverlay = () => {
       message: t('onboarding.settings.message'),
       actionText: t('onboarding.settings.action'),
       arrowDirection: 'bottom',
-      requireRoute: '/dashboard/settings'
+      requireRoute: localizedPath('/dashboard/settings')
     },
     subscription: {
       targetSelector: '[data-onboarding="subscription"]',
@@ -117,7 +119,7 @@ export const OnboardingOverlay = () => {
       message: t('onboarding.subscription.message'),
       actionText: t('onboarding.subscription.action'),
       arrowDirection: 'bottom',
-      requireRoute: '/dashboard/subscription'
+      requireRoute: localizedPath('/dashboard/subscription')
     },
     complete: null
   };
@@ -357,7 +359,7 @@ export const OnboardingOverlay = () => {
                         setIsExiting(true);
                         setTimeout(() => {
                           completeOnboarding();
-                          navigate('/dashboard/settings');
+                          navigate(localizedPath('/dashboard/settings'));
                         }, 150);
                       }}
                       className="w-full bg-primary hover:bg-primary/90 rounded-full relative z-10"

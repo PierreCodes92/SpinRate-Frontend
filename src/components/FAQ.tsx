@@ -2,9 +2,11 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "@/components/TranslationProvider";
+import { useLocalizedPath } from "@/hooks/useLocalizedPath";
 
 const FAQ = () => {
   const { t } = useTranslation();
+  const { localizedPath } = useLocalizedPath();
   const [isVisible, setIsVisible] = useState(false);
   const [visibleItems, setVisibleItems] = useState<number[]>([]);
   const sectionRef = useRef<HTMLElement>(null);
@@ -117,7 +119,7 @@ const FAQ = () => {
           <p className="text-muted-foreground mb-4 md:text-lg md:mb-6">
             {t('moreQuestions')}
           </p>
-           <Button variant="outline" size="lg" className="hover:bg-primary hover:text-white transition-smooth" onClick={() => window.location.href = '/contact'}>
+           <Button variant="outline" size="lg" className="hover:bg-primary hover:text-white transition-smooth" onClick={() => window.location.href = localizedPath('/contact')}>
              {t('contactUs')}
            </Button>
         </div>

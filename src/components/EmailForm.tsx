@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from 'react-router-dom';
+import { useLocalizedPath } from '@/hooks/useLocalizedPath';
 
 const EmailForm = () => {
   const [email, setEmail] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { localizedPath } = useLocalizedPath();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ const EmailForm = () => {
       });
       setEmail('');
       setIsSubmitting(false);
-      navigate('/create-game');
+      navigate(localizedPath('/create-game'));
     }, 1500);
   };
 
